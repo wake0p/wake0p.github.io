@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="content发布文章页面 categories 该目录下记录的是相关目录，比如这里的categories/Text 就对应下面这里\n然后该目录下的_index.md，用于渲染这个\n1 2 3 4 5 6 7 8 --- title: &#34;Test&#34; description: &#34;123&#34; image: &#34;hutomo-abrianto-l2jk-uxb1BY-unsplash.jpg&#34; style: background: &#34;#f08080&#34; color: &#34;#fff&#34; --- 其中title和decription就是在这个页面的顶部，存在描述，标题，和图像\n然后下面是对应带有该标签的文章，而style代表这个标签的样式，这里就是背景浅红色，字体白色\npage目录 page目录下存在其他文件夹，分别就对应左侧的选项\n这里侧边选项是通过menu main 来定义的\n每一个目录下存在一个index.md/index.zh-cn.md ，其中渲染部分如下\n1 2 3 4 5 6 7 8 9 10 11 --- title: &#34;Archives&#34; date: 2019-05-28 layout: &#34;archives&#34; slug: &#34;archives&#34; menu: main: weight: -70 params: icon: archives --- 其中titile表示侧边拦的名称， data好像没啥用处， layout表示布局使用layouts文件下的archives.html布局 slug表示当前页面的网站索引，比如这里的/wake0p.github.io/archives menu用于 1 2 3 4 5 menu: main: weight: -70 params: icon: archives weight: -70：weight 用来控制菜单项的排序。数字越小，菜单项会显示得越靠前，越大则越靠后。-70 表示该页面在菜单中的位置比较靠前（在相同 weight 的情况下）。 params:：这是菜单项的附加参数。你可以在这里指定图标、样式、链接等额外的设置。 icon: archives：表示在这个菜单项中会使用一个名为 archives 的图标。具体来说，网站的图标可能是一个与归档相关的图标（如文件夹或文件堆叠的图标），并且可以通过CSS或其他方式进行自定义显示。 当然还存在其他属性，比如在Links文件下，就Links属性，用于表示参考文章，使用方法如下\n">
+<title></title>
+
+<link rel='canonical' href='http://localhost:1313/p/'>
+
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="">
+<meta property='og:description' content="content发布文章页面 categories 该目录下记录的是相关目录，比如这里的categories/Text 就对应下面这里\n然后该目录下的_index.md，用于渲染这个\n1 2 3 4 5 6 7 8 --- title: &#34;Test&#34; description: &#34;123&#34; image: &#34;hutomo-abrianto-l2jk-uxb1BY-unsplash.jpg&#34; style: background: &#34;#f08080&#34; color: &#34;#fff&#34; --- 其中title和decription就是在这个页面的顶部，存在描述，标题，和图像\n然后下面是对应带有该标签的文章，而style代表这个标签的样式，这里就是背景浅红色，字体白色\npage目录 page目录下存在其他文件夹，分别就对应左侧的选项\n这里侧边选项是通过menu main 来定义的\n每一个目录下存在一个index.md/index.zh-cn.md ，其中渲染部分如下\n1 2 3 4 5 6 7 8 9 10 11 --- title: &#34;Archives&#34; date: 2019-05-28 layout: &#34;archives&#34; slug: &#34;archives&#34; menu: main: weight: -70 params: icon: archives --- 其中titile表示侧边拦的名称， data好像没啥用处， layout表示布局使用layouts文件下的archives.html布局 slug表示当前页面的网站索引，比如这里的/wake0p.github.io/archives menu用于 1 2 3 4 5 menu: main: weight: -70 params: icon: archives weight: -70：weight 用来控制菜单项的排序。数字越小，菜单项会显示得越靠前，越大则越靠后。-70 表示该页面在菜单中的位置比较靠前（在相同 weight 的情况下）。 params:：这是菜单项的附加参数。你可以在这里指定图标、样式、链接等额外的设置。 icon: archives：表示在这个菜单项中会使用一个名为 archives 的图标。具体来说，网站的图标可能是一个与归档相关的图标（如文件夹或文件堆叠的图标），并且可以通过CSS或其他方式进行自定义显示。 当然还存在其他属性，比如在Links文件下，就Links属性，用于表示参考文章，使用方法如下\n">
+<meta property='og:url' content='http://localhost:1313/p/'>
+<meta property='og:site_name' content='wake0p&#39;s blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' />
+<meta name="twitter:title" content="">
+<meta name="twitter:description" content="content发布文章页面 categories 该目录下记录的是相关目录，比如这里的categories/Text 就对应下面这里\n然后该目录下的_index.md，用于渲染这个\n1 2 3 4 5 6 7 8 --- title: &#34;Test&#34; description: &#34;123&#34; image: &#34;hutomo-abrianto-l2jk-uxb1BY-unsplash.jpg&#34; style: background: &#34;#f08080&#34; color: &#34;#fff&#34; --- 其中title和decription就是在这个页面的顶部，存在描述，标题，和图像\n然后下面是对应带有该标签的文章，而style代表这个标签的样式，这里就是背景浅红色，字体白色\npage目录 page目录下存在其他文件夹，分别就对应左侧的选项\n这里侧边选项是通过menu main 来定义的\n每一个目录下存在一个index.md/index.zh-cn.md ，其中渲染部分如下\n1 2 3 4 5 6 7 8 9 10 11 --- title: &#34;Archives&#34; date: 2019-05-28 layout: &#34;archives&#34; slug: &#34;archives&#34; menu: main: weight: -70 params: icon: archives --- 其中titile表示侧边拦的名称， data好像没啥用处， layout表示布局使用layouts文件下的archives.html布局 slug表示当前页面的网站索引，比如这里的/wake0p.github.io/archives menu用于 1 2 3 4 5 menu: main: weight: -70 params: icon: archives weight: -70：weight 用来控制菜单项的排序。数字越小，菜单项会显示得越靠前，越大则越靠后。-70 表示该页面在菜单中的位置比较靠前（在相同 weight 的情况下）。 params:：这是菜单项的附加参数。你可以在这里指定图标、样式、链接等额外的设置。 icon: archives：表示在这个菜单项中会使用一个名为 archives 的图标。具体来说，网站的图标可能是一个与归档相关的图标（如文件夹或文件堆叠的图标），并且可以通过CSS或其他方式进行自定义显示。 当然还存在其他属性，比如在Links文件下，就Links属性，用于表示参考文章，使用方法如下\n">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/head_hu_ebd6ad7c249b4943.jpg" width="300"
+                            height="265" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">wake0p&#39;s blog</a></h1>
+            <h2 class="site-description">名不显时心不朽，再挑灯火看文章</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/wake0p'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/"></a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 1 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="content发布文章页面">content发布文章页面
+</h1><h1 id="categories">categories
+</h1><p>该目录下记录的是相关目录，比如这里的categories/Text 就对应下面这里</p>
+<p><img src="/image.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image.png"
+	
+	
+></p>
+<p>然后该目录下的_index.md，用于渲染这个</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">title: &#34;Test&#34;
+</span></span><span class="line"><span class="cl">description: &#34;123&#34;
+</span></span><span class="line"><span class="cl">image: &#34;hutomo-abrianto-l2jk-uxb1BY-unsplash.jpg&#34;
+</span></span><span class="line"><span class="cl">style:
+</span></span><span class="line"><span class="cl">    background: &#34;<span class="ni">#f08080</span>&#34;
+</span></span><span class="line"><span class="cl">    color: &#34;<span class="ni">#fff</span>&#34;
+</span></span><span class="line"><span class="cl">---
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中title和decription就是在这个页面的顶部，存在描述，标题，和图像</p>
+<p><img src="/image%201.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image.png"
+	
+	
+></p>
+<p>然后下面是对应带有该标签的文章，而style代表这个标签的样式，这里就是背景浅红色，字体白色</p>
+<p><img src="/image%202.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image.png"
+	
+	
+></p>
+<h1 id="page目录">page目录
+</h1><p>page目录下存在其他文件夹，分别就对应左侧的选项</p>
+<blockquote>
+<p>这里侧边选项是通过menu main 来定义的</p></blockquote>
+<p><img src="/image%203.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image.png"
+	
+	
+></p>
+<p><img src="/image%204.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image.png"
+	
+	
+></p>
+<p><a class="link" href="http://%e6%af%8f%e4%b8%80%e4%b8%aa%e7%9b%ae%e5%bd%95%e4%b8%8b%e5%ad%98%e5%9c%a8%e4%b8%80%e4%b8%aaindex.md/index.zh-cn.md"  target="_blank" rel="noopener"
+    >每一个目录下存在一个<code>index.md/index.zh-cn.md</code></a> ，其中渲染部分如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">title: &#34;Archives&#34;
+</span></span><span class="line"><span class="cl">date: 2019-05-28
+</span></span><span class="line"><span class="cl">layout: &#34;archives&#34;
+</span></span><span class="line"><span class="cl">slug: &#34;archives&#34;
+</span></span><span class="line"><span class="cl">menu:
+</span></span><span class="line"><span class="cl">    main:
+</span></span><span class="line"><span class="cl">        weight: -70
+</span></span><span class="line"><span class="cl">        params: 
+</span></span><span class="line"><span class="cl">            icon: archives
+</span></span><span class="line"><span class="cl">---
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>其中titile表示侧边拦的名称，</li>
+<li>data好像没啥用处，</li>
+<li>layout表示布局使用layouts文件下的archives.html布局</li>
+<li>slug表示当前页面的网站索引，比如这里的/wake0p.github.io/archives</li>
+<li>menu用于</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">menu:
+</span></span><span class="line"><span class="cl">    main:
+</span></span><span class="line"><span class="cl">        weight: -70
+</span></span><span class="line"><span class="cl">        params:
+</span></span><span class="line"><span class="cl">            icon: archives
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>weight: -70</strong>：weight 用来控制菜单项的排序。数字越小，菜单项会显示得越靠前，越大则越靠后。-70 表示该页面在菜单中的位置比较靠前（在相同 weight 的情况下）。</li>
+<li><strong>params:</strong>：这是菜单项的附加参数。你可以在这里指定图标、样式、链接等额外的设置。</li>
+<li><strong>icon: archives</strong>：表示在这个菜单项中会使用一个名为 archives 的图标。具体来说，网站的图标可能是一个与归档相关的图标（如文件夹或文件堆叠的图标），并且可以通过CSS或其他方式进行自定义显示。</li>
+</ul>
+<p>当然还存在其他属性，比如在Links文件下，就Links属性，用于表示参考文章，使用方法如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">links:
+</span></span><span class="line"><span class="cl">  <span class="k">-</span> title: GitHub
+</span></span><span class="line"><span class="cl">    description: My GitHub 
+</span></span><span class="line"><span class="cl">    website: https://github.com/wake0p
+</span></span><span class="line"><span class="cl">    image: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
+</span></span><span class="line"><span class="cl">  <span class="k">-</span> title: TypeScript
+</span></span><span class="line"><span class="cl">    description: TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.
+</span></span><span class="line"><span class="cl">    website: https://www.typescriptlang.org
+</span></span><span class="line"><span class="cl">    image: ts-logo-128.jpg
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中image即能够用网上的，也能够使用本地，最后的效果就是在底部存在这样的参考文章</p>
+<p><img src="/image%205.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image.png"
+	
+	
+></p>
+<h1 id="post目录">post目录
+</h1><p>这个目录用于存放真正需要发布文章，一般分为两种情况，</p>
+<ul>
+<li>要么是直接/post/xxx.md 这种md中不引用图片，</li>
+<li>要么就是/post/xxx/index.md将资源单独放在一个文件夹，文件夹包含所需要的所有资源</li>
+</ul>
+<p>比较推荐第二种做法</p>
+<p>然后就是post中文章有的相关属性</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">title: Chinese Test
+</span></span><span class="line"><span class="cl">description: 这是一个副标题
+</span></span><span class="line"><span class="cl">date: 2020-09-09
+</span></span><span class="line"><span class="cl">slug: test-Chinese
+</span></span><span class="line"><span class="cl">image: helena-hertz-wWZzXlDpMog-unsplash.jpg
+</span></span><span class="line"><span class="cl">categories:
+</span></span><span class="line"><span class="cl">    <span class="k">-</span> Test
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">---
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>date表示发布时间</li>
+<li>image表示文章的背景图片</li>
+<li>categories表示当前文章属于哪一个目录，可以说目录中有的，也可也是目录中没有的</li>
+</ul>
+<p>最终的情况就像下面这样</p>
+<p><img src="/image%206.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image.png"
+	
+	
+></p>
+<h1 id="图片排版方法">图片排版方法
+</h1><p>将两个图片放在同一排，就像下面这样</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">![<span class="nt">Photo by Florian Klauer on Unsplash</span>](<span class="na">florian-klauer-nptLmg6jqDo-unsplash.jpg</span>) ![<span class="nt">Photo by Luca Bravo on Unsplash</span>](<span class="na">luca-bravo-alS7ewQ41M8-unsplash.jpg</span>) 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>最终的效果</p>
+<p><img src="/image%207.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image.png"
+	
+	
+></p>
+<p>当然也能够4张图片全部排在一起</p>
+<p><img src="/image%208.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image.png"
+	
+	
+></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 wake0p
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.a22a4238414231947ee185f8c77f9923f8c662573fb1634afadbd572818ce7ca.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
