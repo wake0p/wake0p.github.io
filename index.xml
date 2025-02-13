@@ -273,6 +273,14 @@ data-flex-basis="645px"
 &lt;h2 id="2025年2月12日">2025年2月12日
 &lt;/h2>&lt;ol>
 &lt;li>博客配置 2小时(博客我发现太浪费时间了，还在考虑要不要停掉博客，继续只使用notion)&lt;/li>
+&lt;li>黑奴 1.5小时&lt;/li>
+&lt;/ol>
+&lt;h3 id="总结">总结:
+&lt;/h3>&lt;p>下午去过元宵了，摆烂了一下午，明天要开工了，娱乐项目如下&lt;/p>
+&lt;ol>
+&lt;li>台球1小时&lt;/li>
+&lt;li>放鞭炮 1.5小时&lt;/li>
+&lt;li>稍微陪朋友打了会游戏 2小时 QwQ&lt;/li>
 &lt;/ol></description></item><item><title>Markdown Syntax Guide</title><link>https://wake0p.github.io/p/markdown-syntax-guide/</link><pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate><guid>https://wake0p.github.io/p/markdown-syntax-guide/</guid><description>&lt;img src="https://wake0p.github.io/p/markdown-syntax-guide/pawel-czerwinski-8uZPynIu-rQ-unsplash.jpg" alt="Featured image of post Markdown Syntax Guide" />&lt;p>This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p>
 &lt;h2 id="headings">Headings
 &lt;/h2>&lt;p>The following HTML &lt;code>&amp;lt;h1&amp;gt;&lt;/code>—&lt;code>&amp;lt;h6&amp;gt;&lt;/code> elements represent six levels of section headings. &lt;code>&amp;lt;h1&amp;gt;&lt;/code> is the highest section level while &lt;code>&amp;lt;h6&amp;gt;&lt;/code> is the lowest.&lt;/p>
