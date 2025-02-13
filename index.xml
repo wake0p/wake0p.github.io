@@ -268,15 +268,18 @@ data-flex-basis="645px"
 &lt;li>fuzz 初步学习(吃席的时候看的) 40分钟&lt;/li>
 &lt;li>黑奴 ppt+demo 1.5小时&lt;/li>
 &lt;/ol>
-&lt;p>总结 博客 (wake0p.github.io)目前只搞了个框架，部分修改只在本地进行了
-晚上去吃席了下午4点半搞到晚上十点，今天没怎么学&lt;/p>
+&lt;ul>
+&lt;li>总结 博客 (wake0p.github.io)目前只搞了个框架，部分修改只在本地进行了
+晚上去吃席了下午4点半搞到晚上十点，今天没怎么学&lt;/li>
+&lt;/ul>
 &lt;h2 id="2025年2月12日">2025年2月12日
 &lt;/h2>&lt;ol>
 &lt;li>博客配置 2小时(博客我发现太浪费时间了，还在考虑要不要停掉博客，继续只使用notion)&lt;/li>
 &lt;li>黑奴 1.5小时&lt;/li>
 &lt;/ol>
-&lt;h3 id="总结">总结:
-&lt;/h3>&lt;p>下午去过元宵了，摆烂了一下午，明天要开工了，娱乐项目如下&lt;/p>
+&lt;ul>
+&lt;li>下午去过元宵了，摆烂了一下午，明天要开工了，娱乐项目如下&lt;/li>
+&lt;/ul>
 &lt;ol>
 &lt;li>台球1小时&lt;/li>
 &lt;li>放鞭炮 1.5小时&lt;/li>
@@ -287,8 +290,9 @@ data-flex-basis="645px"
 &lt;li>黑奴 录视频去了(2小时)&lt;/li>
 &lt;li>安卓开发 通知的使用，Http访问联网 (2.5小时)&lt;/li>
 &lt;/ol>
-&lt;h3 id="总结-1">总结:
-&lt;/h3>&lt;p>今天不是很理想，下午刷短视频去了，晚上又打了会游戏，虽然时间不长，但是的确不是个好习惯&lt;/p></description></item><item><title>Markdown Syntax Guide</title><link>https://wake0p.github.io/p/markdown-syntax-guide/</link><pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate><guid>https://wake0p.github.io/p/markdown-syntax-guide/</guid><description>&lt;img src="https://wake0p.github.io/p/markdown-syntax-guide/pawel-czerwinski-8uZPynIu-rQ-unsplash.jpg" alt="Featured image of post Markdown Syntax Guide" />&lt;p>This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p>
+&lt;ul>
+&lt;li>总结: 今天不是很理想，下午刷短视频去了，晚上又打了会游戏，虽然时间不长，但是的确不是个好习惯&lt;/li>
+&lt;/ul></description></item><item><title>Markdown Syntax Guide</title><link>https://wake0p.github.io/p/markdown-syntax-guide/</link><pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate><guid>https://wake0p.github.io/p/markdown-syntax-guide/</guid><description>&lt;img src="https://wake0p.github.io/p/markdown-syntax-guide/pawel-czerwinski-8uZPynIu-rQ-unsplash.jpg" alt="Featured image of post Markdown Syntax Guide" />&lt;p>This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p>
 &lt;h2 id="headings">Headings
 &lt;/h2>&lt;p>The following HTML &lt;code>&amp;lt;h1&amp;gt;&lt;/code>—&lt;code>&amp;lt;h6&amp;gt;&lt;/code> elements represent six levels of section headings. &lt;code>&amp;lt;h1&amp;gt;&lt;/code> is the highest section level while &lt;code>&amp;lt;h6&amp;gt;&lt;/code> is the lowest.&lt;/p>
 &lt;h1 id="h1">H1
