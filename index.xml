@@ -20,7 +20,7 @@ data-flex-basis="168px"
 &lt;/ol>
 &lt;p>那竞标赛怎么来的呢？由于人事任免权力集中在中央，而过去中央最高目标就是发展经济，因此地方政府为了晋升，需要内卷经济发展，而地方政府拥有足够多的事权，正好便于他们发展经济，这也就促进了经济的高速发展，各个地方政府之间相互内卷，于是就产生晋升锦标赛&lt;/p>
 &lt;ul>
-&lt;li>体制特点: 效率极高，中央下达任务能快速到达基层政府&lt;/li>
+&lt;li>体制特点: 效率极高，中央下达任务能快速到达基层政府，而基层政府拥有足够大的事权，因此能过高效且极的完成中央下达的任务。&lt;/li>
 &lt;/ul></description></item><item><title>content目录使用</title><link>https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/</link><pubDate>Wed, 12 Feb 2025 00:00:00 +0000</pubDate><guid>https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/</guid><description>&lt;h2 id="categories">categories
 &lt;/h2>&lt;p>该目录下记录的是相关目录，比如这里的categories/Text 就对应下面这里&lt;/p>
 &lt;p>&lt;img src="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image.png"
@@ -761,13 +761,7 @@ $$</description></item><item><title>Emoji Support</title><link>https://wake0p.gi
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> font-family: Apple Color Emoji, Segoe UI Emoji, NotoColorEmoji, Segoe UI Symbol, Android Emoji, EmojiSymbols;
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div></description></item><item><title>About</title><link>https://wake0p.github.io/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://wake0p.github.io/about/</guid><description>&lt;p>二进制菜鸟一个!&lt;/p>
-&lt;hr>
-&lt;ul>
-&lt;li>禁欲！&lt;/li>
-&lt;li>二八佳人体似酥，腰间仗剑斩愚夫。虽不教君人头落，暗地使人骨髓枯&lt;/li>
-&lt;/ul>
-&lt;hr></description></item><item><title>Archives</title><link>https://wake0p.github.io/archives/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://wake0p.github.io/archives/</guid><description/></item><item><title>Links</title><link>https://wake0p.github.io/links/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://wake0p.github.io/links/</guid><description>&lt;p>To use this feature, add &lt;code>links&lt;/code> section to frontmatter.&lt;/p>
+&lt;/div></description></item><item><title>About</title><link>https://wake0p.github.io/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://wake0p.github.io/about/</guid><description>&lt;p>二进制菜鸟一个!&lt;/p></description></item><item><title>Archives</title><link>https://wake0p.github.io/archives/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://wake0p.github.io/archives/</guid><description/></item><item><title>Links</title><link>https://wake0p.github.io/links/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://wake0p.github.io/links/</guid><description>&lt;p>To use this feature, add &lt;code>links&lt;/code> section to frontmatter.&lt;/p>
 &lt;p>This page&amp;rsquo;s frontmatter:&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
