@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="content发布文章页面 categories 该目录下记录的是相关目录，比如这里的categories/Text 就对应下面这里\n然后该目录下的_index.md，用于渲染这个\n1 2 3 4 5 6 7 8 --- title: &#34;Test&#34; description: &#34;123&#34; image: &#34;hutomo-abrianto-l2jk-uxb1BY-unsplash.jpg&#34; style: background: &#34;#f08080&#34; color: &#34;#fff&#34; --- 其中title和decription就是在这个页面的顶部，存在描述，标题，和图像\n然后下面是对应带有该标签的文章，而style代表这个标签的样式，这里就是背景浅红色，字体白色\npage目录 page目录下存在其他文件夹，分别就对应左侧的选项\n这里侧边选项是通过menu main 来定义的\n每一个目录下存在一个index.md/index.zh-cn.md ，其中渲染部分如下\n1 2 3 4 5 6 7 8 9 10 11 --- title: &#34;Archives&#34; date: 2019-05-28 layout: &#34;archives&#34; slug: &#34;archives&#34; menu: main: weight: -70 params: icon: archives --- 其中titile表示侧边拦的名称， data好像没啥用处， layout表示布局使用layouts文件下的archives.html布局 slug表示当前页面的网站索引，比如这里的/wake0p.github.io/archives menu用于 1 2 3 4 5 menu: main: weight: -70 params: icon: archives weight: -70：weight 用来控制菜单项的排序。数字越小，菜单项会显示得越靠前，越大则越靠后。-70 表示该页面在菜单中的位置比较靠前（在相同 weight 的情况下）。 params:：这是菜单项的附加参数。你可以在这里指定图标、样式、链接等额外的设置。 icon: archives：表示在这个菜单项中会使用一个名为 archives 的图标。具体来说，网站的图标可能是一个与归档相关的图标（如文件夹或文件堆叠的图标），并且可以通过CSS或其他方式进行自定义显示。 当然还存在其他属性，比如在Links文件下，就Links属性，用于表示参考文章，使用方法如下\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="JNI开发基础 参考文章\n初识JNI/NDK NDK（Native Development Kit）是一个允许开发者使用C和C++编写Android应用程序的工具集。它提供了一系列的工具和库，可以帮助开发者将高性能的原生代码集成到Android应用中\nNDK的主要目标是提供一种方式，让开发者能够在需要更高性能或更底层控制的情况下使用C和C++编写部分应用程序，而不仅仅依赖于Java。\nJNI（Java Native Interface）是一种编程框架，用于在Java代码和原生代码（如C和C++）之间进行交互。通过JNI，开发者可以在Java代码中调用原生代码的函数，并且可以将Java对象传递给原生代码进行处理。\nJNI 开发大致框架 android studio创建 Native项目 创建好了Natvie项目后，需要点开Tools→SDK Manager下载 NDK和CMake\n静态注册Native方法 Java层注册/调用 在任意类的中，要想调用JNI .so层的native方法需要存在如下定义\n1 2 3 4 //导入.so中的代码 static { System.loadLibrary(&#34;learnjni&#34;); } 并且存在相应的Native函数声明\n1 2 3 public native String stringFromJNI(); public native String stringFromJAVA(); public native String stringFromC(); 然后就能在该class中调用这些Native函数方法\nc/c++层定义 上面导入的libc库文件learnjni，是在cpp/CMakeLists中定义的\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 # For more information about using CMake with Android Studio, read the # documentation: https://d.android.com/studio/projects/add-native-code.html. # For more examples on how to use CMake, see https://github.com/android/ndk-samples. # Sets the minimum CMake version required for this project. cmake_minimum_required(VERSION 3.22.1) # Declares the project name. The project name can be accessed via ${ PROJECT_NAME}, # Since this is the top level CMakeLists.txt, the project name is also accessible # with ${CMAKE_PROJECT_NAME} (both CMake variables are in-sync within the top level # build script scope). project(&#34;learnjni&#34;) # Creates and names a library, sets it as either STATIC # or SHARED, and provides the relative paths to its source code. # You can define multiple libraries, and CMake builds them for you. # Gradle automatically packages shared libraries with your APK. # # In this top level CMakeLists.txt, ${CMAKE_PROJECT_NAME} is used to define # the target library name; in the sub-module&#39;s CMakeLists.txt, ${PROJECT_NAME} # is preferred for the same purpose. # # In order to load a library into your app from Java/Kotlin, you must call # System.loadLibrary() and pass the name of the library defined here; # for GameActivity/NativeActivity derived applications, the same library name must be # used in the AndroidManifest.xml file. add_library(${CMAKE_PROJECT_NAME} SHARED # List C/C++ source files with relative paths to this CMakeLists.txt. native-lib.cpp) # Specifies libraries CMake should link to your target library. You # can link libraries from various origins, such as libraries defined in this # build script, prebuilt third-party libraries, or Android system libraries. target_link_libraries(${CMAKE_PROJECT_NAME} # List libraries link to the target library android log) 其中的add_library用于添加生产库的源代码文件，比如这里的native-lib.cpp，然后再来看看native-lib.cpp中的c语言如何Java进行交互\n">
 <title></title>
 
 <link rel='canonical' href='http://localhost:1313/p/'>
 
 <link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="">
-<meta property='og:description' content="content发布文章页面 categories 该目录下记录的是相关目录，比如这里的categories/Text 就对应下面这里\n然后该目录下的_index.md，用于渲染这个\n1 2 3 4 5 6 7 8 --- title: &#34;Test&#34; description: &#34;123&#34; image: &#34;hutomo-abrianto-l2jk-uxb1BY-unsplash.jpg&#34; style: background: &#34;#f08080&#34; color: &#34;#fff&#34; --- 其中title和decription就是在这个页面的顶部，存在描述，标题，和图像\n然后下面是对应带有该标签的文章，而style代表这个标签的样式，这里就是背景浅红色，字体白色\npage目录 page目录下存在其他文件夹，分别就对应左侧的选项\n这里侧边选项是通过menu main 来定义的\n每一个目录下存在一个index.md/index.zh-cn.md ，其中渲染部分如下\n1 2 3 4 5 6 7 8 9 10 11 --- title: &#34;Archives&#34; date: 2019-05-28 layout: &#34;archives&#34; slug: &#34;archives&#34; menu: main: weight: -70 params: icon: archives --- 其中titile表示侧边拦的名称， data好像没啥用处， layout表示布局使用layouts文件下的archives.html布局 slug表示当前页面的网站索引，比如这里的/wake0p.github.io/archives menu用于 1 2 3 4 5 menu: main: weight: -70 params: icon: archives weight: -70：weight 用来控制菜单项的排序。数字越小，菜单项会显示得越靠前，越大则越靠后。-70 表示该页面在菜单中的位置比较靠前（在相同 weight 的情况下）。 params:：这是菜单项的附加参数。你可以在这里指定图标、样式、链接等额外的设置。 icon: archives：表示在这个菜单项中会使用一个名为 archives 的图标。具体来说，网站的图标可能是一个与归档相关的图标（如文件夹或文件堆叠的图标），并且可以通过CSS或其他方式进行自定义显示。 当然还存在其他属性，比如在Links文件下，就Links属性，用于表示参考文章，使用方法如下\n">
+<meta property='og:description' content="JNI开发基础 参考文章\n初识JNI/NDK NDK（Native Development Kit）是一个允许开发者使用C和C++编写Android应用程序的工具集。它提供了一系列的工具和库，可以帮助开发者将高性能的原生代码集成到Android应用中\nNDK的主要目标是提供一种方式，让开发者能够在需要更高性能或更底层控制的情况下使用C和C++编写部分应用程序，而不仅仅依赖于Java。\nJNI（Java Native Interface）是一种编程框架，用于在Java代码和原生代码（如C和C++）之间进行交互。通过JNI，开发者可以在Java代码中调用原生代码的函数，并且可以将Java对象传递给原生代码进行处理。\nJNI 开发大致框架 android studio创建 Native项目 创建好了Natvie项目后，需要点开Tools→SDK Manager下载 NDK和CMake\n静态注册Native方法 Java层注册/调用 在任意类的中，要想调用JNI .so层的native方法需要存在如下定义\n1 2 3 4 //导入.so中的代码 static { System.loadLibrary(&#34;learnjni&#34;); } 并且存在相应的Native函数声明\n1 2 3 public native String stringFromJNI(); public native String stringFromJAVA(); public native String stringFromC(); 然后就能在该class中调用这些Native函数方法\nc/c++层定义 上面导入的libc库文件learnjni，是在cpp/CMakeLists中定义的\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 # For more information about using CMake with Android Studio, read the # documentation: https://d.android.com/studio/projects/add-native-code.html. # For more examples on how to use CMake, see https://github.com/android/ndk-samples. # Sets the minimum CMake version required for this project. cmake_minimum_required(VERSION 3.22.1) # Declares the project name. The project name can be accessed via ${ PROJECT_NAME}, # Since this is the top level CMakeLists.txt, the project name is also accessible # with ${CMAKE_PROJECT_NAME} (both CMake variables are in-sync within the top level # build script scope). project(&#34;learnjni&#34;) # Creates and names a library, sets it as either STATIC # or SHARED, and provides the relative paths to its source code. # You can define multiple libraries, and CMake builds them for you. # Gradle automatically packages shared libraries with your APK. # # In this top level CMakeLists.txt, ${CMAKE_PROJECT_NAME} is used to define # the target library name; in the sub-module&#39;s CMakeLists.txt, ${PROJECT_NAME} # is preferred for the same purpose. # # In order to load a library into your app from Java/Kotlin, you must call # System.loadLibrary() and pass the name of the library defined here; # for GameActivity/NativeActivity derived applications, the same library name must be # used in the AndroidManifest.xml file. add_library(${CMAKE_PROJECT_NAME} SHARED # List C/C++ source files with relative paths to this CMakeLists.txt. native-lib.cpp) # Specifies libraries CMake should link to your target library. You # can link libraries from various origins, such as libraries defined in this # build script, prebuilt third-party libraries, or Android system libraries. target_link_libraries(${CMAKE_PROJECT_NAME} # List libraries link to the target library android log) 其中的add_library用于添加生产库的源代码文件，比如这里的native-lib.cpp，然后再来看看native-lib.cpp中的c语言如何Java进行交互\n">
 <meta property='og:url' content='http://localhost:1313/p/'>
 <meta property='og:site_name' content='wake0p&#39;s blog'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' />
 <meta name="twitter:title" content="">
-<meta name="twitter:description" content="content发布文章页面 categories 该目录下记录的是相关目录，比如这里的categories/Text 就对应下面这里\n然后该目录下的_index.md，用于渲染这个\n1 2 3 4 5 6 7 8 --- title: &#34;Test&#34; description: &#34;123&#34; image: &#34;hutomo-abrianto-l2jk-uxb1BY-unsplash.jpg&#34; style: background: &#34;#f08080&#34; color: &#34;#fff&#34; --- 其中title和decription就是在这个页面的顶部，存在描述，标题，和图像\n然后下面是对应带有该标签的文章，而style代表这个标签的样式，这里就是背景浅红色，字体白色\npage目录 page目录下存在其他文件夹，分别就对应左侧的选项\n这里侧边选项是通过menu main 来定义的\n每一个目录下存在一个index.md/index.zh-cn.md ，其中渲染部分如下\n1 2 3 4 5 6 7 8 9 10 11 --- title: &#34;Archives&#34; date: 2019-05-28 layout: &#34;archives&#34; slug: &#34;archives&#34; menu: main: weight: -70 params: icon: archives --- 其中titile表示侧边拦的名称， data好像没啥用处， layout表示布局使用layouts文件下的archives.html布局 slug表示当前页面的网站索引，比如这里的/wake0p.github.io/archives menu用于 1 2 3 4 5 menu: main: weight: -70 params: icon: archives weight: -70：weight 用来控制菜单项的排序。数字越小，菜单项会显示得越靠前，越大则越靠后。-70 表示该页面在菜单中的位置比较靠前（在相同 weight 的情况下）。 params:：这是菜单项的附加参数。你可以在这里指定图标、样式、链接等额外的设置。 icon: archives：表示在这个菜单项中会使用一个名为 archives 的图标。具体来说，网站的图标可能是一个与归档相关的图标（如文件夹或文件堆叠的图标），并且可以通过CSS或其他方式进行自定义显示。 当然还存在其他属性，比如在Links文件下，就Links属性，用于表示参考文章，使用方法如下\n">
+<meta name="twitter:description" content="JNI开发基础 参考文章\n初识JNI/NDK NDK（Native Development Kit）是一个允许开发者使用C和C++编写Android应用程序的工具集。它提供了一系列的工具和库，可以帮助开发者将高性能的原生代码集成到Android应用中\nNDK的主要目标是提供一种方式，让开发者能够在需要更高性能或更底层控制的情况下使用C和C++编写部分应用程序，而不仅仅依赖于Java。\nJNI（Java Native Interface）是一种编程框架，用于在Java代码和原生代码（如C和C++）之间进行交互。通过JNI，开发者可以在Java代码中调用原生代码的函数，并且可以将Java对象传递给原生代码进行处理。\nJNI 开发大致框架 android studio创建 Native项目 创建好了Natvie项目后，需要点开Tools→SDK Manager下载 NDK和CMake\n静态注册Native方法 Java层注册/调用 在任意类的中，要想调用JNI .so层的native方法需要存在如下定义\n1 2 3 4 //导入.so中的代码 static { System.loadLibrary(&#34;learnjni&#34;); } 并且存在相应的Native函数声明\n1 2 3 public native String stringFromJNI(); public native String stringFromJAVA(); public native String stringFromC(); 然后就能在该class中调用这些Native函数方法\nc/c++层定义 上面导入的libc库文件learnjni，是在cpp/CMakeLists中定义的\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 # For more information about using CMake with Android Studio, read the # documentation: https://d.android.com/studio/projects/add-native-code.html. # For more examples on how to use CMake, see https://github.com/android/ndk-samples. # Sets the minimum CMake version required for this project. cmake_minimum_required(VERSION 3.22.1) # Declares the project name. The project name can be accessed via ${ PROJECT_NAME}, # Since this is the top level CMakeLists.txt, the project name is also accessible # with ${CMAKE_PROJECT_NAME} (both CMake variables are in-sync within the top level # build script scope). project(&#34;learnjni&#34;) # Creates and names a library, sets it as either STATIC # or SHARED, and provides the relative paths to its source code. # You can define multiple libraries, and CMake builds them for you. # Gradle automatically packages shared libraries with your APK. # # In this top level CMakeLists.txt, ${CMAKE_PROJECT_NAME} is used to define # the target library name; in the sub-module&#39;s CMakeLists.txt, ${PROJECT_NAME} # is preferred for the same purpose. # # In order to load a library into your app from Java/Kotlin, you must call # System.loadLibrary() and pass the name of the library defined here; # for GameActivity/NativeActivity derived applications, the same library name must be # used in the AndroidManifest.xml file. add_library(${CMAKE_PROJECT_NAME} SHARED # List C/C++ source files with relative paths to this CMakeLists.txt. native-lib.cpp) # Specifies libraries CMake should link to your target library. You # can link libraries from various origins, such as libraries defined in this # build script, prebuilt third-party libraries, or Android system libraries. target_link_libraries(${CMAKE_PROJECT_NAME} # List libraries link to the target library android log) 其中的add_library用于添加生产库的源代码文件，比如这里的native-lib.cpp，然后再来看看native-lib.cpp中的c语言如何Java进行交互\n">
     </head>
     <body class="
     article-page
@@ -177,6 +177,18 @@
         
         
         <li >
+            <a href='/target/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 32 32" width="32px" height="32px"><path d="M 24.568359 4.5761719 L 13.503906 15.800781 L 7.3085938 9.515625 L 0.59570312 16.328125 L 13.501953 29.423828 L 13.505859 29.419922 L 13.507812 29.421875 L 14.21875 28.699219 L 18.339844 24.519531 L 18.791016 24.060547 L 30.564453 12.115234 L 31.28125 11.386719 L 30.564453 10.658203 L 24.568359 4.5761719 z M 24.568359 7.4238281 L 28.472656 11.386719 L 17.367188 22.65625 L 13.505859 26.572266 L 9.6015625 22.611328 L 24.568359 7.4238281 z M 7.3085938 12.365234 L 12.099609 17.226562 L 8.1933594 21.1875 L 3.4042969 16.328125 L 7.3085938 12.365234 z"/></svg>
+                
+                <span>Target</span>
+            </a>
+        </li>
+        
+        
+        <li >
             <a href='/links/' >
                 
                 
@@ -223,7 +235,52 @@
     </ol>
 </aside>
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#jni开发基础">JNI开发基础</a></li>
+    <li><a href="#初识jnindk">初识JNI/NDK</a></li>
+    <li><a href="#jni-开发大致框架">JNI 开发大致框架</a>
+      <ol>
+        <li><a href="#android-studio创建-native项目">android studio创建 Native项目</a></li>
+        <li><a href="#静态注册native方法">静态注册Native方法</a>
+          <ol>
+            <li><a href="#java层注册调用">Java层注册/调用</a></li>
+            <li><a href="#cc层定义">c/c++层定义</a></li>
+          </ol>
+        </li>
+        <li><a href="#动态注册">动态注册</a></li>
+      </ol>
+    </li>
+    <li><a href="#code">code</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
     <article class="main-article">
@@ -258,7 +315,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 1 分钟
+                    阅读时长: 6 分钟
                 </time>
             </div>
         
@@ -273,10 +330,18 @@
     <section class="article-content">
     
     
-    <h1 id="content发布文章页面">content发布文章页面
-</h1><h1 id="categories">categories
-</h1><p>该目录下记录的是相关目录，比如这里的categories/Text 就对应下面这里</p>
-<p><img src="/image.png"
+    <h2 id="jni开发基础">JNI开发基础
+</h2><blockquote>
+<p>参考<a class="link" href="https://mp.weixin.qq.com/s/0fOkDntnzxCgtxeyeY8Uvg"  target="_blank" rel="noopener"
+    >文章</a></p></blockquote>
+<h2 id="初识jnindk">初识JNI/NDK
+</h2><p>NDK（Native Development Kit）是一个允许开发者使用C和C++编写Android应用程序的工具集。它提供了一系列的工具和库，可以帮助开发者将高性能的原生代码集成到Android应用中</p>
+<p>NDK的主要目标是提供一种方式，让开发者能够在需要更高性能或更底层控制的情况下使用C和C++编写部分应用程序，而不仅仅依赖于Java。</p>
+<p>JNI（Java Native Interface）是一种编程框架，用于在Java代码和原生代码（如C和C++）之间进行交互。通过JNI，开发者可以在Java代码中调用原生代码的函数，并且可以将Java对象传递给原生代码进行处理。</p>
+<h2 id="jni-开发大致框架">JNI 开发大致框架
+</h2><h3 id="android-studio创建-native项目">android studio创建 Native项目
+</h3><p>创建好了Natvie项目后，需要点开Tools→SDK Manager下载 NDK和CMake</p>
+<p><img src="/JNI%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80%2019fbf12c9094800f8190fd808006a206/image.png"
 	
 	
 	
@@ -286,31 +351,40 @@
 	
 	
 ></p>
-<p>然后该目录下的_index.md，用于渲染这个</p>
+<h3 id="静态注册native方法">静态注册Native方法
+</h3><h4 id="java层注册调用">Java层注册/调用
+</h4><p>在任意类的中，要想调用JNI <code>.so</code>层的native方法需要存在如下定义</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">---
-</span></span><span class="line"><span class="cl">title: &#34;Test&#34;
-</span></span><span class="line"><span class="cl">description: &#34;123&#34;
-</span></span><span class="line"><span class="cl">image: &#34;hutomo-abrianto-l2jk-uxb1BY-unsplash.jpg&#34;
-</span></span><span class="line"><span class="cl">style:
-</span></span><span class="line"><span class="cl">    background: &#34;<span class="ni">#f08080</span>&#34;
-</span></span><span class="line"><span class="cl">    color: &#34;<span class="ni">#fff</span>&#34;
-</span></span><span class="line"><span class="cl">---
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">//导入.so中的代码</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">static</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">loadLibrary</span><span class="p">(</span><span class="s">&#34;learnjni&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>其中title和decription就是在这个页面的顶部，存在描述，标题，和图像</p>
-<p><img src="/image%201.png"
+</div><p>并且存在相应的Native函数声明</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">native</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">stringFromJNI</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">native</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">stringFromJAVA</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">native</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">stringFromC</span><span class="p">();</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后就能在该class中调用这些Native函数方法</p>
+<h4 id="cc层定义">c/c++层定义
+</h4><p>上面导入的libc库文件learnjni，是在cpp/CMakeLists中定义的</p>
+<p><img src="/JNI%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80%2019fbf12c9094800f8190fd808006a206/image1.png"
 	
 	
 	
@@ -320,43 +394,6 @@
 	
 	
 ></p>
-<p>然后下面是对应带有该标签的文章，而style代表这个标签的样式，这里就是背景浅红色，字体白色</p>
-<p><img src="/image%202.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image.png"
-	
-	
-></p>
-<h1 id="page目录">page目录
-</h1><p>page目录下存在其他文件夹，分别就对应左侧的选项</p>
-<blockquote>
-<p>这里侧边选项是通过menu main 来定义的</p></blockquote>
-<p><img src="/image%203.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image.png"
-	
-	
-></p>
-<p><img src="/image%204.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image.png"
-	
-	
-></p>
-<p><a class="link" href="http://%e6%af%8f%e4%b8%80%e4%b8%aa%e7%9b%ae%e5%bd%95%e4%b8%8b%e5%ad%98%e5%9c%a8%e4%b8%80%e4%b8%aaindex.md/index.zh-cn.md"  target="_blank" rel="noopener"
-    >每一个目录下存在一个<code>index.md/index.zh-cn.md</code></a> ，其中渲染部分如下</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -370,93 +407,77 @@
 </span><span class="lnt"> 9
 </span><span class="lnt">10
 </span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">---
-</span></span><span class="line"><span class="cl">title: &#34;Archives&#34;
-</span></span><span class="line"><span class="cl">date: 2019-05-28
-</span></span><span class="line"><span class="cl">layout: &#34;archives&#34;
-</span></span><span class="line"><span class="cl">slug: &#34;archives&#34;
-</span></span><span class="line"><span class="cl">menu:
-</span></span><span class="line"><span class="cl">    main:
-</span></span><span class="line"><span class="cl">        weight: -70
-</span></span><span class="line"><span class="cl">        params: 
-</span></span><span class="line"><span class="cl">            icon: archives
-</span></span><span class="line"><span class="cl">---
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="err">#</span><span class="w"> </span><span class="n">For</span><span class="w"> </span><span class="n">more</span><span class="w"> </span><span class="n">information</span><span class="w"> </span><span class="n">about</span><span class="w"> </span><span class="n">using</span><span class="w"> </span><span class="n">CMake</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">Android</span><span class="w"> </span><span class="n">Studio</span><span class="p">,</span><span class="w"> </span><span class="n">read</span><span class="w"> </span><span class="n">the</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">documentation</span><span class="p">:</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="c1">//d.android.com/studio/projects/add-native-code.html.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">For</span><span class="w"> </span><span class="n">more</span><span class="w"> </span><span class="n">examples</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="n">CMake</span><span class="p">,</span><span class="w"> </span><span class="n">see</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="c1">//github.com/android/ndk-samples.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">Sets</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">minimum</span><span class="w"> </span><span class="n">CMake</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="n">required</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">this</span><span class="w"> </span><span class="n">project</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">cmake_minimum_required</span><span class="p">(</span><span class="n">VERSION</span><span class="w"> </span><span class="n">3</span><span class="p">.</span><span class="na">22</span><span class="p">.</span><span class="na">1</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">Declares</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">project</span><span class="w"> </span><span class="n">name</span><span class="p">.</span><span class="w"> </span><span class="n">The</span><span class="w"> </span><span class="n">project</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">accessed</span><span class="w"> </span><span class="n">via</span><span class="w"> </span><span class="n">$</span><span class="p">{</span><span class="w"> </span><span class="n">PROJECT_NAME</span><span class="p">},</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">Since</span><span class="w"> </span><span class="k">this</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">top</span><span class="w"> </span><span class="n">level</span><span class="w"> </span><span class="n">CMakeLists</span><span class="p">.</span><span class="na">txt</span><span class="p">,</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">project</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">also</span><span class="w"> </span><span class="n">accessible</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">$</span><span class="p">{</span><span class="n">CMAKE_PROJECT_NAME</span><span class="p">}</span><span class="w"> </span><span class="p">(</span><span class="n">both</span><span class="w"> </span><span class="n">CMake</span><span class="w"> </span><span class="n">variables</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">in</span><span class="o">-</span><span class="n">sync</span><span class="w"> </span><span class="n">within</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">top</span><span class="w"> </span><span class="n">level</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">build</span><span class="w"> </span><span class="n">script</span><span class="w"> </span><span class="n">scope</span><span class="p">).</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">project</span><span class="p">(</span><span class="s">&#34;learnjni&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">Creates</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">names</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">library</span><span class="p">,</span><span class="w"> </span><span class="n">sets</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">either</span><span class="w"> </span><span class="n">STATIC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="n">SHARED</span><span class="p">,</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">provides</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">relative</span><span class="w"> </span><span class="n">paths</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">its</span><span class="w"> </span><span class="n">source</span><span class="w"> </span><span class="n">code</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">You</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">define</span><span class="w"> </span><span class="n">multiple</span><span class="w"> </span><span class="n">libraries</span><span class="p">,</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">CMake</span><span class="w"> </span><span class="n">builds</span><span class="w"> </span><span class="n">them</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">you</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">Gradle</span><span class="w"> </span><span class="n">automatically</span><span class="w"> </span><span class="n">packages</span><span class="w"> </span><span class="n">shared</span><span class="w"> </span><span class="n">libraries</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">APK</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">In</span><span class="w"> </span><span class="k">this</span><span class="w"> </span><span class="n">top</span><span class="w"> </span><span class="n">level</span><span class="w"> </span><span class="n">CMakeLists</span><span class="p">.</span><span class="na">txt</span><span class="p">,</span><span class="w"> </span><span class="n">$</span><span class="p">{</span><span class="n">CMAKE_PROJECT_NAME</span><span class="p">}</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">used</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">define</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="n">library</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">sub</span><span class="o">-</span><span class="n">module</span><span class="err">&#39;</span><span class="n">s</span><span class="w"> </span><span class="n">CMakeLists</span><span class="p">.</span><span class="na">txt</span><span class="p">,</span><span class="w"> </span><span class="n">$</span><span class="p">{</span><span class="n">PROJECT_NAME</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">preferred</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">same</span><span class="w"> </span><span class="n">purpose</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">In</span><span class="w"> </span><span class="n">order</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">library</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">app</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">Java</span><span class="o">/</span><span class="n">Kotlin</span><span class="p">,</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">must</span><span class="w"> </span><span class="n">call</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">loadLibrary</span><span class="p">()</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">pass</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">library</span><span class="w"> </span><span class="n">defined</span><span class="w"> </span><span class="n">here</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">GameActivity</span><span class="o">/</span><span class="n">NativeActivity</span><span class="w"> </span><span class="n">derived</span><span class="w"> </span><span class="n">applications</span><span class="p">,</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">same</span><span class="w"> </span><span class="n">library</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="n">must</span><span class="w"> </span><span class="n">be</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">used</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">AndroidManifest</span><span class="p">.</span><span class="na">xml</span><span class="w"> </span><span class="n">file</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">add_library</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">CMAKE_PROJECT_NAME</span><span class="p">}</span><span class="w"> </span><span class="n">SHARED</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="n">List</span><span class="w"> </span><span class="n">C</span><span class="o">/</span><span class="n">C</span><span class="o">++</span><span class="w"> </span><span class="n">source</span><span class="w"> </span><span class="n">files</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">relative</span><span class="w"> </span><span class="n">paths</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="k">this</span><span class="w"> </span><span class="n">CMakeLists</span><span class="p">.</span><span class="na">txt</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">native</span><span class="o">-</span><span class="n">lib</span><span class="p">.</span><span class="na">cpp</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">Specifies</span><span class="w"> </span><span class="n">libraries</span><span class="w"> </span><span class="n">CMake</span><span class="w"> </span><span class="n">should</span><span class="w"> </span><span class="n">link</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="n">library</span><span class="p">.</span><span class="w"> </span><span class="n">You</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">link</span><span class="w"> </span><span class="n">libraries</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">various</span><span class="w"> </span><span class="n">origins</span><span class="p">,</span><span class="w"> </span><span class="n">such</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">libraries</span><span class="w"> </span><span class="n">defined</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="k">this</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">build</span><span class="w"> </span><span class="n">script</span><span class="p">,</span><span class="w"> </span><span class="n">prebuilt</span><span class="w"> </span><span class="n">third</span><span class="o">-</span><span class="n">party</span><span class="w"> </span><span class="n">libraries</span><span class="p">,</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="n">Android</span><span class="w"> </span><span class="n">system</span><span class="w"> </span><span class="n">libraries</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">target_link_libraries</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">CMAKE_PROJECT_NAME</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="n">List</span><span class="w"> </span><span class="n">libraries</span><span class="w"> </span><span class="n">link</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="n">library</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">android</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">log</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
-</div><ul>
-<li>其中titile表示侧边拦的名称，</li>
-<li>data好像没啥用处，</li>
-<li>layout表示布局使用layouts文件下的archives.html布局</li>
-<li>slug表示当前页面的网站索引，比如这里的/wake0p.github.io/archives</li>
-<li>menu用于</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">menu:
-</span></span><span class="line"><span class="cl">    main:
-</span></span><span class="line"><span class="cl">        weight: -70
-</span></span><span class="line"><span class="cl">        params:
-</span></span><span class="line"><span class="cl">            icon: archives
-</span></span></code></pre></td></tr></table>
-</div>
-</div><ul>
-<li><strong>weight: -70</strong>：weight 用来控制菜单项的排序。数字越小，菜单项会显示得越靠前，越大则越靠后。-70 表示该页面在菜单中的位置比较靠前（在相同 weight 的情况下）。</li>
-<li><strong>params:</strong>：这是菜单项的附加参数。你可以在这里指定图标、样式、链接等额外的设置。</li>
-<li><strong>icon: archives</strong>：表示在这个菜单项中会使用一个名为 archives 的图标。具体来说，网站的图标可能是一个与归档相关的图标（如文件夹或文件堆叠的图标），并且可以通过CSS或其他方式进行自定义显示。</li>
-</ul>
-<p>当然还存在其他属性，比如在Links文件下，就Links属性，用于表示参考文章，使用方法如下</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">links:
-</span></span><span class="line"><span class="cl">  <span class="k">-</span> title: GitHub
-</span></span><span class="line"><span class="cl">    description: My GitHub 
-</span></span><span class="line"><span class="cl">    website: https://github.com/wake0p
-</span></span><span class="line"><span class="cl">    image: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
-</span></span><span class="line"><span class="cl">  <span class="k">-</span> title: TypeScript
-</span></span><span class="line"><span class="cl">    description: TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.
-</span></span><span class="line"><span class="cl">    website: https://www.typescriptlang.org
-</span></span><span class="line"><span class="cl">    image: ts-logo-128.jpg
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>其中image即能够用网上的，也能够使用本地，最后的效果就是在底部存在这样的参考文章</p>
-<p><img src="/image%205.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image.png"
-	
-	
-></p>
-<h1 id="post目录">post目录
-</h1><p>这个目录用于存放真正需要发布文章，一般分为两种情况，</p>
-<ul>
-<li>要么是直接/post/xxx.md 这种md中不引用图片，</li>
-<li>要么就是/post/xxx/index.md将资源单独放在一个文件夹，文件夹包含所需要的所有资源</li>
-</ul>
-<p>比较推荐第二种做法</p>
-<p>然后就是post中文章有的相关属性</p>
+</div><p>其中的add_library用于添加生产库的源代码文件，比如这里的native-lib.cpp，然后再来看看native-lib.cpp中的c语言如何Java进行交互</p>
+<p>初始化生成的代码如下</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -471,46 +492,62 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">---
-</span></span><span class="line"><span class="cl">title: Chinese Test
-</span></span><span class="line"><span class="cl">description: 这是一个副标题
-</span></span><span class="line"><span class="cl">date: 2020-09-09
-</span></span><span class="line"><span class="cl">slug: test-Chinese
-</span></span><span class="line"><span class="cl">image: helena-hertz-wWZzXlDpMog-unsplash.jpg
-</span></span><span class="line"><span class="cl">categories:
-</span></span><span class="line"><span class="cl">    <span class="k">-</span> Test
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">---
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="err">#</span><span class="n">include</span><span class="w"> </span><span class="o">&lt;</span><span class="n">jni</span><span class="p">.</span><span class="na">h</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="n">include</span><span class="w"> </span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">extern</span><span class="w"> </span><span class="s">&#34;C&#34;</span><span class="w"> </span><span class="n">JNIEXPORT</span><span class="w"> </span><span class="n">jstring</span><span class="w"> </span><span class="n">JNICALL</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">Java_com_example_learnjni_MainActivity_stringFromJNI</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">JNIEnv</span><span class="o">*</span><span class="w"> </span><span class="n">env</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">jobject</span><span class="w"> </span><span class="cm">/* this */</span><span class="w"> </span><span class="n">thiz</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">std</span><span class="p">::</span><span class="n">string</span><span class="w"> </span><span class="n">hello</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;Hello from C++&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">NewStringUTF</span><span class="p">(</span><span class="n">hello</span><span class="p">.</span><span class="na">c_str</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
-</div><ul>
-<li>date表示发布时间</li>
-<li>image表示文章的背景图片</li>
-<li>categories表示当前文章属于哪一个目录，可以说目录中有的，也可也是目录中没有的</li>
+</div><hr>
+<p>首先来看函数函数前一行声明</p>
+<ul>
+<li>extern &ldquo;C&quot;表示下面的函数通过c语言进行编译</li>
+<li>JNIEXPORT表示函数是JNI中的导出函数，能过在JAVA代码中调用</li>
+<li>JNICALL修饰符告诉编译器函数调用约定为JNI的规范</li>
+<li>jstring是该函数的返回类型，J开头代表说JAVA中的类型</li>
 </ul>
-<p>最终的情况就像下面这样</p>
-<p><img src="/image%206.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image.png"
-	
-	
-></p>
-<h1 id="图片排版方法">图片排版方法
-</h1><p>将两个图片放在同一排，就像下面这样</p>
+<p>再来看看函数命名，其规范如下</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">![<span class="nt">Photo by Florian Klauer on Unsplash</span>](<span class="na">florian-klauer-nptLmg6jqDo-unsplash.jpg</span>) ![<span class="nt">Photo by Luca Bravo on Unsplash</span>](<span class="na">luca-bravo-alS7ewQ41M8-unsplash.jpg</span>) 
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Java_包名_类名_方法名</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>最终的效果</p>
-<p><img src="/image%207.png"
+</div><ul>
+<li>如果其中的名字包含<code>_</code>下划线，通过<code>1_</code> 来区分。</li>
+</ul>
+<hr>
+<p>再来看看函数传递的参数，存在两个参数JNIEnv和jobject，其中JNIEnv定义如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="err">#</span><span class="k">if</span><span class="w"> </span><span class="n">defined</span><span class="p">(</span><span class="n">__cplusplus</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">typedef</span><span class="w"> </span><span class="n">_JNIEnv</span><span class="w"> </span><span class="n">JNIEnv</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">typedef</span><span class="w"> </span><span class="n">_JavaVM</span><span class="w"> </span><span class="n">JavaVM</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="k">else</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">typedef</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="n">struct</span><span class="w"> </span><span class="n">JNINativeInterface</span><span class="o">*</span><span class="w"> </span><span class="n">JNIEnv</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">typedef</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="n">struct</span><span class="w"> </span><span class="n">JNIInvokeInterface</span><span class="o">*</span><span class="w"> </span><span class="n">JavaVM</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="n">endif</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里区分C和Cpp，先来看Cpp，其JNIEnv就是_JNIEnv的引用，_JNIEnv是一个结构体，包含了很多的函数指针，我们在c语言中处理Java中的类，对象，字段的时候需要用到这些方法。</p>
+<p><img src="/JNI%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80%2019fbf12c9094800f8190fd808006a206/image2.png"
 	
 	
 	
@@ -520,8 +557,69 @@
 	
 	
 ></p>
-<p>当然也能够4张图片全部排在一起</p>
-<p><img src="/image%208.png"
+<p>由于c语言中环境和JAVA的环境完全不同，JAVA中存在类，类对象这些概念，因此存在如下定义</p>
+<ul>
+<li>jclass 表示对Java中的某个类引用</li>
+<li>jobject 表示对Java中某个类对象的引用</li>
+<li>jstring/jint这里表示Java中的string/int类型</li>
+</ul>
+<p>假如要在native层修改Java层类中的一个普通字段String，那么其获取思路如下</p>
+<ol>
+<li>
+<p>普通字段属于类中的字段，首先需要获取到Java中的类，也就是jclass，存在两个方法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">jclass</span><span class="w"> </span><span class="nf">GetObjectClass</span><span class="p">(</span><span class="n">jobject</span><span class="w"> </span><span class="n">obj</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">jclass</span><span class="w"> </span><span class="nf">FindClass</span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>对应的调用例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">jclass</span><span class="w"> </span><span class="n">mainclass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">GetObjectClass</span><span class="p">(</span><span class="n">thiz</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">jclass</span><span class="w"> </span><span class="n">mainclass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">FindClass</span><span class="p">(</span><span class="s">&#34;com/example/learnjni/MainActivity&#34;</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>通过类的对象获取到相应类，这里的thiz就是函数定义的第二个参数jobject(类的对象)，</li>
+<li>直接通过包名/类名也可以获取到相应类</li>
+</ol>
+</li>
+<li>
+<p>获取到Java中的类之后，就能过定位到类中相应字段</p>
+</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">jfieldID</span><span class="w"> </span><span class="nf">GetFieldID</span><span class="p">(</span><span class="n">jclass</span><span class="w"> </span><span class="n">clazz</span><span class="p">,</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">sig</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>对应调用例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">jfieldID</span><span class="w"> </span><span class="n">strId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">GetFieldID</span><span class="p">(</span><span class="n">mainclass</span><span class="p">,</span><span class="s">&#34;str&#34;</span><span class="p">,</span><span class="s">&#34;Ljava/lang/String;&#34;</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>clazz表示字段处于到方法</li>
+<li>name表示字段名称</li>
+<li>sig表示字段的类型，也就是JNI类型</li>
+</ul>
+<p><img src="/JNI%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80%2019fbf12c9094800f8190fd808006a206/image3.png"
 	
 	
 	
@@ -531,6 +629,526 @@
 	
 	
 ></p>
+<p>sig中最特殊的就是对象类型，其命名方式为L包名/对象名，这里以Java中的String为例子，JNI类型如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">JNI类型</span><span class="w"> </span><span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="n">String</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Java类型</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">String</span><span class="w"> 
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>获取到类中的字段后，就能修改其字段的值</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">void</span><span class="w"> </span><span class="nf">SetObjectField</span><span class="p">(</span><span class="n">jobject</span><span class="w"> </span><span class="n">obj</span><span class="p">,</span><span class="w"> </span><span class="n">jfieldID</span><span class="w"> </span><span class="n">fieldID</span><span class="p">,</span><span class="w"> </span><span class="n">jobject</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">jstring</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">NewStringUTF</span><span class="p">(</span><span class="s">&#34;Hellow Java ,这是修改后的普通字段&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">env</span><span class="o">-&gt;</span><span class="n">SetObjectField</span><span class="p">(</span><span class="n">thiz</span><span class="p">,</span><span class="n">strId</span><span class="p">,</span><span class="n">modify</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>要在c语言中修改的Java中的字符串，因此value需要jstring类型，通过NewStringUTF方法进行转换即可。</p>
+<p>以上就是获取java中的类，对象，以及类中的字段，如果要修改的字段为静态的，和普通字段类似</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">extern</span><span class="w"> </span><span class="s">&#34;C&#34;</span><span class="w"> </span><span class="n">JNIEXPORT</span><span class="w"> </span><span class="n">jstring</span><span class="w"> </span><span class="n">JNICALL</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">Java_com_example_learnjni_MainActivity_staticFromC</span><span class="p">(</span><span class="n">JNIEnv</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">env</span><span class="p">,</span><span class="n">jobject</span><span class="w"> </span><span class="n">thiz</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">//modfty static string from Java</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">//    jclass mainclass = env-&gt;FindClass(&#34;com/example/learnjni/MainActivity&#34;);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jclass</span><span class="w"> </span><span class="n">mainclass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">GetObjectClass</span><span class="p">(</span><span class="n">thiz</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jfieldID</span><span class="w"> </span><span class="n">strId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">GetStaticFieldID</span><span class="p">(</span><span class="n">mainclass</span><span class="p">,</span><span class="s">&#34;static_str&#34;</span><span class="p">,</span><span class="s">&#34;Ljava/lang/String;&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jstring</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">NewStringUTF</span><span class="p">(</span><span class="s">&#34;Hellow Java ,这是修改后的静态字段&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">SetStaticObjectField</span><span class="p">(</span><span class="n">mainclass</span><span class="p">,</span><span class="n">strId</span><span class="p">,</span><span class="n">modify</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">nullptr</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>唯一的区别在于静态static字段属于整个class类，而普通字段属于类的实例对象，因此在调用</p>
+<p>setxxxObject的时候，static字段传入的类，普通字段传入的类的对象thiz。</p>
+<hr>
+<p>在来看看c语言的情况</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">typedef</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="n">struct</span><span class="w"> </span><span class="n">JNINativeInterface</span><span class="o">*</span><span class="w"> </span><span class="n">JNIEnv</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">typedef</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="n">struct</span><span class="w"> </span><span class="n">JNIInvokeInterface</span><span class="o">*</span><span class="w"> </span><span class="n">JavaVM</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>由于c语言没类机制，因此JNIEnv是一个指针，指向JNINativeInterface的结构题,该结构体和cpp中的_JNIEnv长得很像</p>
+<p><img src="/JNI%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80%2019fbf12c9094800f8190fd808006a206/image4.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image.png"
+	
+	
+></p>
+<p><img src="/JNI%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80%2019fbf12c9094800f8190fd808006a206/image2.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image.png"
+	
+	
+></p>
+<p>其实本质上_JNIEnv就是JNINativeInterface类的封装，你会发现_JNIEnv中的函数，其实最终都调用JNINativeInterface类中的函数(Fuctions→xxx)。</p>
+<p><img src="/JNI%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80%2019fbf12c9094800f8190fd808006a206/image5.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image.png"
+	
+	
+></p>
+<p>而传入的参数为JNIEnv * evn，因此evn是一个二级指针，要想获取到JNINativeInterface结构体中的函数需要先解引用得到JNINativeInterface *的指针，c语言调用JNI的方法如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="p">(</span><span class="o">*</span><span class="n">evn</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">function</span><span class="p">(</span><span class="n">xxx</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<p>理解了上面类，对象获取的方法，那么再来看看下面的代码就十分容易理解了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">extern</span><span class="w"> </span><span class="s">&#34;C&#34;</span><span class="w"> </span><span class="n">JNIEXPORT</span><span class="w"> </span><span class="n">jstring</span><span class="w"> </span><span class="n">JNICALL</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">Java_com_example_learnjni_MainActivity_stringFromMethod</span><span class="p">(</span><span class="n">JNIEnv</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">env</span><span class="p">,</span><span class="n">jobject</span><span class="w"> </span><span class="n">thiz</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jclass</span><span class="w"> </span><span class="n">mainclass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">GetObjectClass</span><span class="p">(</span><span class="n">thiz</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jmethodID</span><span class="w"> </span><span class="n">voidMethod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">GetMethodID</span><span class="p">(</span><span class="n">mainclass</span><span class="p">,</span><span class="s">&#34;str_method&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;()V&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">CallVoidMethod</span><span class="p">(</span><span class="n">thiz</span><span class="p">,</span><span class="n">voidMethod</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">nullptr</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">extern</span><span class="w"> </span><span class="s">&#34;C&#34;</span><span class="w"> </span><span class="n">JNIEXPORT</span><span class="w"> </span><span class="n">jstring</span><span class="w"> </span><span class="n">JNICALL</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">Java_com_example_learnjni_MainActivity_staticFromMethod</span><span class="p">(</span><span class="n">JNIEnv</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">env</span><span class="p">,</span><span class="n">jobject</span><span class="w"> </span><span class="n">thiz</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jclass</span><span class="w"> </span><span class="n">mainclass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">GetObjectClass</span><span class="p">(</span><span class="n">thiz</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jmethodID</span><span class="w"> </span><span class="n">voidMethod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">GetStaticMethodID</span><span class="p">(</span><span class="n">mainclass</span><span class="p">,</span><span class="s">&#34;static_method&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;()V&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">CallStaticVoidMethod</span><span class="p">(</span><span class="n">mainclass</span><span class="p">,</span><span class="n">voidMethod</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">nullptr</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>上面代码就是在cpp中调用了Java中的方法，这里需要注意获取方法ID的时候提供sig的目的在于区分重载函数</p>
+<h3 id="动态注册">动态注册
+</h3><p>除了让代码静态注册到.so库文件中，JNI还提供了动态注册native层代码方法，其实现方法就是在加载libc.so到库文件时，自动执行JNI_Onload函数，在该函数中进行代码的动态注册，具体实现思路如下</p>
+<ol>
+<li>java层和静态注册相同，直接声明该方法即可，比如这里的intNum</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">native</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">intNum</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">num</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>再cpp/c层不再更具JNI函数命名规则进行命名，而是直接以原名字编写</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">jint</span><span class="w"> </span><span class="nf">intNum</span><span class="p">(</span><span class="n">JNIEnv</span><span class="o">*</span><span class="w"> </span><span class="n">env</span><span class="p">,</span><span class="w"> </span><span class="n">jobject</span><span class="w"> </span><span class="n">thiz</span><span class="p">,</span><span class="n">jint</span><span class="w"> </span><span class="n">num</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w">  </span><span class="n">num</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">123</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>再定义JNI_OnLoad将intNum函数注册即可(注意JNI_OnLoad中的L是大写)</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">extern</span><span class="w"> </span><span class="s">&#34;C&#34;</span><span class="w"> </span><span class="n">JNIEXPORT</span><span class="w"> </span><span class="n">jint</span><span class="w"> </span><span class="n">JNICALL</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">JNI_OnLoad</span><span class="p">(</span><span class="n">JavaVM</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vm</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">reserved</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">JNIEnv</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">evn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nullptr</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jint</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vm</span><span class="o">-&gt;</span><span class="n">GetEnv</span><span class="p">((</span><span class="kt">void</span><span class="w"> </span><span class="o">**</span><span class="p">)</span><span class="o">&amp;</span><span class="n">evn</span><span class="p">,</span><span class="n">JNI_VERSION_1_6</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">result</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">JNI_OK</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="n">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jclass</span><span class="w"> </span><span class="n">mainclass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">evn</span><span class="o">-&gt;</span><span class="n">FindClass</span><span class="p">(</span><span class="s">&#34;com/example/learnjni/MainActivity&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">JNINativeMethod</span><span class="w"> </span><span class="n">methods</span><span class="o">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">{</span><span class="s">&#34;intNum&#34;</span><span class="p">,</span><span class="s">&#34;(I)I&#34;</span><span class="p">,(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">intNum</span><span class="p">},</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">evn</span><span class="o">-&gt;</span><span class="n">RegisterNatives</span><span class="p">(</span><span class="n">mainclass</span><span class="p">,</span><span class="n">methods</span><span class="p">,</span><span class="n">1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">JNI_VERSION_1_6</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>其注册的思路如下</p>
+<ol>
+<li>
+<p>注册需要用到evn-&gt;RegisterNatives,因此先通过vm→GetEnv获取JNIEnv,并判断是否获取成功</p>
+</li>
+<li>
+<p>RegisterNatives函数需要包含JNINativeMethod结构题的数组参数，其定义如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">typedef</span><span class="w"> </span><span class="n">struct</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w"> </span><span class="c1">//函数名称</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">signature</span><span class="p">;</span><span class="w"> </span><span class="c1">// 函数签名 其参数类型和返回值类型</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">void</span><span class="o">*</span><span class="w">       </span><span class="n">fnPtr</span><span class="p">;</span><span class="w"> </span><span class="c1">//函数指针，指向第一步定义的本地函数</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w"> </span><span class="n">JNINativeMethod</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>因此先注册methods数组当中RegisterNatives</p>
+</li>
+<li>
+<p>然后获取到注册的Java类jclass，最后调用evn-&gt;RegisterNatives注册methods数组中的函数，第三个参数1代表methods数组中方法个数。</p>
+</li>
+<li>
+<p>最后JNI_Onload函数需要返回本次注册函数的JNI版本</p>
+</li>
+</ol>
+<p>这里再记录一下安卓apk加载动态库.so文件的执行函数过程如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="p">.</span><span class="na">init</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">.</span><span class="na">init_array</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">JNI_Onload</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="code">code
+</h2><p>最后附上代码</p>
+<ul>
+<li>
+<p>native-lib.cpp</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="n">include</span><span class="w"> </span><span class="o">&lt;</span><span class="n">jni</span><span class="p">.</span><span class="na">h</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="n">include</span><span class="w"> </span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">extern</span><span class="w"> </span><span class="s">&#34;C&#34;</span><span class="w"> </span><span class="n">JNIEXPORT</span><span class="w"> </span><span class="n">jstring</span><span class="w"> </span><span class="n">JNICALL</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">Java_com_example_learnjni_MainActivity_stringFromJNI</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">JNIEnv</span><span class="o">*</span><span class="w"> </span><span class="n">env</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">jobject</span><span class="w"> </span><span class="cm">/* this */</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">std</span><span class="p">::</span><span class="n">string</span><span class="w"> </span><span class="n">hello</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;Hello from C++&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">NewStringUTF</span><span class="p">(</span><span class="n">hello</span><span class="p">.</span><span class="na">c_str</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">extern</span><span class="w"> </span><span class="s">&#34;C&#34;</span><span class="w"> </span><span class="n">JNIEXPORT</span><span class="w"> </span><span class="n">jstring</span><span class="w"> </span><span class="n">JNICALL</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">Java_com_example_learnjni_MainActivity_stringFromJAVA</span><span class="p">(</span><span class="n">JNIEnv</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">env</span><span class="p">,</span><span class="n">jobject</span><span class="w"> </span><span class="n">thiz</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">//modfty string from Java</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jclass</span><span class="w"> </span><span class="n">mainclass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">FindClass</span><span class="p">(</span><span class="s">&#34;com/example/learnjni/MainActivity&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jfieldID</span><span class="w"> </span><span class="n">strId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">GetFieldID</span><span class="p">(</span><span class="n">mainclass</span><span class="p">,</span><span class="s">&#34;str&#34;</span><span class="p">,</span><span class="s">&#34;Ljava/lang/String;&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jstring</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">NewStringUTF</span><span class="p">(</span><span class="s">&#34;Hellow Java ,这是修改后的普通字段&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">SetObjectField</span><span class="p">(</span><span class="n">thiz</span><span class="p">,</span><span class="n">strId</span><span class="p">,</span><span class="n">modify</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">nullptr</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">extern</span><span class="w"> </span><span class="s">&#34;C&#34;</span><span class="w"> </span><span class="n">JNIEXPORT</span><span class="w"> </span><span class="n">jstring</span><span class="w"> </span><span class="n">JNICALL</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">Java_com_example_learnjni_MainActivity_staticFromC</span><span class="p">(</span><span class="n">JNIEnv</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">env</span><span class="p">,</span><span class="n">jobject</span><span class="w"> </span><span class="n">thiz</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">//modfty static string from Java</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">//    jclass mainclass = env-&gt;FindClass(&#34;com/example/learnjni/MainActivity&#34;);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jclass</span><span class="w"> </span><span class="n">mainclass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">GetObjectClass</span><span class="p">(</span><span class="n">thiz</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jfieldID</span><span class="w"> </span><span class="n">strId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">GetStaticFieldID</span><span class="p">(</span><span class="n">mainclass</span><span class="p">,</span><span class="s">&#34;static_str&#34;</span><span class="p">,</span><span class="s">&#34;Ljava/lang/String;&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jstring</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">NewStringUTF</span><span class="p">(</span><span class="s">&#34;Hellow Java ,这是修改后的静态字段&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">SetStaticObjectField</span><span class="p">(</span><span class="n">mainclass</span><span class="p">,</span><span class="n">strId</span><span class="p">,</span><span class="n">modify</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">nullptr</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">extern</span><span class="w"> </span><span class="s">&#34;C&#34;</span><span class="w"> </span><span class="n">JNIEXPORT</span><span class="w"> </span><span class="n">jstring</span><span class="w"> </span><span class="n">JNICALL</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">Java_com_example_learnjni_MainActivity_stringFromMethod</span><span class="p">(</span><span class="n">JNIEnv</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">env</span><span class="p">,</span><span class="n">jobject</span><span class="w"> </span><span class="n">thiz</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jclass</span><span class="w"> </span><span class="n">mainclass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">GetObjectClass</span><span class="p">(</span><span class="n">thiz</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jmethodID</span><span class="w"> </span><span class="n">voidMethod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">GetMethodID</span><span class="p">(</span><span class="n">mainclass</span><span class="p">,</span><span class="s">&#34;str_method&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;()V&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">CallVoidMethod</span><span class="p">(</span><span class="n">thiz</span><span class="p">,</span><span class="n">voidMethod</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">nullptr</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">extern</span><span class="w"> </span><span class="s">&#34;C&#34;</span><span class="w"> </span><span class="n">JNIEXPORT</span><span class="w"> </span><span class="n">jstring</span><span class="w"> </span><span class="n">JNICALL</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">Java_com_example_learnjni_MainActivity_staticFromMethod</span><span class="p">(</span><span class="n">JNIEnv</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">env</span><span class="p">,</span><span class="n">jobject</span><span class="w"> </span><span class="n">thiz</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jclass</span><span class="w"> </span><span class="n">mainclass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">GetObjectClass</span><span class="p">(</span><span class="n">thiz</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jmethodID</span><span class="w"> </span><span class="n">voidMethod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">GetStaticMethodID</span><span class="p">(</span><span class="n">mainclass</span><span class="p">,</span><span class="s">&#34;static_method&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;()V&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">CallStaticVoidMethod</span><span class="p">(</span><span class="n">mainclass</span><span class="p">,</span><span class="n">voidMethod</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">nullptr</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">jint</span><span class="w"> </span><span class="nf">intNum</span><span class="p">(</span><span class="n">JNIEnv</span><span class="o">*</span><span class="w"> </span><span class="n">env</span><span class="p">,</span><span class="w"> </span><span class="n">jobject</span><span class="w"> </span><span class="n">thiz</span><span class="p">,</span><span class="w"> </span><span class="n">jint</span><span class="w"> </span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">123</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">extern</span><span class="w"> </span><span class="s">&#34;C&#34;</span><span class="w"> </span><span class="n">JNIEXPORT</span><span class="w"> </span><span class="n">jint</span><span class="w"> </span><span class="n">JNICALL</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">JNI_OnLoad</span><span class="p">(</span><span class="n">JavaVM</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vm</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">reserved</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">JNIEnv</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">evn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nullptr</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jint</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vm</span><span class="o">-&gt;</span><span class="n">GetEnv</span><span class="p">((</span><span class="kt">void</span><span class="w"> </span><span class="o">**</span><span class="p">)</span><span class="o">&amp;</span><span class="n">evn</span><span class="p">,</span><span class="n">JNI_VERSION_1_4</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">result</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">JNI_OK</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="n">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jclass</span><span class="w"> </span><span class="n">mainclass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">evn</span><span class="o">-&gt;</span><span class="n">FindClass</span><span class="p">(</span><span class="s">&#34;com/example/learnjni/MainActivity&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">JNINativeMethod</span><span class="w"> </span><span class="n">methods</span><span class="o">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">{</span><span class="s">&#34;intNum&#34;</span><span class="p">,</span><span class="s">&#34;(I)I&#34;</span><span class="p">,(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">intNum</span><span class="p">},</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">evn</span><span class="o">-&gt;</span><span class="n">RegisterNatives</span><span class="p">(</span><span class="n">mainclass</span><span class="p">,</span><span class="n">methods</span><span class="p">,</span><span class="n">1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">JNI_VERSION_1_4</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>MainAvtivity</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.learnjni</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">androidx.appcompat.app.AppCompatActivity</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">android.os.Bundle</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">android.util.Log</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">android.widget.TextView</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">android.widget.Toast</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">com.example.learnjni.databinding.ActivityMainBinding</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MainActivity</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">AppCompatActivity</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">native</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">intNum</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">num</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;Helloc Java 我是普通字段&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">AppCompatActivity</span><span class="w"> </span><span class="n">your_this</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">static_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;Helloc Java 我是静态字段&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Used to load the &#39;learnjni&#39; library on application startup.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">loadLibrary</span><span class="p">(</span><span class="s">&#34;learnjni&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">str_method</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Toast</span><span class="p">.</span><span class="na">makeText</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;普通方法&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">Toast</span><span class="p">.</span><span class="na">LENGTH_LONG</span><span class="p">).</span><span class="na">show</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">static_method</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Toast</span><span class="p">.</span><span class="na">makeText</span><span class="p">(</span><span class="n">your_this</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;静态方法&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">Toast</span><span class="p">.</span><span class="na">LENGTH_LONG</span><span class="p">).</span><span class="na">show</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ActivityMainBinding</span><span class="w"> </span><span class="n">binding</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onCreate</span><span class="p">(</span><span class="n">Bundle</span><span class="w"> </span><span class="n">savedInstanceState</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">super</span><span class="p">.</span><span class="na">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">your_this</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">binding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ActivityMainBinding</span><span class="p">.</span><span class="na">inflate</span><span class="p">(</span><span class="n">getLayoutInflater</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">setContentView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="na">getRoot</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// Example of a call to a native method</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">TextView</span><span class="w"> </span><span class="n">tv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">binding</span><span class="p">.</span><span class="na">sampleText</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">tv</span><span class="p">.</span><span class="na">setText</span><span class="p">(</span><span class="n">stringFromJNI</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">intNum</span><span class="p">(</span><span class="n">123</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">tv</span><span class="p">.</span><span class="na">setText</span><span class="p">(</span><span class="n">ret</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * A native method that is implemented by the &#39;learnjni&#39; native library,
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * which is packaged with this application.
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">native</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">stringFromJNI</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">native</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">stringFromJAVA</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">native</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">staticFromC</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">native</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">stringFromMethod</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">native</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">staticFromMethod</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
 
 </section>
 

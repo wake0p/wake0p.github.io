@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="JNI的基础开发知识">
+<title>android JNI开发基础</title>
+
+<link rel='canonical' href='http://localhost:1313/categories/review/jni%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80/jni%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80/'>
+
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="android JNI开发基础">
+<meta property='og:description' content="JNI的基础开发知识">
+<meta property='og:url' content='http://localhost:1313/categories/review/jni%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80/jni%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80/'>
+<meta property='og:site_name' content='wake0p&#39;s blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Categories' /><meta property='article:published_time' content='2025-02-21T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-02-21T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="android JNI开发基础">
+<meta name="twitter:description" content="JNI的基础开发知识">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/head_hu_ebd6ad7c249b4943.jpg" width="300"
+                            height="265" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">wake0p&#39;s blog</a></h1>
+            <h2 class="site-description">名不显时心不朽，再挑灯火看文章</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/wake0p'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/target/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 32 32" width="32px" height="32px"><path d="M 24.568359 4.5761719 L 13.503906 15.800781 L 7.3085938 9.515625 L 0.59570312 16.328125 L 13.501953 29.423828 L 13.505859 29.419922 L 13.507812 29.421875 L 14.21875 28.699219 L 18.339844 24.519531 L 18.791016 24.060547 L 30.564453 12.115234 L 31.28125 11.386719 L 30.564453 10.658203 L 24.568359 4.5761719 z M 24.568359 7.4238281 L 28.472656 11.386719 L 17.367188 22.65625 L 13.505859 26.572266 L 9.6015625 22.611328 L 24.568359 7.4238281 z M 7.3085938 12.365234 L 12.099609 17.226562 L 8.1933594 21.1875 L 3.4042969 16.328125 L 7.3085938 12.365234 z"/></svg>
+                
+                <span>Target</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#初识jnindk">初识JNI/NDK</a></li>
+    <li><a href="#jni-开发大致框架">JNI 开发大致框架</a>
+      <ol>
+        <li><a href="#android-studio创建-native项目">android studio创建 Native项目</a></li>
+        <li><a href="#静态注册native方法">静态注册Native方法</a>
+          <ol>
+            <li><a href="#java层注册调用">Java层注册/调用</a></li>
+            <li><a href="#cc层定义">c/c++层定义</a></li>
+          </ol>
+        </li>
+        <li><a href="#动态注册">动态注册</a></li>
+      </ol>
+    </li>
+    <li><a href="#code">code</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E5%AE%89%E5%8D%93%E5%BC%80%E5%8F%91/" >
+                安卓开发
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/categories/review/jni%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80/jni%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80/">android JNI开发基础</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            JNI的基础开发知识
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 21, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 6 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <blockquote>
+<p>参考<a class="link" href="https://mp.weixin.qq.com/s/0fOkDntnzxCgtxeyeY8Uvg"  target="_blank" rel="noopener"
+    >文章</a></p></blockquote>
+<h2 id="初识jnindk">初识JNI/NDK
+</h2><p>NDK（Native Development Kit）是一个允许开发者使用C和C++编写Android应用程序的工具集。它提供了一系列的工具和库，可以帮助开发者将高性能的原生代码集成到Android应用中</p>
+<p>NDK的主要目标是提供一种方式，让开发者能够在需要更高性能或更底层控制的情况下使用C和C++编写部分应用程序，而不仅仅依赖于Java。</p>
+<p>JNI（Java Native Interface）是一种编程框架，用于在Java代码和原生代码（如C和C++）之间进行交互。通过JNI，开发者可以在Java代码中调用原生代码的函数，并且可以将Java对象传递给原生代码进行处理。</p>
+<h2 id="jni-开发大致框架">JNI 开发大致框架
+</h2><h3 id="android-studio创建-native项目">android studio创建 Native项目
+</h3><p>创建好了Natvie项目后，需要点开Tools→SDK Manager下载 NDK和CMake</p>
+<p><img src="/JNI%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80%2019fbf12c9094800f8190fd808006a206/image.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image.png"
+	
+	
+></p>
+<h3 id="静态注册native方法">静态注册Native方法
+</h3><h4 id="java层注册调用">Java层注册/调用
+</h4><p>在任意类的中，要想调用JNI <code>.so</code>层的native方法需要存在如下定义</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">//导入.so中的代码</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">static</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">loadLibrary</span><span class="p">(</span><span class="s">&#34;learnjni&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>并且存在相应的Native函数声明</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">native</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">stringFromJNI</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">native</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">stringFromJAVA</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">native</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">stringFromC</span><span class="p">();</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后就能在该class中调用这些Native函数方法</p>
+<h4 id="cc层定义">c/c++层定义
+</h4><p>上面导入的libc库文件learnjni，是在cpp/CMakeLists中定义的</p>
+<p><img src="/JNI%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80%2019fbf12c9094800f8190fd808006a206/image1.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image.png"
+	
+	
+></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="err">#</span><span class="w"> </span><span class="n">For</span><span class="w"> </span><span class="n">more</span><span class="w"> </span><span class="n">information</span><span class="w"> </span><span class="n">about</span><span class="w"> </span><span class="n">using</span><span class="w"> </span><span class="n">CMake</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">Android</span><span class="w"> </span><span class="n">Studio</span><span class="p">,</span><span class="w"> </span><span class="n">read</span><span class="w"> </span><span class="n">the</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">documentation</span><span class="p">:</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="c1">//d.android.com/studio/projects/add-native-code.html.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">For</span><span class="w"> </span><span class="n">more</span><span class="w"> </span><span class="n">examples</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="n">CMake</span><span class="p">,</span><span class="w"> </span><span class="n">see</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="c1">//github.com/android/ndk-samples.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">Sets</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">minimum</span><span class="w"> </span><span class="n">CMake</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="n">required</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">this</span><span class="w"> </span><span class="n">project</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">cmake_minimum_required</span><span class="p">(</span><span class="n">VERSION</span><span class="w"> </span><span class="n">3</span><span class="p">.</span><span class="na">22</span><span class="p">.</span><span class="na">1</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">Declares</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">project</span><span class="w"> </span><span class="n">name</span><span class="p">.</span><span class="w"> </span><span class="n">The</span><span class="w"> </span><span class="n">project</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">accessed</span><span class="w"> </span><span class="n">via</span><span class="w"> </span><span class="n">$</span><span class="p">{</span><span class="w"> </span><span class="n">PROJECT_NAME</span><span class="p">},</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">Since</span><span class="w"> </span><span class="k">this</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">top</span><span class="w"> </span><span class="n">level</span><span class="w"> </span><span class="n">CMakeLists</span><span class="p">.</span><span class="na">txt</span><span class="p">,</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">project</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">also</span><span class="w"> </span><span class="n">accessible</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">$</span><span class="p">{</span><span class="n">CMAKE_PROJECT_NAME</span><span class="p">}</span><span class="w"> </span><span class="p">(</span><span class="n">both</span><span class="w"> </span><span class="n">CMake</span><span class="w"> </span><span class="n">variables</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">in</span><span class="o">-</span><span class="n">sync</span><span class="w"> </span><span class="n">within</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">top</span><span class="w"> </span><span class="n">level</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">build</span><span class="w"> </span><span class="n">script</span><span class="w"> </span><span class="n">scope</span><span class="p">).</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">project</span><span class="p">(</span><span class="s">&#34;learnjni&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">Creates</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">names</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">library</span><span class="p">,</span><span class="w"> </span><span class="n">sets</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">either</span><span class="w"> </span><span class="n">STATIC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="n">SHARED</span><span class="p">,</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">provides</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">relative</span><span class="w"> </span><span class="n">paths</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">its</span><span class="w"> </span><span class="n">source</span><span class="w"> </span><span class="n">code</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">You</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">define</span><span class="w"> </span><span class="n">multiple</span><span class="w"> </span><span class="n">libraries</span><span class="p">,</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">CMake</span><span class="w"> </span><span class="n">builds</span><span class="w"> </span><span class="n">them</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">you</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">Gradle</span><span class="w"> </span><span class="n">automatically</span><span class="w"> </span><span class="n">packages</span><span class="w"> </span><span class="n">shared</span><span class="w"> </span><span class="n">libraries</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">APK</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">In</span><span class="w"> </span><span class="k">this</span><span class="w"> </span><span class="n">top</span><span class="w"> </span><span class="n">level</span><span class="w"> </span><span class="n">CMakeLists</span><span class="p">.</span><span class="na">txt</span><span class="p">,</span><span class="w"> </span><span class="n">$</span><span class="p">{</span><span class="n">CMAKE_PROJECT_NAME</span><span class="p">}</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">used</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">define</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="n">library</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">sub</span><span class="o">-</span><span class="n">module</span><span class="err">&#39;</span><span class="n">s</span><span class="w"> </span><span class="n">CMakeLists</span><span class="p">.</span><span class="na">txt</span><span class="p">,</span><span class="w"> </span><span class="n">$</span><span class="p">{</span><span class="n">PROJECT_NAME</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">preferred</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">same</span><span class="w"> </span><span class="n">purpose</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">In</span><span class="w"> </span><span class="n">order</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">library</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">app</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">Java</span><span class="o">/</span><span class="n">Kotlin</span><span class="p">,</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">must</span><span class="w"> </span><span class="n">call</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">loadLibrary</span><span class="p">()</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">pass</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">library</span><span class="w"> </span><span class="n">defined</span><span class="w"> </span><span class="n">here</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">GameActivity</span><span class="o">/</span><span class="n">NativeActivity</span><span class="w"> </span><span class="n">derived</span><span class="w"> </span><span class="n">applications</span><span class="p">,</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">same</span><span class="w"> </span><span class="n">library</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="n">must</span><span class="w"> </span><span class="n">be</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">used</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">AndroidManifest</span><span class="p">.</span><span class="na">xml</span><span class="w"> </span><span class="n">file</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">add_library</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">CMAKE_PROJECT_NAME</span><span class="p">}</span><span class="w"> </span><span class="n">SHARED</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="n">List</span><span class="w"> </span><span class="n">C</span><span class="o">/</span><span class="n">C</span><span class="o">++</span><span class="w"> </span><span class="n">source</span><span class="w"> </span><span class="n">files</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">relative</span><span class="w"> </span><span class="n">paths</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="k">this</span><span class="w"> </span><span class="n">CMakeLists</span><span class="p">.</span><span class="na">txt</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">native</span><span class="o">-</span><span class="n">lib</span><span class="p">.</span><span class="na">cpp</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">Specifies</span><span class="w"> </span><span class="n">libraries</span><span class="w"> </span><span class="n">CMake</span><span class="w"> </span><span class="n">should</span><span class="w"> </span><span class="n">link</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="n">library</span><span class="p">.</span><span class="w"> </span><span class="n">You</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">link</span><span class="w"> </span><span class="n">libraries</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">various</span><span class="w"> </span><span class="n">origins</span><span class="p">,</span><span class="w"> </span><span class="n">such</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">libraries</span><span class="w"> </span><span class="n">defined</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="k">this</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="w"> </span><span class="n">build</span><span class="w"> </span><span class="n">script</span><span class="p">,</span><span class="w"> </span><span class="n">prebuilt</span><span class="w"> </span><span class="n">third</span><span class="o">-</span><span class="n">party</span><span class="w"> </span><span class="n">libraries</span><span class="p">,</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="n">Android</span><span class="w"> </span><span class="n">system</span><span class="w"> </span><span class="n">libraries</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">target_link_libraries</span><span class="p">(</span><span class="n">$</span><span class="p">{</span><span class="n">CMAKE_PROJECT_NAME</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="n">List</span><span class="w"> </span><span class="n">libraries</span><span class="w"> </span><span class="n">link</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="n">library</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">android</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">log</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中的add_library用于添加生产库的源代码文件，比如这里的native-lib.cpp，然后再来看看native-lib.cpp中的c语言如何Java进行交互</p>
+<p>初始化生成的代码如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="err">#</span><span class="n">include</span><span class="w"> </span><span class="o">&lt;</span><span class="n">jni</span><span class="p">.</span><span class="na">h</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="n">include</span><span class="w"> </span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">extern</span><span class="w"> </span><span class="s">&#34;C&#34;</span><span class="w"> </span><span class="n">JNIEXPORT</span><span class="w"> </span><span class="n">jstring</span><span class="w"> </span><span class="n">JNICALL</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">Java_com_example_learnjni_MainActivity_stringFromJNI</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">JNIEnv</span><span class="o">*</span><span class="w"> </span><span class="n">env</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">jobject</span><span class="w"> </span><span class="cm">/* this */</span><span class="w"> </span><span class="n">thiz</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">std</span><span class="p">::</span><span class="n">string</span><span class="w"> </span><span class="n">hello</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;Hello from C++&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">NewStringUTF</span><span class="p">(</span><span class="n">hello</span><span class="p">.</span><span class="na">c_str</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<p>首先来看函数函数前一行声明</p>
+<ul>
+<li>extern &ldquo;C&quot;表示下面的函数通过c语言进行编译</li>
+<li>JNIEXPORT表示函数是JNI中的导出函数，能过在JAVA代码中调用</li>
+<li>JNICALL修饰符告诉编译器函数调用约定为JNI的规范</li>
+<li>jstring是该函数的返回类型，J开头代表说JAVA中的类型</li>
+</ul>
+<p>再来看看函数命名，其规范如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Java_包名_类名_方法名</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>如果其中的名字包含<code>_</code>下划线，通过<code>1_</code> 来区分。</li>
+</ul>
+<hr>
+<p>再来看看函数传递的参数，存在两个参数JNIEnv和jobject，其中JNIEnv定义如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="err">#</span><span class="k">if</span><span class="w"> </span><span class="n">defined</span><span class="p">(</span><span class="n">__cplusplus</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">typedef</span><span class="w"> </span><span class="n">_JNIEnv</span><span class="w"> </span><span class="n">JNIEnv</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">typedef</span><span class="w"> </span><span class="n">_JavaVM</span><span class="w"> </span><span class="n">JavaVM</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="k">else</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">typedef</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="n">struct</span><span class="w"> </span><span class="n">JNINativeInterface</span><span class="o">*</span><span class="w"> </span><span class="n">JNIEnv</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">typedef</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="n">struct</span><span class="w"> </span><span class="n">JNIInvokeInterface</span><span class="o">*</span><span class="w"> </span><span class="n">JavaVM</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="n">endif</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里区分C和Cpp，先来看Cpp，其JNIEnv就是_JNIEnv的引用，_JNIEnv是一个结构体，包含了很多的函数指针，我们在c语言中处理Java中的类，对象，字段的时候需要用到这些方法。</p>
+<p><img src="/JNI%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80%2019fbf12c9094800f8190fd808006a206/image2.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image.png"
+	
+	
+></p>
+<p>由于c语言中环境和JAVA的环境完全不同，JAVA中存在类，类对象这些概念，因此存在如下定义</p>
+<ul>
+<li>jclass 表示对Java中的某个类引用</li>
+<li>jobject 表示对Java中某个类对象的引用</li>
+<li>jstring/jint这里表示Java中的string/int类型</li>
+</ul>
+<p>假如要在native层修改Java层类中的一个普通字段String，那么其获取思路如下</p>
+<ol>
+<li>
+<p>普通字段属于类中的字段，首先需要获取到Java中的类，也就是jclass，存在两个方法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">jclass</span><span class="w"> </span><span class="nf">GetObjectClass</span><span class="p">(</span><span class="n">jobject</span><span class="w"> </span><span class="n">obj</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">jclass</span><span class="w"> </span><span class="nf">FindClass</span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>对应的调用例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">jclass</span><span class="w"> </span><span class="n">mainclass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">GetObjectClass</span><span class="p">(</span><span class="n">thiz</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">jclass</span><span class="w"> </span><span class="n">mainclass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">FindClass</span><span class="p">(</span><span class="s">&#34;com/example/learnjni/MainActivity&#34;</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>通过类的对象获取到相应类，这里的thiz就是函数定义的第二个参数jobject(类的对象)，</li>
+<li>直接通过包名/类名也可以获取到相应类</li>
+</ol>
+</li>
+<li>
+<p>获取到Java中的类之后，就能过定位到类中相应字段</p>
+</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">jfieldID</span><span class="w"> </span><span class="nf">GetFieldID</span><span class="p">(</span><span class="n">jclass</span><span class="w"> </span><span class="n">clazz</span><span class="p">,</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">sig</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>对应调用例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">jfieldID</span><span class="w"> </span><span class="n">strId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">GetFieldID</span><span class="p">(</span><span class="n">mainclass</span><span class="p">,</span><span class="s">&#34;str&#34;</span><span class="p">,</span><span class="s">&#34;Ljava/lang/String;&#34;</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>clazz表示字段处于到方法</li>
+<li>name表示字段名称</li>
+<li>sig表示字段的类型，也就是JNI类型</li>
+</ul>
+<p><img src="/JNI%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80%2019fbf12c9094800f8190fd808006a206/image3.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image.png"
+	
+	
+></p>
+<p>sig中最特殊的就是对象类型，其命名方式为L包名/对象名，这里以Java中的String为例子，JNI类型如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">JNI类型</span><span class="w"> </span><span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="n">String</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Java类型</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">String</span><span class="w"> 
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>获取到类中的字段后，就能修改其字段的值</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">void</span><span class="w"> </span><span class="nf">SetObjectField</span><span class="p">(</span><span class="n">jobject</span><span class="w"> </span><span class="n">obj</span><span class="p">,</span><span class="w"> </span><span class="n">jfieldID</span><span class="w"> </span><span class="n">fieldID</span><span class="p">,</span><span class="w"> </span><span class="n">jobject</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">jstring</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">NewStringUTF</span><span class="p">(</span><span class="s">&#34;Hellow Java ,这是修改后的普通字段&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">env</span><span class="o">-&gt;</span><span class="n">SetObjectField</span><span class="p">(</span><span class="n">thiz</span><span class="p">,</span><span class="n">strId</span><span class="p">,</span><span class="n">modify</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>要在c语言中修改的Java中的字符串，因此value需要jstring类型，通过NewStringUTF方法进行转换即可。</p>
+<p>以上就是获取java中的类，对象，以及类中的字段，如果要修改的字段为静态的，和普通字段类似</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">extern</span><span class="w"> </span><span class="s">&#34;C&#34;</span><span class="w"> </span><span class="n">JNIEXPORT</span><span class="w"> </span><span class="n">jstring</span><span class="w"> </span><span class="n">JNICALL</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">Java_com_example_learnjni_MainActivity_staticFromC</span><span class="p">(</span><span class="n">JNIEnv</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">env</span><span class="p">,</span><span class="n">jobject</span><span class="w"> </span><span class="n">thiz</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">//modfty static string from Java</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">//    jclass mainclass = env-&gt;FindClass(&#34;com/example/learnjni/MainActivity&#34;);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jclass</span><span class="w"> </span><span class="n">mainclass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">GetObjectClass</span><span class="p">(</span><span class="n">thiz</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jfieldID</span><span class="w"> </span><span class="n">strId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">GetStaticFieldID</span><span class="p">(</span><span class="n">mainclass</span><span class="p">,</span><span class="s">&#34;static_str&#34;</span><span class="p">,</span><span class="s">&#34;Ljava/lang/String;&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jstring</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">NewStringUTF</span><span class="p">(</span><span class="s">&#34;Hellow Java ,这是修改后的静态字段&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">SetStaticObjectField</span><span class="p">(</span><span class="n">mainclass</span><span class="p">,</span><span class="n">strId</span><span class="p">,</span><span class="n">modify</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">nullptr</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>唯一的区别在于静态static字段属于整个class类，而普通字段属于类的实例对象，因此在调用</p>
+<p>setxxxObject的时候，static字段传入的类，普通字段传入的类的对象thiz。</p>
+<hr>
+<p>在来看看c语言的情况</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">typedef</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="n">struct</span><span class="w"> </span><span class="n">JNINativeInterface</span><span class="o">*</span><span class="w"> </span><span class="n">JNIEnv</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">typedef</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="n">struct</span><span class="w"> </span><span class="n">JNIInvokeInterface</span><span class="o">*</span><span class="w"> </span><span class="n">JavaVM</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>由于c语言没类机制，因此JNIEnv是一个指针，指向JNINativeInterface的结构题,该结构体和cpp中的_JNIEnv长得很像</p>
+<p><img src="/JNI%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80%2019fbf12c9094800f8190fd808006a206/image4.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image.png"
+	
+	
+></p>
+<p><img src="/JNI%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80%2019fbf12c9094800f8190fd808006a206/image2.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image.png"
+	
+	
+></p>
+<p>其实本质上_JNIEnv就是JNINativeInterface类的封装，你会发现_JNIEnv中的函数，其实最终都调用JNINativeInterface类中的函数(Fuctions→xxx)。</p>
+<p><img src="/JNI%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80%2019fbf12c9094800f8190fd808006a206/image5.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image.png"
+	
+	
+></p>
+<p>而传入的参数为JNIEnv * evn，因此evn是一个二级指针，要想获取到JNINativeInterface结构体中的函数需要先解引用得到JNINativeInterface *的指针，c语言调用JNI的方法如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="p">(</span><span class="o">*</span><span class="n">evn</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">function</span><span class="p">(</span><span class="n">xxx</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<p>理解了上面类，对象获取的方法，那么再来看看下面的代码就十分容易理解了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">extern</span><span class="w"> </span><span class="s">&#34;C&#34;</span><span class="w"> </span><span class="n">JNIEXPORT</span><span class="w"> </span><span class="n">jstring</span><span class="w"> </span><span class="n">JNICALL</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">Java_com_example_learnjni_MainActivity_stringFromMethod</span><span class="p">(</span><span class="n">JNIEnv</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">env</span><span class="p">,</span><span class="n">jobject</span><span class="w"> </span><span class="n">thiz</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jclass</span><span class="w"> </span><span class="n">mainclass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">GetObjectClass</span><span class="p">(</span><span class="n">thiz</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jmethodID</span><span class="w"> </span><span class="n">voidMethod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">GetMethodID</span><span class="p">(</span><span class="n">mainclass</span><span class="p">,</span><span class="s">&#34;str_method&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;()V&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">CallVoidMethod</span><span class="p">(</span><span class="n">thiz</span><span class="p">,</span><span class="n">voidMethod</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">nullptr</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">extern</span><span class="w"> </span><span class="s">&#34;C&#34;</span><span class="w"> </span><span class="n">JNIEXPORT</span><span class="w"> </span><span class="n">jstring</span><span class="w"> </span><span class="n">JNICALL</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">Java_com_example_learnjni_MainActivity_staticFromMethod</span><span class="p">(</span><span class="n">JNIEnv</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">env</span><span class="p">,</span><span class="n">jobject</span><span class="w"> </span><span class="n">thiz</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jclass</span><span class="w"> </span><span class="n">mainclass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">GetObjectClass</span><span class="p">(</span><span class="n">thiz</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jmethodID</span><span class="w"> </span><span class="n">voidMethod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">GetStaticMethodID</span><span class="p">(</span><span class="n">mainclass</span><span class="p">,</span><span class="s">&#34;static_method&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;()V&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">CallStaticVoidMethod</span><span class="p">(</span><span class="n">mainclass</span><span class="p">,</span><span class="n">voidMethod</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">nullptr</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>上面代码就是在cpp中调用了Java中的方法，这里需要注意获取方法ID的时候提供sig的目的在于区分重载函数</p>
+<h3 id="动态注册">动态注册
+</h3><p>除了让代码静态注册到.so库文件中，JNI还提供了动态注册native层代码方法，其实现方法就是在加载libc.so到库文件时，自动执行JNI_Onload函数，在该函数中进行代码的动态注册，具体实现思路如下</p>
+<ol>
+<li>java层和静态注册相同，直接声明该方法即可，比如这里的intNum</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">native</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">intNum</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">num</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>再cpp/c层不再更具JNI函数命名规则进行命名，而是直接以原名字编写</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">jint</span><span class="w"> </span><span class="nf">intNum</span><span class="p">(</span><span class="n">JNIEnv</span><span class="o">*</span><span class="w"> </span><span class="n">env</span><span class="p">,</span><span class="w"> </span><span class="n">jobject</span><span class="w"> </span><span class="n">thiz</span><span class="p">,</span><span class="n">jint</span><span class="w"> </span><span class="n">num</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w">  </span><span class="n">num</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">123</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>再定义JNI_OnLoad将intNum函数注册即可(注意JNI_OnLoad中的L是大写)</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">extern</span><span class="w"> </span><span class="s">&#34;C&#34;</span><span class="w"> </span><span class="n">JNIEXPORT</span><span class="w"> </span><span class="n">jint</span><span class="w"> </span><span class="n">JNICALL</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">JNI_OnLoad</span><span class="p">(</span><span class="n">JavaVM</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vm</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">reserved</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">JNIEnv</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">evn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nullptr</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jint</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vm</span><span class="o">-&gt;</span><span class="n">GetEnv</span><span class="p">((</span><span class="kt">void</span><span class="w"> </span><span class="o">**</span><span class="p">)</span><span class="o">&amp;</span><span class="n">evn</span><span class="p">,</span><span class="n">JNI_VERSION_1_6</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">result</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">JNI_OK</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="n">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jclass</span><span class="w"> </span><span class="n">mainclass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">evn</span><span class="o">-&gt;</span><span class="n">FindClass</span><span class="p">(</span><span class="s">&#34;com/example/learnjni/MainActivity&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">JNINativeMethod</span><span class="w"> </span><span class="n">methods</span><span class="o">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">{</span><span class="s">&#34;intNum&#34;</span><span class="p">,</span><span class="s">&#34;(I)I&#34;</span><span class="p">,(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">intNum</span><span class="p">},</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">evn</span><span class="o">-&gt;</span><span class="n">RegisterNatives</span><span class="p">(</span><span class="n">mainclass</span><span class="p">,</span><span class="n">methods</span><span class="p">,</span><span class="n">1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">JNI_VERSION_1_6</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>其注册的思路如下</p>
+<ol>
+<li>
+<p>注册需要用到evn-&gt;RegisterNatives,因此先通过vm→GetEnv获取JNIEnv,并判断是否获取成功</p>
+</li>
+<li>
+<p>RegisterNatives函数需要包含JNINativeMethod结构题的数组参数，其定义如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">typedef</span><span class="w"> </span><span class="n">struct</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w"> </span><span class="c1">//函数名称</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">signature</span><span class="p">;</span><span class="w"> </span><span class="c1">// 函数签名 其参数类型和返回值类型</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">void</span><span class="o">*</span><span class="w">       </span><span class="n">fnPtr</span><span class="p">;</span><span class="w"> </span><span class="c1">//函数指针，指向第一步定义的本地函数</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w"> </span><span class="n">JNINativeMethod</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>因此先注册methods数组当中RegisterNatives</p>
+</li>
+<li>
+<p>然后获取到注册的Java类jclass，最后调用evn-&gt;RegisterNatives注册methods数组中的函数，第三个参数1代表methods数组中方法个数。</p>
+</li>
+<li>
+<p>最后JNI_Onload函数需要返回本次注册函数的JNI版本</p>
+</li>
+</ol>
+<p>这里再记录一下安卓apk加载动态库.so文件的执行函数过程如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="p">.</span><span class="na">init</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">.</span><span class="na">init_array</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">JNI_Onload</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="code">code
+</h2><p>最后附上代码</p>
+<ul>
+<li>
+<p>native-lib.cpp</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="n">include</span><span class="w"> </span><span class="o">&lt;</span><span class="n">jni</span><span class="p">.</span><span class="na">h</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">#</span><span class="n">include</span><span class="w"> </span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">extern</span><span class="w"> </span><span class="s">&#34;C&#34;</span><span class="w"> </span><span class="n">JNIEXPORT</span><span class="w"> </span><span class="n">jstring</span><span class="w"> </span><span class="n">JNICALL</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">Java_com_example_learnjni_MainActivity_stringFromJNI</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">JNIEnv</span><span class="o">*</span><span class="w"> </span><span class="n">env</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">jobject</span><span class="w"> </span><span class="cm">/* this */</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">std</span><span class="p">::</span><span class="n">string</span><span class="w"> </span><span class="n">hello</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;Hello from C++&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">NewStringUTF</span><span class="p">(</span><span class="n">hello</span><span class="p">.</span><span class="na">c_str</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">extern</span><span class="w"> </span><span class="s">&#34;C&#34;</span><span class="w"> </span><span class="n">JNIEXPORT</span><span class="w"> </span><span class="n">jstring</span><span class="w"> </span><span class="n">JNICALL</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">Java_com_example_learnjni_MainActivity_stringFromJAVA</span><span class="p">(</span><span class="n">JNIEnv</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">env</span><span class="p">,</span><span class="n">jobject</span><span class="w"> </span><span class="n">thiz</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">//modfty string from Java</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jclass</span><span class="w"> </span><span class="n">mainclass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">FindClass</span><span class="p">(</span><span class="s">&#34;com/example/learnjni/MainActivity&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jfieldID</span><span class="w"> </span><span class="n">strId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">GetFieldID</span><span class="p">(</span><span class="n">mainclass</span><span class="p">,</span><span class="s">&#34;str&#34;</span><span class="p">,</span><span class="s">&#34;Ljava/lang/String;&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jstring</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">NewStringUTF</span><span class="p">(</span><span class="s">&#34;Hellow Java ,这是修改后的普通字段&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">SetObjectField</span><span class="p">(</span><span class="n">thiz</span><span class="p">,</span><span class="n">strId</span><span class="p">,</span><span class="n">modify</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">nullptr</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">extern</span><span class="w"> </span><span class="s">&#34;C&#34;</span><span class="w"> </span><span class="n">JNIEXPORT</span><span class="w"> </span><span class="n">jstring</span><span class="w"> </span><span class="n">JNICALL</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">Java_com_example_learnjni_MainActivity_staticFromC</span><span class="p">(</span><span class="n">JNIEnv</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">env</span><span class="p">,</span><span class="n">jobject</span><span class="w"> </span><span class="n">thiz</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">//modfty static string from Java</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">//    jclass mainclass = env-&gt;FindClass(&#34;com/example/learnjni/MainActivity&#34;);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jclass</span><span class="w"> </span><span class="n">mainclass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">GetObjectClass</span><span class="p">(</span><span class="n">thiz</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jfieldID</span><span class="w"> </span><span class="n">strId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">GetStaticFieldID</span><span class="p">(</span><span class="n">mainclass</span><span class="p">,</span><span class="s">&#34;static_str&#34;</span><span class="p">,</span><span class="s">&#34;Ljava/lang/String;&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jstring</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">NewStringUTF</span><span class="p">(</span><span class="s">&#34;Hellow Java ,这是修改后的静态字段&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">SetStaticObjectField</span><span class="p">(</span><span class="n">mainclass</span><span class="p">,</span><span class="n">strId</span><span class="p">,</span><span class="n">modify</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">nullptr</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">extern</span><span class="w"> </span><span class="s">&#34;C&#34;</span><span class="w"> </span><span class="n">JNIEXPORT</span><span class="w"> </span><span class="n">jstring</span><span class="w"> </span><span class="n">JNICALL</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">Java_com_example_learnjni_MainActivity_stringFromMethod</span><span class="p">(</span><span class="n">JNIEnv</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">env</span><span class="p">,</span><span class="n">jobject</span><span class="w"> </span><span class="n">thiz</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jclass</span><span class="w"> </span><span class="n">mainclass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">GetObjectClass</span><span class="p">(</span><span class="n">thiz</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jmethodID</span><span class="w"> </span><span class="n">voidMethod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">GetMethodID</span><span class="p">(</span><span class="n">mainclass</span><span class="p">,</span><span class="s">&#34;str_method&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;()V&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">CallVoidMethod</span><span class="p">(</span><span class="n">thiz</span><span class="p">,</span><span class="n">voidMethod</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">nullptr</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">extern</span><span class="w"> </span><span class="s">&#34;C&#34;</span><span class="w"> </span><span class="n">JNIEXPORT</span><span class="w"> </span><span class="n">jstring</span><span class="w"> </span><span class="n">JNICALL</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">Java_com_example_learnjni_MainActivity_staticFromMethod</span><span class="p">(</span><span class="n">JNIEnv</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">env</span><span class="p">,</span><span class="n">jobject</span><span class="w"> </span><span class="n">thiz</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jclass</span><span class="w"> </span><span class="n">mainclass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">GetObjectClass</span><span class="p">(</span><span class="n">thiz</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jmethodID</span><span class="w"> </span><span class="n">voidMethod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">GetStaticMethodID</span><span class="p">(</span><span class="n">mainclass</span><span class="p">,</span><span class="s">&#34;static_method&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;()V&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">env</span><span class="o">-&gt;</span><span class="n">CallStaticVoidMethod</span><span class="p">(</span><span class="n">mainclass</span><span class="p">,</span><span class="n">voidMethod</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">nullptr</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">jint</span><span class="w"> </span><span class="nf">intNum</span><span class="p">(</span><span class="n">JNIEnv</span><span class="o">*</span><span class="w"> </span><span class="n">env</span><span class="p">,</span><span class="w"> </span><span class="n">jobject</span><span class="w"> </span><span class="n">thiz</span><span class="p">,</span><span class="w"> </span><span class="n">jint</span><span class="w"> </span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">123</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">extern</span><span class="w"> </span><span class="s">&#34;C&#34;</span><span class="w"> </span><span class="n">JNIEXPORT</span><span class="w"> </span><span class="n">jint</span><span class="w"> </span><span class="n">JNICALL</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nf">JNI_OnLoad</span><span class="p">(</span><span class="n">JavaVM</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vm</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">reserved</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">JNIEnv</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">evn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nullptr</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jint</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vm</span><span class="o">-&gt;</span><span class="n">GetEnv</span><span class="p">((</span><span class="kt">void</span><span class="w"> </span><span class="o">**</span><span class="p">)</span><span class="o">&amp;</span><span class="n">evn</span><span class="p">,</span><span class="n">JNI_VERSION_1_4</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">result</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">JNI_OK</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="n">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">jclass</span><span class="w"> </span><span class="n">mainclass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">evn</span><span class="o">-&gt;</span><span class="n">FindClass</span><span class="p">(</span><span class="s">&#34;com/example/learnjni/MainActivity&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">JNINativeMethod</span><span class="w"> </span><span class="n">methods</span><span class="o">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">{</span><span class="s">&#34;intNum&#34;</span><span class="p">,</span><span class="s">&#34;(I)I&#34;</span><span class="p">,(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">intNum</span><span class="p">},</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">evn</span><span class="o">-&gt;</span><span class="n">RegisterNatives</span><span class="p">(</span><span class="n">mainclass</span><span class="p">,</span><span class="n">methods</span><span class="p">,</span><span class="n">1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">JNI_VERSION_1_4</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>MainAvtivity</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.learnjni</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">androidx.appcompat.app.AppCompatActivity</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">android.os.Bundle</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">android.util.Log</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">android.widget.TextView</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">android.widget.Toast</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">com.example.learnjni.databinding.ActivityMainBinding</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MainActivity</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">AppCompatActivity</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">native</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">intNum</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">num</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;Helloc Java 我是普通字段&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">AppCompatActivity</span><span class="w"> </span><span class="n">your_this</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">static_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;Helloc Java 我是静态字段&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Used to load the &#39;learnjni&#39; library on application startup.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">loadLibrary</span><span class="p">(</span><span class="s">&#34;learnjni&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">str_method</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Toast</span><span class="p">.</span><span class="na">makeText</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;普通方法&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">Toast</span><span class="p">.</span><span class="na">LENGTH_LONG</span><span class="p">).</span><span class="na">show</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">static_method</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Toast</span><span class="p">.</span><span class="na">makeText</span><span class="p">(</span><span class="n">your_this</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;静态方法&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">Toast</span><span class="p">.</span><span class="na">LENGTH_LONG</span><span class="p">).</span><span class="na">show</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ActivityMainBinding</span><span class="w"> </span><span class="n">binding</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onCreate</span><span class="p">(</span><span class="n">Bundle</span><span class="w"> </span><span class="n">savedInstanceState</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">super</span><span class="p">.</span><span class="na">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">your_this</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">binding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ActivityMainBinding</span><span class="p">.</span><span class="na">inflate</span><span class="p">(</span><span class="n">getLayoutInflater</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">setContentView</span><span class="p">(</span><span class="n">binding</span><span class="p">.</span><span class="na">getRoot</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// Example of a call to a native method</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">TextView</span><span class="w"> </span><span class="n">tv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">binding</span><span class="p">.</span><span class="na">sampleText</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">tv</span><span class="p">.</span><span class="na">setText</span><span class="p">(</span><span class="n">stringFromJNI</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">intNum</span><span class="p">(</span><span class="n">123</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">tv</span><span class="p">.</span><span class="na">setText</span><span class="p">(</span><span class="n">ret</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * A native method that is implemented by the &#39;learnjni&#39; native library,
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * which is packaged with this application.
+</span></span></span><span class="line"><span class="cl"><span class="cm">     */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">native</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">stringFromJNI</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">native</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">stringFromJAVA</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">native</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">staticFromC</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">native</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">stringFromMethod</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">native</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">staticFromMethod</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 wake0p
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.a22a4238414231947ee185f8c77f9923f8c662573fb1634afadbd572818ce7ca.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
