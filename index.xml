@@ -1170,13 +1170,6 @@ data-flex-basis="645px"
 &lt;ul>
 &lt;li>总结 今天只能说常规发挥, 没有学的特别多, 也没有一点没学, 明天继续加油吧&lt;/li>
 &lt;/ul>
-&lt;blockquote>
-&lt;p>明日大概任务规划&lt;/p>
-&lt;ul>
-&lt;li>&lt;input disabled="" type="checkbox"> 安卓JNI开发从0-1&amp;ndash;看雪课程 (2.5小时)&lt;/li>
-&lt;li>&lt;input disabled="" type="checkbox"> 黑奴两份ppt+ 视频 (3.5小时)&lt;/li>
-&lt;li>&lt;input disabled="" type="checkbox"> 安卓开发服务端 (1小时)&lt;/li>
-&lt;/ul>&lt;/blockquote>
 &lt;h3 id="2025年2月18号">2025年2月18号
 &lt;/h3>&lt;p>今天G了,G得很彻底, 头晕眼花的😵‍💫, 上面任务没一个完成了, 也就学了安卓开发服务端 1.5小时, 都还么完成&lt;/p>
 &lt;h3 id="2025年2月19号">2025年2月19号
@@ -1193,6 +1186,14 @@ data-flex-basis="645px"
 &lt;/ol>
 &lt;ul>
 &lt;li>总结: 今天被黑马喽硬控一天, 主要是今天ppt内容是windows内核调试的,我不太熟悉,因此花销的时间比较久&lt;/li>
+&lt;/ul>
+&lt;h3 id="2025年2月21号">2025年2月21号
+&lt;/h3>&lt;ol>
+&lt;li>又是黑奴 (2.5小时) 真的不想干,难搞啊&lt;/li>
+&lt;li>上午 1小时+下午1.5小时 继续学习了安卓JNI开发并写了(博客)[https://wake0p.github.io/p/android-jni%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80/]&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>总结: 晚上干黑奴干emo了,还有一部分原因是要开学,感觉并没有很好的把握住这个寒假,这个寒假有一半的时间都是边耍边学的,后天就要去学校了,感觉寒假真的是一事无成啊,不过都过去了,把握好接下来的时间,拼搏一下吧.&lt;/li>
 &lt;/ul></description></item><item><title>Markdown Syntax Guide</title><link>https://wake0p.github.io/p/markdown-syntax-guide/</link><pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate><guid>https://wake0p.github.io/p/markdown-syntax-guide/</guid><description>&lt;img src="https://wake0p.github.io/p/markdown-syntax-guide/pawel-czerwinski-8uZPynIu-rQ-unsplash.jpg" alt="Featured image of post Markdown Syntax Guide" />&lt;p>This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p>
 &lt;h2 id="headings">Headings
 &lt;/h2>&lt;p>The following HTML &lt;code>&amp;lt;h1&amp;gt;&lt;/code>—&lt;code>&amp;lt;h6&amp;gt;&lt;/code> elements represent six levels of section headings. &lt;code>&amp;lt;h1&amp;gt;&lt;/code> is the highest section level while &lt;code>&amp;lt;h6&amp;gt;&lt;/code> is the lowest.&lt;/p>
