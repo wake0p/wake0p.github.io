@@ -1599,7 +1599,12 @@ $$</description></item><item><title>Emoji Support</title><link>https://wake0p.gi
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> font-family: Apple Color Emoji, Segoe UI Emoji, NotoColorEmoji, Segoe UI Symbol, Android Emoji, EmojiSymbols;
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div></description></item><item><title>About</title><link>https://wake0p.github.io/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://wake0p.github.io/about/</guid><description>&lt;p>二进制菜鸟一个!&lt;/p></description></item><item><title>Archives</title><link>https://wake0p.github.io/archives/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://wake0p.github.io/archives/</guid><description/></item><item><title>Links</title><link>https://wake0p.github.io/links/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://wake0p.github.io/links/</guid><description>&lt;p>To use this feature, add &lt;code>links&lt;/code> section to frontmatter.&lt;/p>
+&lt;/div></description></item><item><title>About</title><link>https://wake0p.github.io/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://wake0p.github.io/about/</guid><description>&lt;p>二进制菜鸟一个!&lt;/p>
+&lt;ul>
+&lt;li>我要做: 每天看书半小时, 运动半小时,学习8小时&lt;/li>
+&lt;li>我不做: 不玩短视频, 不打王者!&lt;/li>
+&lt;li>我想要: 赚到10万&lt;/li>
+&lt;/ul></description></item><item><title>Archives</title><link>https://wake0p.github.io/archives/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://wake0p.github.io/archives/</guid><description/></item><item><title>Links</title><link>https://wake0p.github.io/links/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://wake0p.github.io/links/</guid><description>&lt;p>To use this feature, add &lt;code>links&lt;/code> section to frontmatter.&lt;/p>
 &lt;p>This page&amp;rsquo;s frontmatter:&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
