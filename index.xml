@@ -1227,7 +1227,8 @@ data-flex-basis="645px"
 &lt;/ul>
 &lt;blockquote>
 &lt;p>周总结 这周确实玩的比较嗨了，刚开学第一周,确实应该好好反省一下,接下来要多去实验室了,不要呆在寝室里面,因为你呆在寝室里面很容易就去玩耍去了。最主要是被阿里云ctf打的道心破碎了,很难受啊&lt;/p>&lt;/blockquote>
-&lt;h3 id="2025年3月5号">2025年3月5号
+&lt;h2 id="2025年第十周">2025年第十周
+&lt;/h2>&lt;h3 id="2025年3月5号">2025年3月5号
 &lt;/h3>&lt;ol>
 &lt;li>安卓逆向- 汇编keystore 反汇编capstone 框架学习 3.5小时&lt;/li>
 &lt;li>spring boot web 基础开发 4小时 &amp;ndash; 学校的实验&lt;/li>
@@ -1243,6 +1244,16 @@ data-flex-basis="645px"
 &lt;/ol>
 &lt;ul>
 &lt;li>总结 晚上摆烂了,然后晚上回去看微信读书发现我的30天挑战G了, 天数都是够了的,就差了3小时的读书时间, 悔之莫及啊, 准备再次挑战30天&lt;/li>
+&lt;/ul>
+&lt;h3 id="2025年3月7号">2025年3月7号
+&lt;/h3>&lt;ol>
+&lt;li>上午上了一上午的课&lt;/li>
+&lt;li>下午实验室 搞了一下 awdp patch 笔记, 以及一道fmt的题目总结&lt;/li>
+&lt;li>晚上选了三个小时的耳机，选了半天都不知道买哪一款&lt;/li>
+&lt;li>安卓 Activity 层常见漏洞, 复现了越权绕过简单漏洞,钓鱼诈骗还未复现成功,还看了看 Task Hijacking 的一个远古 CVE StrandHogg 漏洞还未成功复现,可能已经修复了, 具体待深入研究&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>晚上选耳机的时间有点久了, 主要是送给家人的, 得认真挑选一下, 晚上其实应该去实验室学习的, 在寝室虽然也学了, 但是很影响学习心情, 寝室简直的又吵又闹。&lt;/li>
 &lt;/ul></description></item><item><title>Markdown Syntax Guide</title><link>https://wake0p.github.io/p/markdown-syntax-guide/</link><pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate><guid>https://wake0p.github.io/p/markdown-syntax-guide/</guid><description>&lt;img src="https://wake0p.github.io/p/markdown-syntax-guide/pawel-czerwinski-8uZPynIu-rQ-unsplash.jpg" alt="Featured image of post Markdown Syntax Guide" />&lt;p>This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p>
 &lt;h2 id="headings">Headings
 &lt;/h2>&lt;p>The following HTML &lt;code>&amp;lt;h1&amp;gt;&lt;/code>—&lt;code>&amp;lt;h6&amp;gt;&lt;/code> elements represent six levels of section headings. &lt;code>&amp;lt;h1&amp;gt;&lt;/code> is the highest section level while &lt;code>&amp;lt;h6&amp;gt;&lt;/code> is the lowest.&lt;/p>
@@ -1668,13 +1679,33 @@ $$</description></item><item><title>Emoji Support</title><link>https://wake0p.gi
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">image&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">ts-logo-128.jpg&lt;/span>&lt;span class="w">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>&lt;code>image&lt;/code> field accepts both local and external images.&lt;/p></description></item><item><title>Search</title><link>https://wake0p.github.io/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://wake0p.github.io/search/</guid><description/></item><item><title>Target</title><link>https://wake0p.github.io/target/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://wake0p.github.io/target/</guid><description>&lt;h2 id="工作">工作
+&lt;/div>&lt;p>&lt;code>image&lt;/code> field accepts both local and external images.&lt;/p></description></item><item><title>Search</title><link>https://wake0p.github.io/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://wake0p.github.io/search/</guid><description/></item><item><title>Target</title><link>https://wake0p.github.io/target/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://wake0p.github.io/target/</guid><description>&lt;p>时刻警惕当前正在做的事情,并提出三问&lt;/p>
+&lt;ol>
+&lt;li>我正在做什么事情?&lt;/li>
+&lt;li>为啥要做这件事情?&lt;/li>
+&lt;li>这件事情有什么好处呢?&lt;/li>
+&lt;/ol>
+&lt;h2 id="工作">工作
 &lt;/h2>&lt;ul>
 &lt;li>&lt;input disabled="" type="checkbox"> 找到一份安卓实习！！&lt;/li>
 &lt;li>&lt;input disabled="" type="checkbox"> 进行人生第一次投资 &amp;ndash;在经济,金融基础知识充足的情况&lt;/li>
-&lt;li>&lt;input disabled="" type="checkbox"> 赚到100w&lt;/li>
+&lt;li>&lt;input disabled="" type="checkbox"> 赚到10w&lt;/li>
 &lt;/ul>
 &lt;h2 id="生活">生活
 &lt;/h2>&lt;ul>
-&lt;li>&lt;input disabled="" type="checkbox"> 体验一次大学恋爱&lt;/li>
+&lt;li>
+&lt;p>&lt;input disabled="" type="checkbox"> 体验一次大学恋爱&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;input disabled="" type="checkbox"> 戒色100天&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>我要做: 每天看书一小时, 运动半小时,学习8小时&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>我不做: 不玩短视频, 不打王者!&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>我想要: 赚到10万&lt;/p>
+&lt;/li>
 &lt;/ul></description></item></channel></rss>
