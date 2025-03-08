@@ -1254,6 +1254,14 @@ data-flex-basis="645px"
 &lt;/ol>
 &lt;ul>
 &lt;li>晚上选耳机的时间有点久了, 主要是送给家人的, 得认真挑选一下, 晚上其实应该去实验室学习的, 在寝室虽然也学了, 但是很影响学习心情, 寝室简直的又吵又闹。&lt;/li>
+&lt;/ul>
+&lt;h3 id="2025年-3月8号">2025年 3月8号
+&lt;/h3>&lt;ol>
+&lt;li>上午+半个下午一直在打 pwn TPctf 做出了一道题,也算是复习了一下堆题相关知识点,特别是 apple2的知识点&lt;/li>
+&lt;li>晚上吃完饭, 看了会安卓activity层的 StringHogg 漏洞,总结了一下前置知识, 还简单看了一下 拒绝服务攻击&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>这一天过的莫名的快啊, 感觉啥也没学, 但又感觉一天也没耍什么, fuzz 和安卓安全/逆向的学习要提上日程了, 特别是 fuzz 很好奇到底是如何使用的,如何进行挖洞的&lt;/li>
 &lt;/ul></description></item><item><title>Markdown Syntax Guide</title><link>https://wake0p.github.io/p/markdown-syntax-guide/</link><pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate><guid>https://wake0p.github.io/p/markdown-syntax-guide/</guid><description>&lt;img src="https://wake0p.github.io/p/markdown-syntax-guide/pawel-czerwinski-8uZPynIu-rQ-unsplash.jpg" alt="Featured image of post Markdown Syntax Guide" />&lt;p>This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p>
 &lt;h2 id="headings">Headings
 &lt;/h2>&lt;p>The following HTML &lt;code>&amp;lt;h1&amp;gt;&lt;/code>—&lt;code>&amp;lt;h6&amp;gt;&lt;/code> elements represent six levels of section headings. &lt;code>&amp;lt;h1&amp;gt;&lt;/code> is the highest section level while &lt;code>&amp;lt;h6&amp;gt;&lt;/code> is the lowest.&lt;/p>
