@@ -203,7 +203,16 @@
 &lt;blockquote>
 &lt;p>明日/后天备赛任务如下&lt;/p>
 &lt;ul>
-&lt;li>&lt;input disabled="" type="checkbox"> 复习cjson,protobuf的协议,以及使用方法&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> 复习cjson,protobuf的协议,以及使用方法&lt;/li>
 &lt;li>&lt;input disabled="" type="checkbox"> 看一下vm题目, 简单做一下&lt;/li>
-&lt;li>&lt;input disabled="" type="checkbox"> UAF漏洞的patch方法&lt;/li>
-&lt;/ul>&lt;/blockquote></description></item></channel></rss>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> UAF漏洞的patch方法&lt;/li>
+&lt;/ul>&lt;/blockquote>
+&lt;h3 id="3月12日">3月12日
+&lt;/h3>&lt;ol>
+&lt;li>上午三四节课看了 cjson 然后一看就是一下午, 🈶道 cjson 没做空格处理, 结果半天解析不了, 给我搞的很难受&lt;/li>
+&lt;li>晚上上完实验去实验室,总结了一下 cjson ,和他们聊聊天,发了一篇先知社区文章，准备恰米。 最后看了几分钟一下vm&lt;/li>
+&lt;li>晚上 跑步+聊天 30分钟&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>今天过的好仓促, 时间都去哪里了啊？&lt;/li>
+&lt;/ul></description></item></channel></rss>
