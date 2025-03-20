@@ -232,4 +232,14 @@
 &lt;/ol>
 &lt;ul>
 &lt;li>总结: 满课的一天累了, 晚上放松放松了, 明天恢复好状态准备开赛了！！&lt;/li>
+&lt;/ul>
+&lt;h2 id="2025年第十二周">2025年第十二周
+&lt;/h2>&lt;h3 id="3月19日">3月19日
+&lt;/h3>&lt;ol>
+&lt;li>上午看了 webview 使用方法, 比如 JS 调用 android 代码, webview 的继承子类等&lt;/li>
+&lt;li>下午看了 webview 的常见漏洞: 跨域漏洞,页面注入,符号链接跨源攻击,cookie泄漏等相关漏洞&lt;/li>
+&lt;li>复现了 bytectf2021 的 easydroid, 目前还没复现完毕&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>总结 : 感觉最近状态好差, 身体极度疲倦, 大脑极度呆滞, 提不起力&lt;/li>
 &lt;/ul></description></item></channel></rss>
