@@ -247,4 +247,6 @@
 &lt;h3 id="4月7日">4月7日
 &lt;/h3>&lt;ol>
 &lt;li>今天看了一天的Android app启动，看了启动的源码，感觉好复杂，不过总算是看的差不多了，大致流程大概是知道了，就差了Activity的启动还没分析，源码确实比较晦涩&lt;/li>
-&lt;/ol></description></item></channel></rss>
+&lt;/ol>
+&lt;h3 id="4月9日">4月9日
+&lt;/h3>&lt;p>上午算是理解了第一代壳的加固关键点，晚上做了最后一个病毒分析的实验，打工的任务算是完结了&lt;/p></description></item></channel></rss>
