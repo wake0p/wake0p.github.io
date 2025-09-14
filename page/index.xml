@@ -37,7 +37,7 @@
 &lt;/ol>
 &lt;h2 id="工作">工作
 &lt;/h2>&lt;ul>
-&lt;li>&lt;input disabled="" type="checkbox"> 找到一份安卓实习！！&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> 找到一份安卓实习！！&lt;/li>
 &lt;li>&lt;input disabled="" type="checkbox"> 进行人生第一次投资 &amp;ndash;在经济,金融基础知识充足的情况&lt;/li>
 &lt;li>&lt;input disabled="" type="checkbox"> 赚到10w&lt;/li>
 &lt;/ul>
@@ -47,13 +47,16 @@
 &lt;p>&lt;input disabled="" type="checkbox"> 体验一次大学恋爱&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;input disabled="" type="checkbox"> 戒色100天&lt;/p>
+&lt;p>&lt;input checked="" disabled="" type="checkbox"> 戒色100天&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;input disabled="" type="checkbox"> 戒色200天&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>我要做: 每天看书一小时, 运动半小时,学习8小时&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>我不做: 不玩短视频, 不打王者!&lt;/p>
+&lt;p>我不做: 不玩短视频, 不打游戏!&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>我想要: 赚到10万&lt;/p>

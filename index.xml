@@ -1351,7 +1351,7 @@ data-flex-basis="645px"
 &lt;ol>
 &lt;li>一整天其实就入门epbf的相关知识点,比如 JIT Compilation , ebpf Maps 存在的操作接口 , epbf相关的保护{这一块设计到的攻击Spectre-v1/v2 和 JIT spraying 还没来学习 }, 还有 ebpf 相关的一些接口和操作方法 4.5小时&lt;/li>
 &lt;li>跑步半小时&lt;/li>
-&lt;li>下午一下午都在考虑如何最便宜的到达哈尔滨,最终选择了飞机+一晚上的高铁的方式去,总共花费了1左右(以后要多赚钱了啊!!)&lt;/li>
+&lt;li>下午一下午都在考虑如何最便宜的到达,最终选择了飞机+一晚上的高铁的方式去,总共花费了1k左右(以后要多赚钱了啊!!)&lt;/li>
 &lt;/ol>
 &lt;ul>
 &lt;li>也摆烂了这么久了,该回归了QYQ,周末又过去了,又要上班了,我爱上班(bushi&lt;/li>
@@ -1788,7 +1788,7 @@ $$</description></item><item><title>Emoji Support</title><link>https://wake0p.gi
 &lt;/ol>
 &lt;h2 id="工作">工作
 &lt;/h2>&lt;ul>
-&lt;li>&lt;input disabled="" type="checkbox"> 找到一份安卓实习！！&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> 找到一份安卓实习！！&lt;/li>
 &lt;li>&lt;input disabled="" type="checkbox"> 进行人生第一次投资 &amp;ndash;在经济,金融基础知识充足的情况&lt;/li>
 &lt;li>&lt;input disabled="" type="checkbox"> 赚到10w&lt;/li>
 &lt;/ul>
@@ -1798,13 +1798,16 @@ $$</description></item><item><title>Emoji Support</title><link>https://wake0p.gi
 &lt;p>&lt;input disabled="" type="checkbox"> 体验一次大学恋爱&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;input disabled="" type="checkbox"> 戒色100天&lt;/p>
+&lt;p>&lt;input checked="" disabled="" type="checkbox"> 戒色100天&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;input disabled="" type="checkbox"> 戒色200天&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>我要做: 每天看书一小时, 运动半小时,学习8小时&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>我不做: 不玩短视频, 不打王者!&lt;/p>
+&lt;p>我不做: 不玩短视频, 不打游戏!&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>我想要: 赚到10万&lt;/p>
