@@ -1386,6 +1386,11 @@ data-flex-basis="645px"
 &lt;/h3>&lt;ol>
 &lt;li>上午尝试学习了一下 AI 大模型推理与微调,本来是准备跟着动手学大模型学的,看了一下感觉教的其实并不是很好,并且和我想要学的东西相差很远,于是就是停止了,后续有空再看看 AI agent 吧&lt;/li>
 &lt;li>晚上开始入门 Unidbg 很早就准备要学了,不过拖到现在,看了一下常见的动态调试的方法,或许 Unidbg 拿来分析算法是很好的选择,并且如今也找到了不错的教程,了解如何启动 Unidbg ,以及 Unidbg 和 ebpf 对比的优点,以及 Unidbg 常见使用场景,等明天继续深入学习 Unidbg 的使用方法,以及分析算法的过程&lt;/li>
+&lt;/ol>
+&lt;h3 id="11月4号">11月4号
+&lt;/h3>&lt;ol>
+&lt;li>上午继续学习 Unidbg 成功编译好项目,学习模拟执行相关接口,以及启动模拟执行需要补那一些环境,比如补JNI环境,补系统调用函数等&lt;/li>
+&lt;li>晚上回去搞了一晚上部署平台出题的东西,为了money,不得不接点牛马项目www&lt;/li>
 &lt;/ol></description></item><item><title>Markdown Syntax Guide</title><link>https://wake0p.github.io/p/markdown-syntax-guide/</link><pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate><guid>https://wake0p.github.io/p/markdown-syntax-guide/</guid><description>&lt;img src="https://wake0p.github.io/p/markdown-syntax-guide/pawel-czerwinski-8uZPynIu-rQ-unsplash.jpg" alt="Featured image of post Markdown Syntax Guide" />&lt;p>This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p>
 &lt;h2 id="headings">Headings
 &lt;/h2>&lt;p>The following HTML &lt;code>&amp;lt;h1&amp;gt;&lt;/code>—&lt;code>&amp;lt;h6&amp;gt;&lt;/code> elements represent six levels of section headings. &lt;code>&amp;lt;h1&amp;gt;&lt;/code> is the highest section level while &lt;code>&amp;lt;h6&amp;gt;&lt;/code> is the lowest.&lt;/p>
