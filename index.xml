@@ -1401,6 +1401,7 @@ data-flex-basis="645px"
 &lt;/h3>&lt;ol>
 &lt;li>上午+下午基本上都在工作,处理一个指纹的加密过程&lt;/li>
 &lt;li>晚上继续学习 Unidbg ,记录了之前的笔记,并且尝试补 JNI 环境,跟着教程补完后调用成功了,但有很多地方还不是很清楚为啥这样补,后续原因的学习就放到明天吧!&lt;/li>
+&lt;li>等后续的 Unidbg 弄完了就要继续着手 android 相关 cve 分析了,毕竟那个才是真爱哈哈&lt;/li>
 &lt;/ol></description></item><item><title>Markdown Syntax Guide</title><link>https://wake0p.github.io/p/markdown-syntax-guide/</link><pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate><guid>https://wake0p.github.io/p/markdown-syntax-guide/</guid><description>&lt;img src="https://wake0p.github.io/p/markdown-syntax-guide/pawel-czerwinski-8uZPynIu-rQ-unsplash.jpg" alt="Featured image of post Markdown Syntax Guide" />&lt;p>This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p>
 &lt;h2 id="headings">Headings
 &lt;/h2>&lt;p>The following HTML &lt;code>&amp;lt;h1&amp;gt;&lt;/code>—&lt;code>&amp;lt;h6&amp;gt;&lt;/code> elements represent six levels of section headings. &lt;code>&amp;lt;h1&amp;gt;&lt;/code> is the highest section level while &lt;code>&amp;lt;h6&amp;gt;&lt;/code> is the lowest.&lt;/p>
