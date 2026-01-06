@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>wake0p's blog</title><link>https://wake0p.github.io/</link><description>Recent content on wake0p's blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>wake0p</copyright><lastBuildDate>Fri, 21 Feb 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://wake0p.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>android JNI开发基础</title><link>https://wake0p.github.io/p/android-jni%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80/</link><pubDate>Fri, 21 Feb 2025 00:00:00 +0000</pubDate><guid>https://wake0p.github.io/p/android-jni%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80/</guid><description>&lt;blockquote>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>wake0p's blog</title><link>https://wake0p.github.io/</link><description>Recent content on wake0p's blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>wake0p</copyright><lastBuildDate>Sun, 04 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://wake0p.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>2025年度总结</title><link>https://wake0p.github.io/categories/review/2025-annual-summary/</link><pubDate>Sun, 04 Jan 2026 00:00:00 +0000</pubDate><guid>https://wake0p.github.io/categories/review/2025-annual-summary/</guid><description>&lt;h2 id="2025年度总结">2025年度总结
+&lt;/h2></description></item><item><title>android JNI开发基础</title><link>https://wake0p.github.io/p/android-jni%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80/</link><pubDate>Fri, 21 Feb 2025 00:00:00 +0000</pubDate><guid>https://wake0p.github.io/p/android-jni%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80/</guid><description>&lt;blockquote>
 &lt;p>参考&lt;a class="link" href="https://mp.weixin.qq.com/s/0fOkDntnzxCgtxeyeY8Uvg" target="_blank" rel="noopener"
 >文章&lt;/a>&lt;/p>&lt;/blockquote>
 &lt;h2 id="初识jnindk">初识JNI/NDK
@@ -838,261 +839,7 @@ data-flex-basis="168px"
 &lt;p>那竞标赛怎么来的呢？由于人事任免权力集中在中央，而过去中央最高目标就是发展经济，因此地方政府为了晋升，需要内卷经济发展，而地方政府拥有足够多的事权，正好便于他们发展经济，这也就促进了经济的高速发展，各个地方政府之间相互内卷，于是就产生晋升锦标赛&lt;/p>
 &lt;ul>
 &lt;li>体制特点: 效率极高，中央下达任务能快速到达基层政府，而基层政府拥有足够大的事权，因此能过高效且极的完成中央下达的任务。&lt;/li>
-&lt;/ul></description></item><item><title>content目录使用</title><link>https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/</link><pubDate>Wed, 12 Feb 2025 00:00:00 +0000</pubDate><guid>https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/</guid><description>&lt;h2 id="categories">categories
-&lt;/h2>&lt;p>该目录下记录的是相关目录，比如这里的categories/Text 就对应下面这里&lt;/p>
-&lt;p>&lt;img src="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image.png"
-width="540"
-height="410"
-srcset="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image_hu_2091fb7aaf176e54.png 480w, https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image_hu_af0364ae4beff16a.png 1024w"
-loading="lazy"
-alt="image.png"
-class="gallery-image"
-data-flex-grow="131"
-data-flex-basis="316px"
->&lt;/p>
-&lt;p>然后该目录下的_index.md，用于渲染这个&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;span class="lnt">5
-&lt;/span>&lt;span class="lnt">6
-&lt;/span>&lt;span class="lnt">7
-&lt;/span>&lt;span class="lnt">8
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-markdown" data-lang="markdown">&lt;span class="line">&lt;span class="cl">---
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">title: &amp;#34;Test&amp;#34;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">description: &amp;#34;123&amp;#34;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">image: &amp;#34;hutomo-abrianto-l2jk-uxb1BY-unsplash.jpg&amp;#34;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">style:
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> background: &amp;#34;&lt;span class="ni">#f08080&lt;/span>&amp;#34;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> color: &amp;#34;&lt;span class="ni">#fff&lt;/span>&amp;#34;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">---
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>其中title和decription就是在这个页面的顶部，存在描述，标题，和图像&lt;/p>
-&lt;p>&lt;img src="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image1.png"
-width="1840"
-height="1184"
-srcset="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image1_hu_303a5532e128d040.png 480w, https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image1_hu_3afbaf434aa46171.png 1024w"
-loading="lazy"
-alt="image.png"
-class="gallery-image"
-data-flex-grow="155"
-data-flex-basis="372px"
->&lt;/p>
-&lt;p>然后下面是对应带有该标签的文章，而style代表这个标签的样式，这里就是背景浅红色，字体白色&lt;/p>
-&lt;p>&lt;img src="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image2.png"
-width="910"
-height="306"
-srcset="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image2_hu_3e713db96c27668b.png 480w, https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image2_hu_3a99658ab72cd2a8.png 1024w"
-loading="lazy"
-alt="image.png"
-class="gallery-image"
-data-flex-grow="297"
-data-flex-basis="713px"
->&lt;/p>
-&lt;h2 id="page目录">page目录
-&lt;/h2>&lt;p>page目录下存在其他文件夹，分别就对应左侧的选项&lt;/p>
-&lt;blockquote>
-&lt;p>这里侧边选项是通过menu main 来定义的&lt;/p>&lt;/blockquote>
-&lt;p>&lt;img src="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image3.png"
-width="922"
-height="962"
-srcset="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image3_hu_f3bafb66433a0437.png 480w, https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image3_hu_939ace41653510e.png 1024w"
-loading="lazy"
-alt="image.png"
-class="gallery-image"
-data-flex-grow="95"
-data-flex-basis="230px"
-> &lt;img src="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image4.png"
-width="502"
-height="442"
-srcset="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image4_hu_2cc646c05a945c85.png 480w, https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image4_hu_ff09ddbeefd036e4.png 1024w"
-loading="lazy"
-alt="image.png"
-class="gallery-image"
-data-flex-grow="113"
-data-flex-basis="272px"
->&lt;/p>
-&lt;p>每一个目录下存在一个&lt;code>index.md/index.zh-cn.md&lt;/code> ，其中渲染部分如下&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;span class="lnt">11
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-markdown" data-lang="markdown">&lt;span class="line">&lt;span class="cl">---
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">title: &amp;#34;Archives&amp;#34;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">date: 2019-05-28
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">layout: &amp;#34;archives&amp;#34;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">slug: &amp;#34;archives&amp;#34;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">menu:
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> main:
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> weight: -70
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> params:
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> icon: archives
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">---
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;ul>
-&lt;li>其中titile表示侧边拦的名称，&lt;/li>
-&lt;li>data好像没啥用处，&lt;/li>
-&lt;li>layout表示布局使用layouts文件下的archives.html布局&lt;/li>
-&lt;li>slug表示当前页面的网站索引，比如这里的/wake0p.github.io/archives&lt;/li>
-&lt;li>menu用于表示当前index.md是为左侧边栏服务的&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;span class="lnt">5
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">menu:
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> main:
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> weight: -70
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> params:
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> icon: archives
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;ul>
-&lt;li>&lt;strong>weight: -70&lt;/strong>：weight 用来控制菜单项的排序。数字越小，菜单项会显示得越靠前，越大则越靠后。-70 表示该页面在菜单中的位置比较靠前（在相同 weight 的情况下）。&lt;/li>
-&lt;li>&lt;strong>params:&lt;/strong>：这是菜单项的附加参数。你可以在这里指定图标、样式、链接等额外的设置。&lt;/li>
-&lt;li>&lt;strong>icon: archives&lt;/strong>：表示在这个菜单项中会使用一个名为 archives 的图标。具体来说，网站的图标可能是一个与归档相关的图标（如文件夹或文件堆叠的图标），并且可以通过CSS或其他方式进行自定义显示。&lt;/li>
-&lt;/ul>
-&lt;p>当然还存在其他属性，比如在Links文件下，就Links属性，用于表示参考文章，使用方法如下&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;span class="lnt">5
-&lt;/span>&lt;span class="lnt">6
-&lt;/span>&lt;span class="lnt">7
-&lt;/span>&lt;span class="lnt">8
-&lt;/span>&lt;span class="lnt">9
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-markdown" data-lang="markdown">&lt;span class="line">&lt;span class="cl">links:
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">-&lt;/span> title: GitHub
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> description: My GitHub
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> website: https://github.com/wake0p
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> image: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">-&lt;/span> title: TypeScript
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> description: TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> website: https://www.typescriptlang.org
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> image: ts-logo-128.jpg
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>其中image即能够用网上的，也能够使用本地，最后的效果就是在底部存在这样的参考文章&lt;/p>
-&lt;p>&lt;img src="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image5.png"
-width="2940"
-height="1382"
-srcset="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image5_hu_c8a323c7521de0dc.png 480w, https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image5_hu_7d74abd23d3cffb7.png 1024w"
-loading="lazy"
-alt="image.png"
-class="gallery-image"
-data-flex-grow="212"
-data-flex-basis="510px"
->&lt;/p>
-&lt;h2 id="post目录">post目录
-&lt;/h2>&lt;p>这个目录用于存放真正需要发布文章，一般分为两种情况，&lt;/p>
-&lt;ul>
-&lt;li>要么是直接/post/xxx.md 这种md中不引用图片，&lt;/li>
-&lt;li>要么就是/post/xxx/index.md将资源单独放在一个文件夹，文件夹包含所需要的所有资源&lt;/li>
-&lt;/ul>
-&lt;p>比较推荐第二种做法&lt;/p>
-&lt;p>然后就是post中文章有的相关属性&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-markdown" data-lang="markdown">&lt;span class="line">&lt;span class="cl">---
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">title: Chinese Test
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">description: 这是一个副标题
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">date: 2020-09-09
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">slug: test-Chinese
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">image: helena-hertz-wWZzXlDpMog-unsplash.jpg
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">categories:
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">-&lt;/span> Test
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">---
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;ul>
-&lt;li>date表示发布时间&lt;/li>
-&lt;li>image表示文章的背景图片&lt;/li>
-&lt;li>categories表示当前文章属于哪一个目录，可以说目录中有的，也可也是目录中没有的&lt;/li>
-&lt;/ul>
-&lt;p>最终的情况就像下面这样&lt;/p>
-&lt;p>&lt;img src="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image6.png"
-width="1744"
-height="1218"
-srcset="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image6_hu_4732b2ba2332d8ad.png 480w, https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image6_hu_b02e7d5bb0b234d0.png 1024w"
-loading="lazy"
-alt="image.png"
-class="gallery-image"
-data-flex-grow="143"
-data-flex-basis="343px"
->&lt;/p>
-&lt;h2 id="图片排版方法">图片排版方法
-&lt;/h2>&lt;p>将两个图片放在同一排，就像下面这样&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-markdown" data-lang="markdown">&lt;span class="line">&lt;span class="cl">![&lt;span class="nt">Photo by Florian Klauer on Unsplash&lt;/span>](&lt;span class="na">florian-klauer-nptLmg6jqDo-unsplash.jpg&lt;/span>) ![&lt;span class="nt">Photo by Luca Bravo on Unsplash&lt;/span>](&lt;span class="na">luca-bravo-alS7ewQ41M8-unsplash.jpg&lt;/span>)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>最终的效果&lt;/p>
-&lt;p>&lt;img src="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image7.png"
-width="1546"
-height="822"
-srcset="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image7_hu_e0773df173b5fb6d.png 480w, https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image7_hu_9f699b38e226b510.png 1024w"
-loading="lazy"
-alt="image.png"
-class="gallery-image"
-data-flex-grow="188"
-data-flex-basis="451px"
->&lt;/p>
-&lt;p>当然也能够4张图片全部排在一起&lt;/p>
-&lt;p>&lt;img src="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image8.png"
-width="1604"
-height="596"
-srcset="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image8_hu_58ff8bdfe7931b4a.png 480w, https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image8_hu_6aeab4ef20287783.png 1024w"
-loading="lazy"
-alt="image.png"
-class="gallery-image"
-data-flex-grow="269"
-data-flex-basis="645px"
->&lt;/p></description></item><item><title>每日复盘篇</title><link>https://wake0p.github.io/categories/review/daybyday/</link><pubDate>Wed, 12 Feb 2025 00:00:00 +0000</pubDate><guid>https://wake0p.github.io/categories/review/daybyday/</guid><description>&lt;img src="https://wake0p.github.io/categories/review/daybyday/before.jpg" alt="Featured image of post 每日复盘篇" />&lt;hr>
+&lt;/ul></description></item><item><title>2025日复盘篇</title><link>https://wake0p.github.io/categories/review/daybyday/</link><pubDate>Wed, 12 Feb 2025 00:00:00 +0000</pubDate><guid>https://wake0p.github.io/categories/review/daybyday/</guid><description>&lt;img src="https://wake0p.github.io/categories/review/daybyday/before.jpg" alt="Featured image of post 2025日复盘篇" />&lt;hr>
 &lt;h2 id="2025年第七周">2025年第七周
 &lt;/h2>&lt;h3 id="2025年2月10日">2025年2月10日
 &lt;/h3>&lt;ol>
@@ -1424,7 +1171,261 @@ data-flex-basis="645px"
 &lt;/h3>&lt;ol>
 &lt;li>上午+半个下午继续复习人工智能,还差一章等明天再复习了&lt;/li>
 &lt;li>后半下午 + 晚上准备给实验室三面布置任务,顺便实战一下 Unidbg ,开始逆向快手sign3分析,在补环境的地方出现了一个未解决的问题,等考完试再去解决&lt;/li>
-&lt;/ol></description></item><item><title>Markdown Syntax Guide</title><link>https://wake0p.github.io/p/markdown-syntax-guide/</link><pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate><guid>https://wake0p.github.io/p/markdown-syntax-guide/</guid><description>&lt;img src="https://wake0p.github.io/p/markdown-syntax-guide/pawel-czerwinski-8uZPynIu-rQ-unsplash.jpg" alt="Featured image of post Markdown Syntax Guide" />&lt;p>This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p>
+&lt;/ol></description></item><item><title>content目录使用</title><link>https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/</link><pubDate>Wed, 12 Feb 2025 00:00:00 +0000</pubDate><guid>https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/</guid><description>&lt;h2 id="categories">categories
+&lt;/h2>&lt;p>该目录下记录的是相关目录，比如这里的categories/Text 就对应下面这里&lt;/p>
+&lt;p>&lt;img src="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image.png"
+width="540"
+height="410"
+srcset="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image_hu_2091fb7aaf176e54.png 480w, https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image_hu_af0364ae4beff16a.png 1024w"
+loading="lazy"
+alt="image.png"
+class="gallery-image"
+data-flex-grow="131"
+data-flex-basis="316px"
+>&lt;/p>
+&lt;p>然后该目录下的_index.md，用于渲染这个&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-markdown" data-lang="markdown">&lt;span class="line">&lt;span class="cl">---
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">title: &amp;#34;Test&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">description: &amp;#34;123&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">image: &amp;#34;hutomo-abrianto-l2jk-uxb1BY-unsplash.jpg&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">style:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> background: &amp;#34;&lt;span class="ni">#f08080&lt;/span>&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> color: &amp;#34;&lt;span class="ni">#fff&lt;/span>&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">---
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>其中title和decription就是在这个页面的顶部，存在描述，标题，和图像&lt;/p>
+&lt;p>&lt;img src="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image1.png"
+width="1840"
+height="1184"
+srcset="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image1_hu_303a5532e128d040.png 480w, https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image1_hu_3afbaf434aa46171.png 1024w"
+loading="lazy"
+alt="image.png"
+class="gallery-image"
+data-flex-grow="155"
+data-flex-basis="372px"
+>&lt;/p>
+&lt;p>然后下面是对应带有该标签的文章，而style代表这个标签的样式，这里就是背景浅红色，字体白色&lt;/p>
+&lt;p>&lt;img src="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image2.png"
+width="910"
+height="306"
+srcset="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image2_hu_3e713db96c27668b.png 480w, https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image2_hu_3a99658ab72cd2a8.png 1024w"
+loading="lazy"
+alt="image.png"
+class="gallery-image"
+data-flex-grow="297"
+data-flex-basis="713px"
+>&lt;/p>
+&lt;h2 id="page目录">page目录
+&lt;/h2>&lt;p>page目录下存在其他文件夹，分别就对应左侧的选项&lt;/p>
+&lt;blockquote>
+&lt;p>这里侧边选项是通过menu main 来定义的&lt;/p>&lt;/blockquote>
+&lt;p>&lt;img src="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image3.png"
+width="922"
+height="962"
+srcset="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image3_hu_f3bafb66433a0437.png 480w, https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image3_hu_939ace41653510e.png 1024w"
+loading="lazy"
+alt="image.png"
+class="gallery-image"
+data-flex-grow="95"
+data-flex-basis="230px"
+> &lt;img src="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image4.png"
+width="502"
+height="442"
+srcset="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image4_hu_2cc646c05a945c85.png 480w, https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image4_hu_ff09ddbeefd036e4.png 1024w"
+loading="lazy"
+alt="image.png"
+class="gallery-image"
+data-flex-grow="113"
+data-flex-basis="272px"
+>&lt;/p>
+&lt;p>每一个目录下存在一个&lt;code>index.md/index.zh-cn.md&lt;/code> ，其中渲染部分如下&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-markdown" data-lang="markdown">&lt;span class="line">&lt;span class="cl">---
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">title: &amp;#34;Archives&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">date: 2019-05-28
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">layout: &amp;#34;archives&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">slug: &amp;#34;archives&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">menu:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> main:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> weight: -70
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> params:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> icon: archives
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">---
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>其中titile表示侧边拦的名称，&lt;/li>
+&lt;li>data好像没啥用处，&lt;/li>
+&lt;li>layout表示布局使用layouts文件下的archives.html布局&lt;/li>
+&lt;li>slug表示当前页面的网站索引，比如这里的/wake0p.github.io/archives&lt;/li>
+&lt;li>menu用于表示当前index.md是为左侧边栏服务的&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">menu:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> main:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> weight: -70
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> params:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> icon: archives
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>&lt;strong>weight: -70&lt;/strong>：weight 用来控制菜单项的排序。数字越小，菜单项会显示得越靠前，越大则越靠后。-70 表示该页面在菜单中的位置比较靠前（在相同 weight 的情况下）。&lt;/li>
+&lt;li>&lt;strong>params:&lt;/strong>：这是菜单项的附加参数。你可以在这里指定图标、样式、链接等额外的设置。&lt;/li>
+&lt;li>&lt;strong>icon: archives&lt;/strong>：表示在这个菜单项中会使用一个名为 archives 的图标。具体来说，网站的图标可能是一个与归档相关的图标（如文件夹或文件堆叠的图标），并且可以通过CSS或其他方式进行自定义显示。&lt;/li>
+&lt;/ul>
+&lt;p>当然还存在其他属性，比如在Links文件下，就Links属性，用于表示参考文章，使用方法如下&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-markdown" data-lang="markdown">&lt;span class="line">&lt;span class="cl">links:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">-&lt;/span> title: GitHub
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> description: My GitHub
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> website: https://github.com/wake0p
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> image: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">-&lt;/span> title: TypeScript
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> description: TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> website: https://www.typescriptlang.org
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> image: ts-logo-128.jpg
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>其中image即能够用网上的，也能够使用本地，最后的效果就是在底部存在这样的参考文章&lt;/p>
+&lt;p>&lt;img src="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image5.png"
+width="2940"
+height="1382"
+srcset="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image5_hu_c8a323c7521de0dc.png 480w, https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image5_hu_7d74abd23d3cffb7.png 1024w"
+loading="lazy"
+alt="image.png"
+class="gallery-image"
+data-flex-grow="212"
+data-flex-basis="510px"
+>&lt;/p>
+&lt;h2 id="post目录">post目录
+&lt;/h2>&lt;p>这个目录用于存放真正需要发布文章，一般分为两种情况，&lt;/p>
+&lt;ul>
+&lt;li>要么是直接/post/xxx.md 这种md中不引用图片，&lt;/li>
+&lt;li>要么就是/post/xxx/index.md将资源单独放在一个文件夹，文件夹包含所需要的所有资源&lt;/li>
+&lt;/ul>
+&lt;p>比较推荐第二种做法&lt;/p>
+&lt;p>然后就是post中文章有的相关属性&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-markdown" data-lang="markdown">&lt;span class="line">&lt;span class="cl">---
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">title: Chinese Test
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">description: 这是一个副标题
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">date: 2020-09-09
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">slug: test-Chinese
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">image: helena-hertz-wWZzXlDpMog-unsplash.jpg
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">categories:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">-&lt;/span> Test
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">---
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>date表示发布时间&lt;/li>
+&lt;li>image表示文章的背景图片&lt;/li>
+&lt;li>categories表示当前文章属于哪一个目录，可以说目录中有的，也可也是目录中没有的&lt;/li>
+&lt;/ul>
+&lt;p>最终的情况就像下面这样&lt;/p>
+&lt;p>&lt;img src="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image6.png"
+width="1744"
+height="1218"
+srcset="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image6_hu_4732b2ba2332d8ad.png 480w, https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image6_hu_b02e7d5bb0b234d0.png 1024w"
+loading="lazy"
+alt="image.png"
+class="gallery-image"
+data-flex-grow="143"
+data-flex-basis="343px"
+>&lt;/p>
+&lt;h2 id="图片排版方法">图片排版方法
+&lt;/h2>&lt;p>将两个图片放在同一排，就像下面这样&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-markdown" data-lang="markdown">&lt;span class="line">&lt;span class="cl">![&lt;span class="nt">Photo by Florian Klauer on Unsplash&lt;/span>](&lt;span class="na">florian-klauer-nptLmg6jqDo-unsplash.jpg&lt;/span>) ![&lt;span class="nt">Photo by Luca Bravo on Unsplash&lt;/span>](&lt;span class="na">luca-bravo-alS7ewQ41M8-unsplash.jpg&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>最终的效果&lt;/p>
+&lt;p>&lt;img src="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image7.png"
+width="1546"
+height="822"
+srcset="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image7_hu_e0773df173b5fb6d.png 480w, https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image7_hu_9f699b38e226b510.png 1024w"
+loading="lazy"
+alt="image.png"
+class="gallery-image"
+data-flex-grow="188"
+data-flex-basis="451px"
+>&lt;/p>
+&lt;p>当然也能够4张图片全部排在一起&lt;/p>
+&lt;p>&lt;img src="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image8.png"
+width="1604"
+height="596"
+srcset="https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image8_hu_58ff8bdfe7931b4a.png 480w, https://wake0p.github.io/p/content%E7%9B%AE%E5%BD%95%E4%BD%BF%E7%94%A8/image8_hu_6aeab4ef20287783.png 1024w"
+loading="lazy"
+alt="image.png"
+class="gallery-image"
+data-flex-grow="269"
+data-flex-basis="645px"
+>&lt;/p></description></item><item><title>Markdown Syntax Guide</title><link>https://wake0p.github.io/p/markdown-syntax-guide/</link><pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate><guid>https://wake0p.github.io/p/markdown-syntax-guide/</guid><description>&lt;img src="https://wake0p.github.io/p/markdown-syntax-guide/pawel-czerwinski-8uZPynIu-rQ-unsplash.jpg" alt="Featured image of post Markdown Syntax Guide" />&lt;p>This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p>
 &lt;h2 id="headings">Headings
 &lt;/h2>&lt;p>The following HTML &lt;code>&amp;lt;h1&amp;gt;&lt;/code>—&lt;code>&amp;lt;h6&amp;gt;&lt;/code> elements represent six levels of section headings. &lt;code>&amp;lt;h1&amp;gt;&lt;/code> is the highest section level while &lt;code>&amp;lt;h6&amp;gt;&lt;/code> is the lowest.&lt;/p>
 &lt;h1 id="h1">H1
