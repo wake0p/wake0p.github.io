@@ -1,0 +1,1484 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="Xphone 开发心得与 Shizuku 源码分析"><title>Xphone 开发心得</title>
+<link rel=canonical href=https://wake0p.github.io/p/xphone-%E5%BC%80%E5%8F%91%E5%BF%83%E5%BE%97/><link rel=stylesheet href=/scss/style.min.9c87cb08ba83dcd506cf6bf0bcf901be31aa18920d07b6d7e08a7cc10b7d9a77.css><meta property='og:title' content="Xphone 开发心得"><meta property='og:description' content="Xphone 开发心得与 Shizuku 源码分析"><meta property='og:url' content='https://wake0p.github.io/p/xphone-%E5%BC%80%E5%8F%91%E5%BF%83%E5%BE%97/'><meta property='og:site_name' content="wake0p's blog"><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:published_time' content='2026-01-28T12:00:00+08:00'><meta property='article:modified_time' content='2026-01-28T12:00:00+08:00'><meta name=twitter:title content="Xphone 开发心得"><meta name=twitter:description content="Xphone 开发心得与 Shizuku 源码分析"></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/head_hu_ebd6ad7c249b4943.jpg width=300 height=265 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>🍥</span></figure><div class=site-meta><h1 class=site-name><a href=/>wake0p's blog</a></h1><h2 class=site-description>名不显时心不朽,再挑灯火看文章</h2></div></header><ol class=menu-social><li><a href=https://github.com/wake0p target=_blank title=GitHub rel=me><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>Home</span></a></li><li><a href=/about/><svg class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+<span>About</span></a></li><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>Archives</span></a></li><li><a href=/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>Search</span></a></li><li><a href=/target/><svg viewBox="0 0 32 32" width="32" height="32"><path d="M24.568359 4.5761719 13.503906 15.800781 7.3085938 9.515625.59570312 16.328125 13.501953 29.423828 13.505859 29.419922 13.507812 29.421875 14.21875 28.699219l4.121094-4.179688L18.791016 24.060547 30.564453 12.115234l.716797-.728515L30.564453 10.658203 24.568359 4.5761719zm0 2.8476562 3.904297 3.9628909L17.367188 22.65625l-3.861329 3.916016-3.9042965-3.960938L24.568359 7.4238281zM7.3085938 12.365234l4.7910152 4.861328L8.1933594 21.1875 3.4042969 16.328125l3.9042969-3.962891z"/></svg>
+<span>Target</span></a></li><li><a href=/links/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>Links</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#前言>前言</a></li><li><a href=#xphone-开发心得>Xphone 开发心得</a></li><li><a href=#寻找-adb-端口>寻找 adb 端口</a></li><li><a href=#和-adb-服务器进行认证>和 adb 服务器进行认证</a></li><li><a href=#启动后台服务>启动后台服务</a></li></ol></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/categories/%E5%AE%89%E5%8D%93%E5%BC%80%E5%8F%91/>安卓开发</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/xphone-%E5%BC%80%E5%8F%91%E5%BF%83%E5%BE%97/>Xphone 开发心得</a></h2><h3 class=article-subtitle>Xphone 开发心得与 Shizuku 源码分析</h3></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>Jan 28, 2026</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>阅读时长: 15 分钟</time></div></footer></div></header><section class=article-content><h2 id=前言>前言</h2><blockquote><p>项目地址: <a class=link href=https://github.com/wake0p/Xphone target=_blank rel=noopener>Xphone</a></p></blockquote><p>自己开发了一个 戒掉短视频和手机游戏的 app , 开发过程中从 shizuku 中学习到了非 root 手机持久化获取 adb 权限的方法 特来记录一番.</p><h2 id=xphone-开发心得>Xphone 开发心得</h2><p>android 内核为 linux 系统, linux 将系统权限划分为 root 和 非root权限,由于厂商不希望用户自定义去修改内核因此默认ban了root权限,但是呢开发者又需要能管理其他app的权限, 于是 android 以 root 权限启动init.rc及其配置的系统服务(包含 adbd) ,然后adbd又被设置为 shell 权限</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=nf>setgid</span><span class=p>(</span><span class=n>AID_SHELL</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=nf>setuid</span><span class=p>(</span><span class=n>AID_SHELL</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><p>而这个adb_shell 权限是能够操控其他app的, 因此如果我们能够维持一个 adb_shell 这样的高权限,就能过实现当前 OutPhone 的核心功能 任意隐藏/显示 app.</p><p>那么我们该如何维持高权限呢? 这里就不得不参考一下 shizuku 的代码实现了,下面是 shizuku 代码实现分析.</p><p>在 shizuku 中需要用户认证 adb 调试, 通过无线/有限/root的方式实现权限认证, 这里以无线认证的方式进行一步一步分析源码</p><h2 id=寻找-adb-端口>寻找 adb 端口</h2><p><strong>AdbMdns.kt</strong> 用于在当前的局域网中寻找服务和对应的 IP port 寻找过程如下</p><ol><li>通过 discoverServices 函数匹配服务名称 &ldquo;_adb-tls-pairing._tcp&rdquo;</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=n>nsdManager</span><span class=p>.</span><span class=nf>discoverServices</span><span class=p>(</span><span class=n>serviceType</span><span class=p>,</span> <span class=n>NsdManager</span><span class=p>.</span><span class=n>PROTOCOL_DNS_SD</span><span class=p>,</span> <span class=n>listener</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>这里使用了 callback 的机制, 传入 listener 当找到服务名称之后就去回掉 onServiceFound</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl> <span class=n>private</span> <span class=n>fun</span> <span class=nf>onServiceFound</span><span class=p>(</span><span class=nl>info</span><span class=p>:</span> <span class=n>NsdServiceInfo</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>nsdManager</span><span class=p>.</span><span class=nf>resolveService</span><span class=p>(</span><span class=n>info</span><span class=p>,</span> <span class=nf>ResolveListener</span><span class=p>(</span><span class=n>this</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>而 onServiceFound 调用 resolveService 方法去获取 IP 和 port , 获取成功后回 onServiceResolved</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=n>private</span> <span class=n>fun</span> <span class=nf>onServiceResolved</span><span class=p>(</span><span class=nl>resolvedService</span><span class=p>:</span> <span class=n>NsdServiceInfo</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=p>(</span><span class=n>running</span> <span class=o>&amp;&amp;</span> <span class=n>NetworkInterface</span><span class=p>.</span><span class=nf>getNetworkInterfaces</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>                <span class=p>.</span><span class=nf>asSequence</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>                <span class=p>.</span><span class=n>any</span> <span class=p>{</span> <span class=n>networkInterface</span> <span class=o>-&gt;</span>
+</span></span><span class=line><span class=cl>                    <span class=n>networkInterface</span><span class=p>.</span><span class=n>inetAddresses</span>
+</span></span><span class=line><span class=cl>                        <span class=p>.</span><span class=nf>asSequence</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>                        <span class=p>.</span><span class=n>any</span> <span class=p>{</span> <span class=n>resolvedService</span><span class=p>.</span><span class=n>host</span><span class=p>.</span><span class=n>hostAddress</span> <span class=o>==</span> <span class=n>it</span><span class=p>.</span><span class=n>hostAddress</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl>                <span class=p>}</span>
+</span></span><span class=line><span class=cl>            <span class=o>&amp;&amp;</span> <span class=nf>isPortAvailable</span><span class=p>(</span><span class=n>resolvedService</span><span class=p>.</span><span class=n>port</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>serviceName</span> <span class=o>=</span> <span class=n>resolvedService</span><span class=p>.</span><span class=n>serviceName</span>
+</span></span><span class=line><span class=cl>            <span class=n>observer</span><span class=p>.</span><span class=nf>onChanged</span><span class=p>(</span><span class=n>resolvedService</span><span class=p>.</span><span class=n>port</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>该函数遍历当前手机的所有网卡 IP 然后和刚刚解析到的地址进行对比, 如果相同则尝试 bind 判断端口是否被占用.</p><p>当ip端口被找到之后,会callback onChanged 函数将找到的 port 传出, 这里的 onChanged 属于 observer 类</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>    <span class=n>private</span> <span class=n>val</span> <span class=n>observer</span> <span class=o>=</span> <span class=n>Observer</span><span class=o>&lt;</span><span class=n>Int</span><span class=o>&gt;</span> <span class=p>{</span> <span class=n>port</span> <span class=o>-&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=n>Log</span><span class=p>.</span><span class=nf>i</span><span class=p>(</span><span class=n>tag</span><span class=p>,</span> <span class=s>&#34;Pairing service port: $port&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=p>(</span><span class=n>port</span> <span class=o>&lt;=</span> <span class=mi>0</span><span class=p>)</span> <span class=k>return</span><span class=err>@</span><span class=n>Observer</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c1>// Since the service could be killed before user finishing input,
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=c1>// we need to put the port into Intent
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>val</span> <span class=n>notification</span> <span class=o>=</span> <span class=nf>createInputNotification</span><span class=p>(</span><span class=n>port</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=nf>getSystemService</span><span class=p>(</span><span class=n>NotificationManager</span><span class=o>::</span><span class=n>class</span><span class=p>.</span><span class=n>java</span><span class=p>).</span><span class=nf>notify</span><span class=p>(</span><span class=n>notificationId</span><span class=p>,</span> <span class=n>notification</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>onChanged 函数调用 NotificationManager.notify 创建输入的通知输入对应的匹配码, 而在 notification 对象中指定用户需要启动的 Intent 类为 AdbPairingService (这里创建了一个 PendingIntent 包装 Intent ****)</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=n>private</span> <span class=n>fun</span> <span class=nf>createInputNotification</span><span class=p>(</span><span class=nl>port</span><span class=p>:</span> <span class=n>Int</span><span class=p>)</span><span class=o>:</span> <span class=n>Notification</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Notification</span><span class=p>.</span><span class=nf>Builder</span><span class=p>(</span><span class=n>this</span><span class=p>,</span> <span class=n>notificationChannel</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=nf>setColor</span><span class=p>(</span><span class=nf>getColor</span><span class=p>(</span><span class=n>R</span><span class=p>.</span><span class=n>color</span><span class=p>.</span><span class=n>notification</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=nf>setContentTitle</span><span class=p>(</span><span class=nf>getString</span><span class=p>(</span><span class=n>R</span><span class=p>.</span><span class=n>string</span><span class=p>.</span><span class=n>notification_adb_pairing_service_found_title</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=nf>setSmallIcon</span><span class=p>(</span><span class=n>R</span><span class=p>.</span><span class=n>drawable</span><span class=p>.</span><span class=n>ic_system_icon</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=nf>addAction</span><span class=p>(</span><span class=nf>replyNotificationAction</span><span class=p>(</span><span class=n>port</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>        <span class=p>.</span><span class=nf>build</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>private</span> <span class=n>fun</span> <span class=nf>replyNotificationAction</span><span class=p>(</span><span class=nl>port</span><span class=p>:</span> <span class=n>Int</span><span class=p>)</span><span class=o>:</span> <span class=n>Notification</span><span class=p>.</span><span class=n>Action</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// Ensure pending intent is created
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=n>val</span> <span class=n>action</span> <span class=o>=</span> <span class=n>replyNotificationAction</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>PendingIntent</span><span class=p>.</span><span class=nf>getForegroundService</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=n>this</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=n>replyRequestId</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nf>replyIntent</span><span class=p>(</span><span class=n>this</span><span class=p>,</span> <span class=n>port</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=p>(</span><span class=n>Build</span><span class=p>.</span><span class=n>VERSION</span><span class=p>.</span><span class=n>SDK_INT</span> <span class=o>&gt;=</span> <span class=n>Build</span><span class=p>.</span><span class=n>VERSION_CODES</span><span class=p>.</span><span class=n>S</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=n>PendingIntent</span><span class=p>.</span><span class=n>FLAG_MUTABLE</span> <span class=n>or</span> <span class=n>PendingIntent</span><span class=p>.</span><span class=n>FLAG_UPDATE_CURRENT</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span>
+</span></span><span class=line><span class=cl>            <span class=n>PendingIntent</span><span class=p>.</span><span class=n>FLAG_UPDATE_CURRENT</span>
+</span></span><span class=line><span class=cl>    <span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>action</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>private</span> <span class=n>fun</span> <span class=nf>replyIntent</span><span class=p>(</span><span class=nl>context</span><span class=p>:</span> <span class=n>Context</span><span class=p>,</span> <span class=nl>port</span><span class=p>:</span> <span class=n>Int</span><span class=p>)</span><span class=o>:</span> <span class=n>Intent</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nf>Intent</span><span class=p>(</span><span class=n>context</span><span class=p>,</span> <span class=n>AdbPairingService</span><span class=o>::</span><span class=n>class</span><span class=p>.</span><span class=n>java</span><span class=p>).</span><span class=nf>setAction</span><span class=p>(</span><span class=n>replyAction</span><span class=p>).</span><span class=nf>putExtra</span><span class=p>(</span><span class=n>portKey</span><span class=p>,</span> <span class=n>port</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>而当前类正在运行当中因此用户输入匹配码并且点击发送之后,就会回到 onStartCommand 函数</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=n>override</span> <span class=n>fun</span> <span class=nf>onStartCommand</span><span class=p>(</span><span class=nl>intent</span><span class=p>:</span> <span class=n>Intent</span><span class=o>?</span><span class=p>,</span> <span class=nl>flags</span><span class=p>:</span> <span class=n>Int</span><span class=p>,</span> <span class=nl>startId</span><span class=p>:</span> <span class=n>Int</span><span class=p>)</span><span class=o>:</span> <span class=n>Int</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>val</span> <span class=n>notification</span> <span class=o>=</span> <span class=nf>when</span> <span class=p>(</span><span class=n>intent</span><span class=o>?</span><span class=p>.</span><span class=n>action</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>          <span class=n>startAction</span> <span class=o>-&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>              <span class=nf>onStart</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>          <span class=p>}</span>
+</span></span><span class=line><span class=cl>          <span class=n>replyAction</span> <span class=o>-&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>              <span class=n>val</span> <span class=n>code</span> <span class=o>=</span> <span class=n>RemoteInput</span><span class=p>.</span><span class=nf>getResultsFromIntent</span><span class=p>(</span><span class=n>intent</span><span class=p>)</span><span class=o>?</span><span class=p>.</span><span class=nf>getCharSequence</span><span class=p>(</span><span class=n>remoteInputResultKey</span><span class=p>)</span> <span class=o>?:</span> <span class=s>&#34;&#34;</span>
+</span></span><span class=line><span class=cl>              <span class=n>val</span> <span class=n>port</span> <span class=o>=</span> <span class=n>intent</span><span class=p>.</span><span class=nf>getIntExtra</span><span class=p>(</span><span class=n>portKey</span><span class=p>,</span> <span class=o>-</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>              <span class=k>if</span> <span class=p>(</span><span class=n>port</span> <span class=o>!=</span> <span class=o>-</span><span class=mi>1</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                  <span class=nf>onInput</span><span class=p>(</span><span class=n>code</span><span class=p>.</span><span class=nf>toString</span><span class=p>(),</span> <span class=n>port</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>              <span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                  <span class=nf>onStart</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>              <span class=p>}</span>
+</span></span><span class=line><span class=cl>          <span class=p>}</span>
+</span></span><span class=line><span class=cl>          <span class=n>stopAction</span> <span class=o>-&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>              <span class=nf>stopForeground</span><span class=p>(</span><span class=n>STOP_FOREGROUND_REMOVE</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>              <span class=nf>stopSelf</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>              <span class=n>null</span>
+</span></span><span class=line><span class=cl>          <span class=p>}</span>
+</span></span><span class=line><span class=cl>          <span class=k>else</span> <span class=o>-&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>              <span class=k>return</span> <span class=n>START_NOT_STICKY</span>
+</span></span><span class=line><span class=cl>          <span class=p>}</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>      <span class=k>if</span> <span class=p>(</span><span class=n>notification</span> <span class=o>!=</span> <span class=n>null</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>          <span class=n>try</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>              <span class=nf>startForeground</span><span class=p>(</span><span class=n>notificationId</span><span class=p>,</span> <span class=n>notification</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                  <span class=n>ServiceInfo</span><span class=p>.</span><span class=n>FOREGROUND_SERVICE_TYPE_MANIFEST</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>          <span class=p>}</span> <span class=nf>catch</span> <span class=p>(</span><span class=nl>e</span><span class=p>:</span> <span class=n>Throwable</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>              <span class=n>Log</span><span class=p>.</span><span class=nf>e</span><span class=p>(</span><span class=n>tag</span><span class=p>,</span> <span class=s>&#34;startForeground failed&#34;</span><span class=p>,</span> <span class=n>e</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>              <span class=k>if</span> <span class=p>(</span><span class=n>Build</span><span class=p>.</span><span class=n>VERSION</span><span class=p>.</span><span class=n>SDK_INT</span> <span class=o>&gt;=</span> <span class=n>Build</span><span class=p>.</span><span class=n>VERSION_CODES</span><span class=p>.</span><span class=n>S</span>
+</span></span><span class=line><span class=cl>                  <span class=o>&amp;&amp;</span> <span class=n>e</span> <span class=n>is</span> <span class=n>ForegroundServiceStartNotAllowedException</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                  <span class=nf>getSystemService</span><span class=p>(</span><span class=n>NotificationManager</span><span class=o>::</span><span class=n>class</span><span class=p>.</span><span class=n>java</span><span class=p>).</span><span class=nf>notify</span><span class=p>(</span><span class=n>notificationId</span><span class=p>,</span> <span class=n>notification</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>              <span class=p>}</span>
+</span></span><span class=line><span class=cl>          <span class=p>}</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>      <span class=k>return</span> <span class=n>START_REDELIVER_INTENT</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>并且匹配到 replyAction ,用于提取 port 和 code, 然后再调用 onInput</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=c1>// 代码位置: AdbPairingService.kt lines 143-164
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>private</span> <span class=n>fun</span> <span class=nf>onInput</span><span class=p>(</span><span class=nl>code</span><span class=p>:</span> <span class=n>String</span><span class=p>,</span> <span class=nl>port</span><span class=p>:</span> <span class=n>Int</span><span class=p>)</span><span class=o>:</span> <span class=n>Notification</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>GlobalScope</span><span class=p>.</span><span class=nf>launch</span><span class=p>(</span><span class=n>Dispatchers</span><span class=p>.</span><span class=n>IO</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>val</span> <span class=n>host</span> <span class=o>=</span> <span class=s>&#34;127.0.0.1&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c1>// 1. 获取/生成 ADB 密钥
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>val</span> <span class=n>key</span> <span class=o>=</span> <span class=n>try</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=c1>// AdbKey 的构造函数会尝试读取现有密钥或生成新密钥
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=nf>AdbKey</span><span class=p>(</span><span class=nf>PreferenceAdbKeyStore</span><span class=p>(</span><span class=n>ShizukuSettings</span><span class=p>.</span><span class=nf>getPreferences</span><span class=p>()),</span> <span class=s>&#34;shizuku&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span> <span class=nf>catch</span> <span class=p>(</span><span class=nl>e</span><span class=p>:</span> <span class=n>Throwable</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>e</span><span class=p>.</span><span class=nf>printStackTrace</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span><span class=err>@</span><span class=n>launch</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c1>// 2. 发起配对连接
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=c1>// 使用 AdbPairingClient 进行 TLS 配对
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=nf>AdbPairingClient</span><span class=p>(</span><span class=n>host</span><span class=p>,</span> <span class=n>port</span><span class=p>,</span> <span class=n>code</span><span class=p>,</span> <span class=n>key</span><span class=p>).</span><span class=n>runCatching</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nf>start</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=p>}.</span><span class=n>onFailure</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nf>handleResult</span><span class=p>(</span><span class=nb>false</span><span class=p>,</span> <span class=n>it</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>}.</span><span class=n>onSuccess</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nf>handleResult</span><span class=p>(</span><span class=n>it</span><span class=p>,</span> <span class=n>null</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>workingNotification</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=和-adb-服务器进行认证>和 adb 服务器进行认证</h2><p>onInput 调用 AdbKey , 他和 adb 建立连接 并且生成rsa密钥,并且保存到本地的adb 服务上</p><p>在 AdbKey 的 初始化函数中</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl><span class=k>init</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>this</span><span class=p>.</span><span class=n>encryptionKey</span> <span class=p>=</span> <span class=n>getOrCreateEncryptionKey</span><span class=p>()</span> <span class=o>?:</span> <span class=n>error</span><span class=p>(</span><span class=s2>&#34;Failed to generate encryption key with AndroidKeyManager.&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>this</span><span class=p>.</span><span class=n>privateKey</span> <span class=p>=</span> <span class=n>getOrCreatePrivateKey</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=k>this</span><span class=p>.</span><span class=n>publicKey</span> <span class=p>=</span> <span class=nc>KeyFactory</span><span class=p>.</span><span class=n>getInstance</span><span class=p>(</span><span class=s2>&#34;RSA&#34;</span><span class=p>).</span><span class=n>generatePublic</span><span class=p>(</span><span class=n>RSAPublicKeySpec</span><span class=p>(</span><span class=n>privateKey</span><span class=p>.</span><span class=n>modulus</span><span class=p>,</span> <span class=nc>RSAKeyGenParameterSpec</span><span class=p>.</span><span class=n>F4</span><span class=p>))</span> <span class=k>as</span> <span class=n>RSAPublicKey</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>val</span> <span class=py>signer</span> <span class=p>=</span> <span class=n>JcaContentSignerBuilder</span><span class=p>(</span><span class=s2>&#34;SHA256withRSA&#34;</span><span class=p>).</span><span class=n>build</span><span class=p>(</span><span class=n>privateKey</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>val</span> <span class=py>x509Certificate</span> <span class=p>=</span> <span class=n>X509v3CertificateBuilder</span><span class=p>(</span><span class=n>X500Name</span><span class=p>(</span><span class=s2>&#34;CN=00&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=nc>BigInteger</span><span class=p>.</span><span class=n>ONE</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=n>Date</span><span class=p>(</span><span class=m>0</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=n>Date</span><span class=p>(</span><span class=m>2461449600</span> <span class=p>*</span> <span class=m>1000</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=nc>Locale</span><span class=p>.</span><span class=n>ROOT</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=n>X500Name</span><span class=p>(</span><span class=s2>&#34;CN=00&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>                <span class=nc>SubjectPublicKeyInfo</span><span class=p>.</span><span class=n>getInstance</span><span class=p>(</span><span class=n>publicKey</span><span class=p>.</span><span class=n>encoded</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>).</span><span class=n>build</span><span class=p>(</span><span class=n>signer</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>this</span><span class=p>.</span><span class=n>certificate</span> <span class=p>=</span> <span class=nc>CertificateFactory</span><span class=p>.</span><span class=n>getInstance</span><span class=p>(</span><span class=s2>&#34;X.509&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                <span class=p>.</span><span class=n>generateCertificate</span><span class=p>(</span><span class=n>ByteArrayInputStream</span><span class=p>(</span><span class=n>x509Certificate</span><span class=p>.</span><span class=n>encoded</span><span class=p>))</span> <span class=k>as</span> <span class=n>X509Certificate</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=nc>Log</span><span class=p>.</span><span class=n>d</span><span class=p>(</span><span class=n>TAG</span><span class=p>,</span> <span class=n>privateKey</span><span class=p>.</span><span class=n>toString</span><span class=p>())</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>val</span> <span class=py>adbPublicKey</span><span class=p>:</span> <span class=n>ByteArray</span> <span class=k>by</span> <span class=n>unsafeLazy</span> <span class=p>{</span> 
+</span></span><span class=line><span class=cl>    <span class=n>publicKey</span><span class=p>.</span><span class=n>adbEncoded</span><span class=p>(</span><span class=n>name</span><span class=p>)</span> 
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>该函数大概做了四件事情</p><ol><li><strong>获取加密密钥 (Encryption Key)</strong>:  Android Keystore 系统 (<code>ANDROID_KEYSTORE</code>) 获取或生成一个 <strong>AES-256 (GCM模式)</strong> 的密钥</li><li><strong>获取/生成 RSA 私钥 (Private Key)</strong>: 从 ShizukuSettings.SharedPreferences 中读取密钥,如果为空则重新生成 RSA 密钥,并且通过 AES 加密密钥并存储到 SharedPreferences 中</li><li>生成 x509Certificate 证书</li><li>通过 by unsafeLazy 懒加载模式 生成 publicKey 这个 key 用于 后续服务器 adb 认证</li></ol><p>利用刚刚生成的 key 和adb服务器进行通信 调用 <code>AdbPairingClient</code> 的 start 函数</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span><span class=lnt>72
+</span><span class=lnt>73
+</span><span class=lnt>74
+</span><span class=lnt>75
+</span><span class=lnt>76
+</span><span class=lnt>77
+</span><span class=lnt>78
+</span><span class=lnt>79
+</span><span class=lnt>80
+</span><span class=lnt>81
+</span><span class=lnt>82
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=line><span class=cl><span class=k>fun</span> <span class=nf>start</span><span class=p>():</span> <span class=n>Boolean</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 1. 建立基础的 TLS 连接
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// 这是一个同步阻塞调用，会建立 TCP 连接并完成 TLS 握手，同时通过 Conscrypt 导出关键的密钥材料
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=n>setupTlsConnection</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// 2. 更新状态：开始交换 SPAKE2 协议消息
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=n>state</span> <span class=p>=</span> <span class=nc>State</span><span class=p>.</span><span class=n>ExchangingMsgs</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// 3. 执行核心的密钥交换协议 (SPAKE2 msg exchange)
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// 这个函数会通过网络发送和接收数据包，验证双方是否拥有相同的&#34;密码&#34;（即配对码）
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// 如果失败返回 false，配对终止
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=k>if</span> <span class=p>(!</span><span class=n>doExchangeMsgs</span><span class=p>())</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>state</span> <span class=p>=</span> <span class=nc>State</span><span class=p>.</span><span class=n>Stopped</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=k>false</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// 4. 更新状态：交换设备信息
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// 密码验证成功后，双方交换具体的设备标识和对端公钥 (Peer Info)
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=n>state</span> <span class=p>=</span> <span class=nc>State</span><span class=p>.</span><span class=n>ExchangingPeerInfo</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// 5. 执行信息交换
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// 这里会将我们自己的 RSA 公钥发送给手机，告诉它“请信任这台电脑/APP”
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=k>if</span> <span class=p>(!</span><span class=n>doExchangePeerInfo</span><span class=p>())</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>state</span> <span class=p>=</span> <span class=nc>State</span><span class=p>.</span><span class=n>Stopped</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=k>false</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// 6. 配对成功完成
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=n>state</span> <span class=p>=</span> <span class=nc>State</span><span class=p>.</span><span class=n>Stopped</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=k>true</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>private</span> <span class=k>fun</span> <span class=nf>setupTlsConnection</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 1. 创建普通 TCP Socket
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// host = &#34;127.0.0.1&#34; (通常通过端口转发或直接连), port 由 mDNS 发现
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=n>socket</span> <span class=p>=</span> <span class=n>Socket</span><span class=p>(</span><span class=n>host</span><span class=p>,</span> <span class=n>port</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=c1>// 2. 禁用 Nagle 算法
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// 确保数据包立即发送，对这种交互式握手协议很重要，避免延迟
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=n>socket</span><span class=p>.</span><span class=n>tcpNoDelay</span> <span class=p>=</span> <span class=k>true</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// 3. 升级为 TLS (SSL) Socket
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// key.sslContext 是之前配置好的，包含自签名证书作为客户端证书
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// 注意：这里的 TLS 握手并不验证服务器证书（因为是匿名/自签名），安全性依赖后续的配对码验证
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=k>val</span> <span class=py>sslContext</span> <span class=p>=</span> <span class=n>key</span><span class=p>.</span><span class=n>sslContext</span>
+</span></span><span class=line><span class=cl>    <span class=k>val</span> <span class=py>sslSocket</span> <span class=p>=</span> <span class=n>sslContext</span><span class=p>.</span><span class=n>socketFactory</span><span class=p>.</span><span class=n>createSocket</span><span class=p>(</span><span class=n>socket</span><span class=p>,</span> <span class=n>host</span><span class=p>,</span> <span class=n>port</span><span class=p>,</span> <span class=k>true</span><span class=p>)</span> <span class=k>as</span> <span class=n>SSLSocket</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=c1>// 4. 开始 TLS 握手
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// 阻塞直到握手完成。此时建立了加密通道，但双方还没验证身份（因为都是自签名）
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=n>sslSocket</span><span class=p>.</span><span class=n>startHandshake</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=nc>Log</span><span class=p>.</span><span class=n>d</span><span class=p>(</span><span class=n>TAG</span><span class=p>,</span> <span class=s2>&#34;Handshake succeeded.&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// 5. 获取输入输出流
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// 后续的所有通信都在这个 TLS 隧道内进行
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=n>inputStream</span> <span class=p>=</span> <span class=n>DataInputStream</span><span class=p>(</span><span class=n>sslSocket</span><span class=p>.</span><span class=n>inputStream</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>outputStream</span> <span class=p>=</span> <span class=n>DataOutputStream</span><span class=p>(</span><span class=n>sslSocket</span><span class=p>.</span><span class=n>outputStream</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// --- 核心安全逻辑开始：生成 SPAKE2 共享密码 ---
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 6. 将用户输入的配对码转换为字节 (e.g., &#34;123456&#34; -&gt; bytes)
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=k>val</span> <span class=py>pairCodeBytes</span> <span class=p>=</span> <span class=n>pairCode</span><span class=p>.</span><span class=n>toByteArray</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// 7. 导出 TLS 密钥材料 (RFC 5705 Keying Material Exporters)
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// 这是关键! 只有 Conscrypt (BoringSSL/OpenSSL) 支持。
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// 它从 TLS 握手的 master secret 中派生出一段新的密钥数据。
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// 这保证了只有刚才参与了这次特定 TLS 握手的双方才能得到个这数据。
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=k>val</span> <span class=py>keyMaterial</span> <span class=p>=</span> <span class=nc>Conscrypt</span><span class=p>.</span><span class=n>exportKeyingMaterial</span><span class=p>(</span><span class=n>sslSocket</span><span class=p>,</span> <span class=n>kExportedKeyLabel</span><span class=p>,</span> <span class=k>null</span><span class=p>,</span> <span class=n>kExportedKeySize</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=c1>// 8. 混合密码：拼接 [配对码] + [TLS密钥材料]
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=k>val</span> <span class=py>passwordBytes</span> <span class=p>=</span> <span class=n>ByteArray</span><span class=p>(</span><span class=n>pairCode</span><span class=p>.</span><span class=n>length</span> <span class=p>+</span> <span class=n>keyMaterial</span><span class=p>.</span><span class=n>size</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>pairCodeBytes</span><span class=p>.</span><span class=n>copyInto</span><span class=p>(</span><span class=n>passwordBytes</span><span class=p>)</span> <span class=c1>// 先填配对码
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=n>keyMaterial</span><span class=p>.</span><span class=n>copyInto</span><span class=p>(</span><span class=n>passwordBytes</span><span class=p>,</span> <span class=n>pairCodeBytes</span><span class=p>.</span><span class=n>size</span><span class=p>)</span> <span class=c1>// 再填导出的密钥材料
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 9. 初始化 SPAKE2 配对上下文 (Native 调用)
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// 使用这个混合后的 &#34;passwordBytes&#34; 初始化 SPAKE2 算法。
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// 只有当双方都有相同的配对码 AND 相同的 TLS 导出密钥时，后续的 doExchangeMsgs 才会成功。
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// 这有效地防止了中间人攻击（MITM），因为中间人即使拦截了配对码，也无法拥有正确的 TLS master secret。
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=k>val</span> <span class=py>pairingContext</span> <span class=p>=</span> <span class=nc>PairingContext</span><span class=p>.</span><span class=n>create</span><span class=p>(</span><span class=n>passwordBytes</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=n>checkNotNull</span><span class=p>(</span><span class=n>pairingContext</span><span class=p>)</span> <span class=p>{</span> <span class=s2>&#34;Unable to create PairingContext.&#34;</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>this</span><span class=p>.</span><span class=n>pairingContext</span> <span class=p>=</span> <span class=n>pairingContext</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>在 <code>AdbPairingClient</code> 的 start 函数中就完成了和 adb 服务器的信息认证,之后通过 AdbClient 与服务器建立连接之后, 通知栏显示配对完成</p><h2 id=启动后台服务>启动后台服务</h2><p>后续启动 shizuku 后 进入主界面点击无线模式的启动之后,会调用 onCreate ,该函数会 初始化 viewModel</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=line><span class=cl><span class=k>private</span> <span class=k>class</span> <span class=nc>ViewModel</span><span class=p>(</span><span class=n>context</span><span class=p>:</span> <span class=n>Context</span><span class=p>,</span> <span class=n>root</span><span class=p>:</span> <span class=n>Boolean</span><span class=p>,</span> <span class=n>host</span><span class=p>:</span> <span class=n>String</span><span class=p>?,</span> <span class=n>port</span><span class=p>:</span> <span class=n>Int</span><span class=p>)</span> <span class=p>:</span> <span class=n>androidx</span><span class=p>.</span><span class=n>lifecycle</span><span class=p>.</span><span class=n>ViewModel</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>private</span> <span class=k>val</span> <span class=py>sb</span> <span class=p>=</span> <span class=n>StringBuilder</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>private</span> <span class=k>val</span> <span class=py>_output</span> <span class=p>=</span> <span class=n>MutableLiveData</span><span class=p>&lt;</span><span class=n>Resource</span><span class=p>&lt;</span><span class=n>StringBuilder</span><span class=p>&gt;&gt;()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>val</span> <span class=py>output</span> <span class=p>=</span> <span class=n>_output</span> <span class=k>as</span> <span class=n>LiveData</span><span class=p>&lt;</span><span class=n>Resource</span><span class=p>&lt;</span><span class=n>StringBuilder</span><span class=p>&gt;&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>init</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>try</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=p>(</span><span class=n>root</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=n>startRoot</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>            <span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=n>startAdb</span><span class=p>(</span><span class=n>host</span><span class=o>!!</span><span class=p>,</span> <span class=n>port</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span> <span class=k>catch</span> <span class=p>(</span><span class=n>e</span><span class=p>:</span> <span class=n>Throwable</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>postResult</span><span class=p>(</span><span class=n>e</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl> <span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>而在 viewModel 中调用 startAdb 进行持久化权限维持</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=line><span class=cl> <span class=k>private</span> <span class=k>fun</span> <span class=nf>startAdb</span><span class=p>(</span><span class=n>host</span><span class=p>:</span> <span class=n>String</span><span class=p>,</span> <span class=n>port</span><span class=p>:</span> <span class=n>Int</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>sb</span><span class=p>.</span><span class=n>append</span><span class=p>(</span><span class=s2>&#34;Starting with wireless adb in port </span><span class=si>$port</span><span class=s2>...&#34;</span><span class=p>).</span><span class=n>append</span><span class=p>(</span><span class=sc>&#39;\n&#39;</span><span class=p>).</span><span class=n>append</span><span class=p>(</span><span class=sc>&#39;\n&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>postResult</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=nc>GlobalScope</span><span class=p>.</span><span class=n>launch</span><span class=p>(</span><span class=nc>Dispatchers</span><span class=p>.</span><span class=n>IO</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>val</span> <span class=py>key</span> <span class=p>=</span> <span class=k>try</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=n>AdbKey</span><span class=p>(</span><span class=n>PreferenceAdbKeyStore</span><span class=p>(</span><span class=nc>ShizukuSettings</span><span class=p>.</span><span class=n>getPreferences</span><span class=p>()),</span> <span class=s2>&#34;shizuku&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=p>}</span> <span class=k>catch</span> <span class=p>(</span><span class=n>e</span><span class=p>:</span> <span class=n>Throwable</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=n>e</span><span class=p>.</span><span class=n>printStackTrace</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>                <span class=n>sb</span><span class=p>.</span><span class=n>append</span><span class=p>(</span><span class=sc>&#39;\n&#39;</span><span class=p>).</span><span class=n>append</span><span class=p>(</span><span class=nc>Log</span><span class=p>.</span><span class=n>getStackTraceString</span><span class=p>(</span><span class=n>e</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>                <span class=n>postResult</span><span class=p>(</span><span class=n>AdbKeyException</span><span class=p>(</span><span class=n>e</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                <span class=k>return</span><span class=nd>@launch</span>
+</span></span><span class=line><span class=cl>            <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=n>AdbClient</span><span class=p>(</span><span class=n>host</span><span class=p>,</span> <span class=n>port</span><span class=p>,</span> <span class=n>key</span><span class=p>).</span><span class=n>runCatching</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=n>connect</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>                <span class=n>shellCommand</span><span class=p>(</span><span class=nc>Starter</span><span class=p>.</span><span class=n>internalCommand</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                    <span class=n>sb</span><span class=p>.</span><span class=n>append</span><span class=p>(</span><span class=n>String</span><span class=p>(</span><span class=k>it</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                    <span class=n>postResult</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>                <span class=p>}</span>
+</span></span><span class=line><span class=cl>                <span class=n>close</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>            <span class=p>}.</span><span class=n>onFailure</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=k>it</span><span class=p>.</span><span class=n>printStackTrace</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>                <span class=n>sb</span><span class=p>.</span><span class=n>append</span><span class=p>(</span><span class=sc>&#39;\n&#39;</span><span class=p>).</span><span class=n>append</span><span class=p>(</span><span class=nc>Log</span><span class=p>.</span><span class=n>getStackTraceString</span><span class=p>(</span><span class=k>it</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>                <span class=n>postResult</span><span class=p>(</span><span class=k>it</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl><span class=c1>//   对应的 internalCommand
+</span></span></span><span class=line><span class=cl><span class=c1></span>   
+</span></span><span class=line><span class=cl>   <span class=k>object</span> <span class=nc>Starter</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>private</span> <span class=k>val</span> <span class=py>starterFile</span> <span class=p>=</span> <span class=n>File</span><span class=p>(</span><span class=n>application</span><span class=p>.</span><span class=n>applicationInfo</span><span class=p>.</span><span class=n>nativeLibraryDir</span><span class=p>,</span> <span class=s2>&#34;libshizuku.so&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>val</span> <span class=py>userCommand</span><span class=p>:</span> <span class=n>String</span> <span class=p>=</span> <span class=n>starterFile</span><span class=p>.</span><span class=n>absolutePath</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>val</span> <span class=py>adbCommand</span> <span class=p>=</span> <span class=s2>&#34;adb shell </span><span class=si>$userCommand</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>val</span> <span class=py>internalCommand</span> <span class=p>=</span> <span class=s2>&#34;</span><span class=si>$userCommand</span><span class=s2> --apk=</span><span class=si>${application.applicationInfo.sourceDir}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>持久化的方式就是 让 adb shell 去执行 <a class=link href=http://libshizuku.so target=_blank rel=noopener>libshizuku.so</a> —apk=”<strong>base.apk</strong>” 而 libshizuku.so 的代码如下</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span><span class=lnt>142
+</span><span class=lnt>143
+</span><span class=lnt>144
+</span><span class=lnt>145
+</span><span class=lnt>146
+</span><span class=lnt>147
+</span><span class=lnt>148
+</span><span class=lnt>149
+</span><span class=lnt>150
+</span><span class=lnt>151
+</span><span class=lnt>152
+</span><span class=lnt>153
+</span><span class=lnt>154
+</span><span class=lnt>155
+</span><span class=lnt>156
+</span><span class=lnt>157
+</span><span class=lnt>158
+</span><span class=lnt>159
+</span><span class=lnt>160
+</span><span class=lnt>161
+</span><span class=lnt>162
+</span><span class=lnt>163
+</span><span class=lnt>164
+</span><span class=lnt>165
+</span><span class=lnt>166
+</span><span class=lnt>167
+</span><span class=lnt>168
+</span><span class=lnt>169
+</span><span class=lnt>170
+</span><span class=lnt>171
+</span><span class=lnt>172
+</span><span class=lnt>173
+</span><span class=lnt>174
+</span><span class=lnt>175
+</span><span class=lnt>176
+</span><span class=lnt>177
+</span><span class=lnt>178
+</span><span class=lnt>179
+</span><span class=lnt>180
+</span><span class=lnt>181
+</span><span class=lnt>182
+</span><span class=lnt>183
+</span><span class=lnt>184
+</span><span class=lnt>185
+</span><span class=lnt>186
+</span><span class=lnt>187
+</span><span class=lnt>188
+</span><span class=lnt>189
+</span><span class=lnt>190
+</span><span class=lnt>191
+</span><span class=lnt>192
+</span><span class=lnt>193
+</span><span class=lnt>194
+</span><span class=lnt>195
+</span><span class=lnt>196
+</span><span class=lnt>197
+</span><span class=lnt>198
+</span><span class=lnt>199
+</span><span class=lnt>200
+</span><span class=lnt>201
+</span><span class=lnt>202
+</span><span class=lnt>203
+</span><span class=lnt>204
+</span><span class=lnt>205
+</span><span class=lnt>206
+</span><span class=lnt>207
+</span><span class=lnt>208
+</span><span class=lnt>209
+</span><span class=lnt>210
+</span><span class=lnt>211
+</span><span class=lnt>212
+</span><span class=lnt>213
+</span><span class=lnt>214
+</span><span class=lnt>215
+</span><span class=lnt>216
+</span><span class=lnt>217
+</span><span class=lnt>218
+</span><span class=lnt>219
+</span><span class=lnt>220
+</span><span class=lnt>221
+</span><span class=lnt>222
+</span><span class=lnt>223
+</span><span class=lnt>224
+</span><span class=lnt>225
+</span><span class=lnt>226
+</span><span class=lnt>227
+</span><span class=lnt>228
+</span><span class=lnt>229
+</span><span class=lnt>230
+</span><span class=lnt>231
+</span><span class=lnt>232
+</span><span class=lnt>233
+</span><span class=lnt>234
+</span><span class=lnt>235
+</span><span class=lnt>236
+</span><span class=lnt>237
+</span><span class=lnt>238
+</span><span class=lnt>239
+</span><span class=lnt>240
+</span><span class=lnt>241
+</span><span class=lnt>242
+</span><span class=lnt>243
+</span><span class=lnt>244
+</span><span class=lnt>245
+</span><span class=lnt>246
+</span><span class=lnt>247
+</span><span class=lnt>248
+</span><span class=lnt>249
+</span><span class=lnt>250
+</span><span class=lnt>251
+</span><span class=lnt>252
+</span><span class=lnt>253
+</span><span class=lnt>254
+</span><span class=lnt>255
+</span><span class=lnt>256
+</span><span class=lnt>257
+</span><span class=lnt>258
+</span><span class=lnt>259
+</span><span class=lnt>260
+</span><span class=lnt>261
+</span><span class=lnt>262
+</span><span class=lnt>263
+</span><span class=lnt>264
+</span><span class=lnt>265
+</span><span class=lnt>266
+</span><span class=lnt>267
+</span><span class=lnt>268
+</span><span class=lnt>269
+</span><span class=lnt>270
+</span><span class=lnt>271
+</span><span class=lnt>272
+</span><span class=lnt>273
+</span><span class=lnt>274
+</span><span class=lnt>275
+</span><span class=lnt>276
+</span><span class=lnt>277
+</span><span class=lnt>278
+</span><span class=lnt>279
+</span><span class=lnt>280
+</span><span class=lnt>281
+</span><span class=lnt>282
+</span><span class=lnt>283
+</span><span class=lnt>284
+</span><span class=lnt>285
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;cstdio&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;cstdlib&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;fcntl.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;unistd.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;dirent.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;ctime&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;cstring&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;libgen.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;sys/stat.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;sys/system_properties.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;cerrno&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;string&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;termios.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&#34;android.h&#34;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&#34;misc.h&#34;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&#34;selinux.h&#34;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&#34;cgroup.h&#34;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&#34;logging.h&#34;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=cp>#ifdef DEBUG
+</span></span></span><span class=line><span class=cl><span class=cp>#define JAVA_DEBUGGABLE
+</span></span></span><span class=line><span class=cl><span class=cp>#endif
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=cp>#define perrorf(...) fprintf(stderr, __VA_ARGS__)
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=cp>#define EXIT_FATAL_SET_CLASSPATH 3
+</span></span></span><span class=line><span class=cl><span class=cp>#define EXIT_FATAL_FORK 4
+</span></span></span><span class=line><span class=cl><span class=cp>#define EXIT_FATAL_APP_PROCESS 5
+</span></span></span><span class=line><span class=cl><span class=cp>#define EXIT_FATAL_UID 6
+</span></span></span><span class=line><span class=cl><span class=cp>#define EXIT_FATAL_PM_PATH 7
+</span></span></span><span class=line><span class=cl><span class=cp>#define EXIT_FATAL_KILL 9
+</span></span></span><span class=line><span class=cl><span class=cp>#define EXIT_FATAL_BINDER_BLOCKED_BY_SELINUX 10
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=cp>#define PACKAGE_NAME &#34;moe.shizuku.privileged.api&#34;
+</span></span></span><span class=line><span class=cl><span class=cp>#define SERVER_NAME &#34;shizuku_server&#34;
+</span></span></span><span class=line><span class=cl><span class=cp>#define SERVER_CLASS_PATH &#34;rikka.shizuku.server.ShizukuService&#34;
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=cp>#if defined(__arm__)
+</span></span></span><span class=line><span class=cl><span class=cp>#define ABI &#34;arm&#34;
+</span></span></span><span class=line><span class=cl><span class=cp>#elif defined(__i386__)
+</span></span></span><span class=line><span class=cl><span class=cp>#define ABI &#34;x86&#34;
+</span></span></span><span class=line><span class=cl><span class=cp>#elif defined(__x86_64__)
+</span></span></span><span class=line><span class=cl><span class=cp>#define ABI &#34;x86_64&#34;
+</span></span></span><span class=line><span class=cl><span class=cp>#elif defined(__aarch64__)
+</span></span></span><span class=line><span class=cl><span class=cp>#define ABI &#34;arm64&#34;
+</span></span></span><span class=line><span class=cl><span class=cp>#endif
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=k>static</span> <span class=kt>void</span> <span class=nf>run_server</span><span class=p>(</span><span class=k>const</span> <span class=kt>char</span> <span class=o>*</span><span class=n>dex_path</span><span class=p>,</span> <span class=k>const</span> <span class=kt>char</span> <span class=o>*</span><span class=n>main_class</span><span class=p>,</span> <span class=k>const</span> <span class=kt>char</span> <span class=o>*</span><span class=n>process_name</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=nf>setenv</span><span class=p>(</span><span class=s>&#34;CLASSPATH&#34;</span><span class=p>,</span> <span class=n>dex_path</span><span class=p>,</span> <span class=nb>true</span><span class=p>))</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nf>LOGE</span><span class=p>(</span><span class=s>&#34;can&#39;t set CLASSPATH</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=nf>exit</span><span class=p>(</span><span class=n>EXIT_FATAL_SET_CLASSPATH</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=cp>#define ARG(v) char **v = nullptr; \
+</span></span></span><span class=line><span class=cl><span class=cp>    char buf_##v[PATH_MAX]; \
+</span></span></span><span class=line><span class=cl><span class=cp>    size_t v_size = 0; \
+</span></span></span><span class=line><span class=cl><span class=cp>    uintptr_t v_current = 0;
+</span></span></span><span class=line><span class=cl><span class=cp>#define ARG_PUSH(v, arg) v_size += sizeof(char *); \
+</span></span></span><span class=line><span class=cl><span class=cp>if (v == nullptr) { \
+</span></span></span><span class=line><span class=cl><span class=cp>    v = (char **) malloc(v_size); \
+</span></span></span><span class=line><span class=cl><span class=cp>} else { \
+</span></span></span><span class=line><span class=cl><span class=cp>    v = (char **) realloc(v, v_size);\
+</span></span></span><span class=line><span class=cl><span class=cp>} \
+</span></span></span><span class=line><span class=cl><span class=cp>v_current = (uintptr_t) v + v_size - sizeof(char *); \
+</span></span></span><span class=line><span class=cl><span class=cp>*((char **) v_current) = arg ? strdup(arg) : nullptr;
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=cp>#define ARG_END(v) ARG_PUSH(v, nullptr)
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=cp>#define ARG_PUSH_FMT(v, fmt, ...) snprintf(buf_##v, PATH_MAX, fmt, __VA_ARGS__); \
+</span></span></span><span class=line><span class=cl><span class=cp>    ARG_PUSH(v, buf_##v)
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=cp>#ifdef JAVA_DEBUGGABLE
+</span></span></span><span class=line><span class=cl><span class=cp>#define ARG_PUSH_DEBUG_ONLY(v, arg) ARG_PUSH(v, arg)
+</span></span></span><span class=line><span class=cl><span class=cp>#define ARG_PUSH_DEBUG_VM_PARAMS(v) \
+</span></span></span><span class=line><span class=cl><span class=cp>    if (android_get_device_api_level() &gt;= 30) { \
+</span></span></span><span class=line><span class=cl><span class=cp>        ARG_PUSH(v, &#34;-Xcompiler-option&#34;); \
+</span></span></span><span class=line><span class=cl><span class=cp>        ARG_PUSH(v, &#34;--debuggable&#34;); \
+</span></span></span><span class=line><span class=cl><span class=cp>        ARG_PUSH(v, &#34;-XjdwpProvider:adbconnection&#34;); \
+</span></span></span><span class=line><span class=cl><span class=cp>        ARG_PUSH(v, &#34;-XjdwpOptions:suspend=n,server=y&#34;); \
+</span></span></span><span class=line><span class=cl><span class=cp>    } else if (android_get_device_api_level() &gt;= 28) { \
+</span></span></span><span class=line><span class=cl><span class=cp>        ARG_PUSH(v, &#34;-Xcompiler-option&#34;); \
+</span></span></span><span class=line><span class=cl><span class=cp>        ARG_PUSH(v, &#34;--debuggable&#34;); \
+</span></span></span><span class=line><span class=cl><span class=cp>        ARG_PUSH(v, &#34;-XjdwpProvider:internal&#34;); \
+</span></span></span><span class=line><span class=cl><span class=cp>        ARG_PUSH(v, &#34;-XjdwpOptions:transport=dt_android_adb,suspend=n,server=y&#34;); \
+</span></span></span><span class=line><span class=cl><span class=cp>    } else { \
+</span></span></span><span class=line><span class=cl><span class=cp>        ARG_PUSH(v, &#34;-Xcompiler-option&#34;); \
+</span></span></span><span class=line><span class=cl><span class=cp>        ARG_PUSH(v, &#34;--debuggable&#34;); \
+</span></span></span><span class=line><span class=cl><span class=cp>        ARG_PUSH(v, &#34;-agentlib:jdwp=transport=dt_android_adb,suspend=n,server=y&#34;); \
+</span></span></span><span class=line><span class=cl><span class=cp>    }
+</span></span></span><span class=line><span class=cl><span class=cp>#else
+</span></span></span><span class=line><span class=cl><span class=cp>#define ARG_PUSH_DEBUG_VM_PARAMS(v)
+</span></span></span><span class=line><span class=cl><span class=cp>#define ARG_PUSH_DEBUG_ONLY(v, arg)
+</span></span></span><span class=line><span class=cl><span class=cp>#endif
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl>    <span class=kt>char</span> <span class=n>lib_path</span><span class=p>[</span><span class=n>PATH_MAX</span><span class=p>]{</span><span class=mi>0</span><span class=p>};</span>
+</span></span><span class=line><span class=cl>    <span class=nf>snprintf</span><span class=p>(</span><span class=n>lib_path</span><span class=p>,</span> <span class=n>PATH_MAX</span><span class=p>,</span> <span class=s>&#34;%s/lib/%s&#34;</span><span class=p>,</span> <span class=nf>dirname</span><span class=p>(</span><span class=n>dex_path</span><span class=p>),</span> <span class=n>ABI</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nf>ARG</span><span class=p>(</span><span class=n>argv</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nf>ARG_PUSH</span><span class=p>(</span><span class=n>argv</span><span class=p>,</span> <span class=s>&#34;/system/bin/app_process&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nf>ARG_PUSH_FMT</span><span class=p>(</span><span class=n>argv</span><span class=p>,</span> <span class=s>&#34;-Djava.class.path=%s&#34;</span><span class=p>,</span> <span class=n>dex_path</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nf>ARG_PUSH_FMT</span><span class=p>(</span><span class=n>argv</span><span class=p>,</span> <span class=s>&#34;-Dshizuku.library.path=%s&#34;</span><span class=p>,</span> <span class=n>lib_path</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nf>ARG_PUSH_DEBUG_VM_PARAMS</span><span class=p>(</span><span class=n>argv</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nf>ARG_PUSH</span><span class=p>(</span><span class=n>argv</span><span class=p>,</span> <span class=s>&#34;/system/bin&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nf>ARG_PUSH_FMT</span><span class=p>(</span><span class=n>argv</span><span class=p>,</span> <span class=s>&#34;--nice-name=%s&#34;</span><span class=p>,</span> <span class=n>process_name</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nf>ARG_PUSH</span><span class=p>(</span><span class=n>argv</span><span class=p>,</span> <span class=n>main_class</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nf>ARG_PUSH_DEBUG_ONLY</span><span class=p>(</span><span class=n>argv</span><span class=p>,</span> <span class=s>&#34;--debug&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nf>ARG_END</span><span class=p>(</span><span class=n>argv</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nf>LOGD</span><span class=p>(</span><span class=s>&#34;exec app_process&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=nf>execvp</span><span class=p>((</span><span class=k>const</span> <span class=kt>char</span> <span class=o>*</span><span class=p>)</span> <span class=n>argv</span><span class=p>[</span><span class=mi>0</span><span class=p>],</span> <span class=n>argv</span><span class=p>))</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nf>exit</span><span class=p>(</span><span class=n>EXIT_FATAL_APP_PROCESS</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>static</span> <span class=kt>void</span> <span class=nf>start_server</span><span class=p>(</span><span class=k>const</span> <span class=kt>char</span> <span class=o>*</span><span class=n>path</span><span class=p>,</span> <span class=k>const</span> <span class=kt>char</span> <span class=o>*</span><span class=n>main_class</span><span class=p>,</span> <span class=k>const</span> <span class=kt>char</span> <span class=o>*</span><span class=n>process_name</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kt>pid_t</span> <span class=n>pid</span> <span class=o>=</span> <span class=nf>fork</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=k>switch</span> <span class=p>(</span><span class=n>pid</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>case</span> <span class=o>-</span><span class=mi>1</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nf>perrorf</span><span class=p>(</span><span class=s>&#34;fatal: can&#39;t fork</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=nf>exit</span><span class=p>(</span><span class=n>EXIT_FATAL_FORK</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=k>case</span> <span class=mi>0</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nf>LOGD</span><span class=p>(</span><span class=s>&#34;child&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=nf>setsid</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>            <span class=nf>chdir</span><span class=p>(</span><span class=s>&#34;/&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=kt>int</span> <span class=n>fd</span> <span class=o>=</span> <span class=nf>open</span><span class=p>(</span><span class=s>&#34;/dev/null&#34;</span><span class=p>,</span> <span class=n>O_RDWR</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=p>(</span><span class=n>fd</span> <span class=o>!=</span> <span class=o>-</span><span class=mi>1</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=nf>dup2</span><span class=p>(</span><span class=n>fd</span><span class=p>,</span> <span class=n>STDIN_FILENO</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>                <span class=nf>dup2</span><span class=p>(</span><span class=n>fd</span><span class=p>,</span> <span class=n>STDOUT_FILENO</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>                <span class=nf>dup2</span><span class=p>(</span><span class=n>fd</span><span class=p>,</span> <span class=n>STDERR_FILENO</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>                <span class=k>if</span> <span class=p>(</span><span class=n>fd</span> <span class=o>&gt;</span> <span class=mi>2</span><span class=p>)</span> <span class=nf>close</span><span class=p>(</span><span class=n>fd</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=p>}</span>
+</span></span><span class=line><span class=cl>            <span class=nf>run_server</span><span class=p>(</span><span class=n>path</span><span class=p>,</span> <span class=n>main_class</span><span class=p>,</span> <span class=n>process_name</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=k>default</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;info: shizuku_server pid is %d</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>pid</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;info: shizuku_starter exit with 0</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=nf>exit</span><span class=p>(</span><span class=n>EXIT_SUCCESS</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>static</span> <span class=kt>int</span> <span class=nf>check_selinux</span><span class=p>(</span><span class=k>const</span> <span class=kt>char</span> <span class=o>*</span><span class=n>s</span><span class=p>,</span> <span class=k>const</span> <span class=kt>char</span> <span class=o>*</span><span class=n>t</span><span class=p>,</span> <span class=k>const</span> <span class=kt>char</span> <span class=o>*</span><span class=n>c</span><span class=p>,</span> <span class=k>const</span> <span class=kt>char</span> <span class=o>*</span><span class=n>p</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=n>res</span> <span class=o>=</span> <span class=n>se</span><span class=o>::</span><span class=nf>selinux_check_access</span><span class=p>(</span><span class=n>s</span><span class=p>,</span> <span class=n>t</span><span class=p>,</span> <span class=n>c</span><span class=p>,</span> <span class=n>p</span><span class=p>,</span> <span class=n>nullptr</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=cp>#ifndef DEBUG
+</span></span></span><span class=line><span class=cl><span class=cp></span>    <span class=k>if</span> <span class=p>(</span><span class=n>res</span> <span class=o>!=</span> <span class=mi>0</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=cp>#endif
+</span></span></span><span class=line><span class=cl><span class=cp></span>    <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;info: selinux_check_access %s %s %s %s: %d</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>s</span><span class=p>,</span> <span class=n>t</span><span class=p>,</span> <span class=n>c</span><span class=p>,</span> <span class=n>p</span><span class=p>,</span> <span class=n>res</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>fflush</span><span class=p>(</span><span class=n>stdout</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=cp>#ifndef DEBUG
+</span></span></span><span class=line><span class=cl><span class=cp></span>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=cp>#endif
+</span></span></span><span class=line><span class=cl><span class=cp></span>    <span class=k>return</span> <span class=n>res</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>static</span> <span class=kt>int</span> <span class=nf>switch_cgroup</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=n>pid</span> <span class=o>=</span> <span class=nf>getpid</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>cgroup</span><span class=o>::</span><span class=nf>switch_cgroup</span><span class=p>(</span><span class=s>&#34;/acct&#34;</span><span class=p>,</span> <span class=n>pid</span><span class=p>))</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;info: switch cgroup succeeded, cgroup in /acct</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>cgroup</span><span class=o>::</span><span class=nf>switch_cgroup</span><span class=p>(</span><span class=s>&#34;/dev/cg2_bpf&#34;</span><span class=p>,</span> <span class=n>pid</span><span class=p>))</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;info: switch cgroup succeeded, cgroup in /dev/cg2_bpf</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>cgroup</span><span class=o>::</span><span class=nf>switch_cgroup</span><span class=p>(</span><span class=s>&#34;/sys/fs/cgroup&#34;</span><span class=p>,</span> <span class=n>pid</span><span class=p>))</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;info: switch cgroup succeeded, cgroup in /sys/fs/cgroup</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=kt>char</span> <span class=n>buf</span><span class=p>[</span><span class=n>PROP_VALUE_MAX</span> <span class=o>+</span> <span class=mi>1</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=nf>__system_property_get</span><span class=p>(</span><span class=s>&#34;ro.config.per_app_memcg&#34;</span><span class=p>,</span> <span class=n>buf</span><span class=p>)</span> <span class=o>&gt;</span> <span class=mi>0</span> <span class=o>&amp;&amp;</span>
+</span></span><span class=line><span class=cl>        <span class=nf>strncmp</span><span class=p>(</span><span class=n>buf</span><span class=p>,</span> <span class=s>&#34;false&#34;</span><span class=p>,</span> <span class=mi>5</span><span class=p>)</span> <span class=o>!=</span> <span class=mi>0</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=p>(</span><span class=n>cgroup</span><span class=o>::</span><span class=nf>switch_cgroup</span><span class=p>(</span><span class=s>&#34;/dev/memcg/apps&#34;</span><span class=p>,</span> <span class=n>pid</span><span class=p>))</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;info: switch cgroup succeeded, cgroup in /dev/memcg/apps</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;warn: can&#39;t switch cgroup</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>fflush</span><span class=p>(</span><span class=n>stdout</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=o>-</span><span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>int</span> <span class=nf>main</span><span class=p>(</span><span class=kt>int</span> <span class=n>argc</span><span class=p>,</span> <span class=kt>char</span> <span class=o>*</span><span class=n>argv</span><span class=p>[])</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>std</span><span class=o>::</span><span class=n>string</span> <span class=n>apk_path</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=p>(</span><span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=n>argc</span><span class=p>;</span> <span class=o>++</span><span class=n>i</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=p>(</span><span class=nf>strncmp</span><span class=p>(</span><span class=n>argv</span><span class=p>[</span><span class=n>i</span><span class=p>],</span> <span class=s>&#34;--apk=&#34;</span><span class=p>,</span> <span class=mi>6</span><span class=p>)</span> <span class=o>==</span> <span class=mi>0</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>apk_path</span> <span class=o>=</span> <span class=n>argv</span><span class=p>[</span><span class=n>i</span><span class=p>]</span> <span class=o>+</span> <span class=mi>6</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kt>uid_t</span> <span class=n>uid</span> <span class=o>=</span> <span class=nf>getuid</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>uid</span> <span class=o>!=</span> <span class=mi>0</span> <span class=o>&amp;&amp;</span> <span class=n>uid</span> <span class=o>!=</span> <span class=mi>2000</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nf>perrorf</span><span class=p>(</span><span class=s>&#34;fatal: run Shizuku from non root nor adb user (uid=%d).</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>uid</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=nf>exit</span><span class=p>(</span><span class=n>EXIT_FATAL_UID</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>se</span><span class=o>::</span><span class=nf>init</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>uid</span> <span class=o>==</span> <span class=mi>0</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nf>switch_cgroup</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=p>(</span><span class=nf>android_get_device_api_level</span><span class=p>()</span> <span class=o>&gt;=</span> <span class=mi>29</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;info: switching mount namespace to init...</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=nf>switch_mnt_ns</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>uid</span> <span class=o>==</span> <span class=mi>0</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=kt>char</span> <span class=o>*</span><span class=n>context</span> <span class=o>=</span> <span class=n>nullptr</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=p>(</span><span class=n>se</span><span class=o>::</span><span class=nf>getcon</span><span class=p>(</span><span class=o>&amp;</span><span class=n>context</span><span class=p>)</span> <span class=o>==</span> <span class=mi>0</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=kt>int</span> <span class=n>res</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=n>res</span> <span class=o>|=</span> <span class=nf>check_selinux</span><span class=p>(</span><span class=s>&#34;u:r:untrusted_app:s0&#34;</span><span class=p>,</span> <span class=n>context</span><span class=p>,</span> <span class=s>&#34;binder&#34;</span><span class=p>,</span> <span class=s>&#34;call&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=n>res</span> <span class=o>|=</span> <span class=nf>check_selinux</span><span class=p>(</span><span class=s>&#34;u:r:untrusted_app:s0&#34;</span><span class=p>,</span> <span class=n>context</span><span class=p>,</span> <span class=s>&#34;binder&#34;</span><span class=p>,</span> <span class=s>&#34;transfer&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=p>(</span><span class=n>res</span> <span class=o>!=</span> <span class=mi>0</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=nf>perrorf</span><span class=p>(</span><span class=s>&#34;fatal: the su you are using does not allow app (u:r:untrusted_app:s0) to connect to su (%s) with binder.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                        <span class=n>context</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>                <span class=nf>exit</span><span class=p>(</span><span class=n>EXIT_FATAL_BINDER_BLOCKED_BY_SELINUX</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=p>}</span>
+</span></span><span class=line><span class=cl>            <span class=n>se</span><span class=o>::</span><span class=nf>freecon</span><span class=p>(</span><span class=n>context</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;info: starter begin</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>fflush</span><span class=p>(</span><span class=n>stdout</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// kill old server
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;info: killing old process...</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>fflush</span><span class=p>(</span><span class=n>stdout</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nf>foreach_proc</span><span class=p>([](</span><span class=kt>pid_t</span> <span class=n>pid</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=p>(</span><span class=n>pid</span> <span class=o>==</span> <span class=nf>getpid</span><span class=p>())</span> <span class=k>return</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=kt>char</span> <span class=n>name</span><span class=p>[</span><span class=mi>1024</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=p>(</span><span class=nf>get_proc_name</span><span class=p>(</span><span class=n>pid</span><span class=p>,</span> <span class=n>name</span><span class=p>,</span> <span class=mi>1024</span><span class=p>)</span> <span class=o>!=</span> <span class=mi>0</span><span class=p>)</span> <span class=k>return</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=p>(</span><span class=nf>strcmp</span><span class=p>(</span><span class=n>SERVER_NAME</span><span class=p>,</span> <span class=n>name</span><span class=p>)</span> <span class=o>!=</span> <span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=p>(</span><span class=nf>kill</span><span class=p>(</span><span class=n>pid</span><span class=p>,</span> <span class=n>SIGKILL</span><span class=p>)</span> <span class=o>==</span> <span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;info: killed %d (%s)</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>pid</span><span class=p>,</span> <span class=n>name</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span> <span class=k>if</span> <span class=p>(</span><span class=n>errno</span> <span class=o>==</span> <span class=n>EPERM</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nf>perrorf</span><span class=p>(</span><span class=s>&#34;fatal: can&#39;t kill %d, please try to stop existing Shizuku from app first.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>pid</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=nf>exit</span><span class=p>(</span><span class=n>EXIT_FATAL_KILL</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;warn: failed to kill %d (%s)</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>pid</span><span class=p>,</span> <span class=n>name</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=nf>access</span><span class=p>(</span><span class=n>apk_path</span><span class=p>.</span><span class=nf>c_str</span><span class=p>(),</span> <span class=n>R_OK</span><span class=p>)</span> <span class=o>==</span> <span class=mi>0</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;info: use apk path from argv</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=nf>fflush</span><span class=p>(</span><span class=n>stdout</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>apk_path</span><span class=p>.</span><span class=nf>empty</span><span class=p>())</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>auto</span> <span class=n>f</span> <span class=o>=</span> <span class=nf>popen</span><span class=p>(</span><span class=s>&#34;pm path &#34;</span> <span class=n>PACKAGE_NAME</span><span class=p>,</span> <span class=s>&#34;r&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=p>(</span><span class=n>f</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=kt>char</span> <span class=n>line</span><span class=p>[</span><span class=n>PATH_MAX</span><span class=p>]{</span><span class=mi>0</span><span class=p>};</span>
+</span></span><span class=line><span class=cl>            <span class=nf>fgets</span><span class=p>(</span><span class=n>line</span><span class=p>,</span> <span class=n>PATH_MAX</span><span class=p>,</span> <span class=n>f</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=nf>trim</span><span class=p>(</span><span class=n>line</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=p>(</span><span class=nf>strstr</span><span class=p>(</span><span class=n>line</span><span class=p>,</span> <span class=s>&#34;package:&#34;</span><span class=p>)</span> <span class=o>==</span> <span class=n>line</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=n>apk_path</span> <span class=o>=</span> <span class=n>line</span> <span class=o>+</span> <span class=nf>strlen</span><span class=p>(</span><span class=s>&#34;package:&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=p>}</span>
+</span></span><span class=line><span class=cl>            <span class=nf>pclose</span><span class=p>(</span><span class=n>f</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>apk_path</span><span class=p>.</span><span class=nf>empty</span><span class=p>())</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nf>perrorf</span><span class=p>(</span><span class=s>&#34;fatal: can&#39;t get path of manager</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=nf>exit</span><span class=p>(</span><span class=n>EXIT_FATAL_PM_PATH</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;info: apk path is %s</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>apk_path</span><span class=p>.</span><span class=nf>c_str</span><span class=p>());</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=nf>access</span><span class=p>(</span><span class=n>apk_path</span><span class=p>.</span><span class=nf>c_str</span><span class=p>(),</span> <span class=n>R_OK</span><span class=p>)</span> <span class=o>!=</span> <span class=mi>0</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nf>perrorf</span><span class=p>(</span><span class=s>&#34;fatal: can&#39;t access manager %s</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>apk_path</span><span class=p>.</span><span class=nf>c_str</span><span class=p>());</span>
+</span></span><span class=line><span class=cl>        <span class=nf>exit</span><span class=p>(</span><span class=n>EXIT_FATAL_PM_PATH</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;info: starting server...</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>fflush</span><span class=p>(</span><span class=n>stdout</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>LOGD</span><span class=p>(</span><span class=s>&#34;start_server&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>start_server</span><span class=p>(</span><span class=n>apk_path</span><span class=p>.</span><span class=nf>c_str</span><span class=p>(),</span> <span class=n>SERVER_CLASS_PATH</span><span class=p>,</span> <span class=n>SERVER_NAME</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>该代码修改当前进程命名空间和资源空间, 用于避免被系统杀死以及获得全局视角(启动服务器进程和 Init 进程位于同一个命名空间)</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>uid</span> <span class=o>==</span> <span class=mi>0</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nf>switch_cgroup</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=p>(</span><span class=nf>android_get_device_api_level</span><span class=p>()</span> <span class=o>&gt;=</span> <span class=mi>29</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;info: switching mount namespace to init...</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=nf>switch_mnt_ns</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=k>static</span> <span class=kt>int</span> <span class=nf>switch_cgroup</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=n>pid</span> <span class=o>=</span> <span class=nf>getpid</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>cgroup</span><span class=o>::</span><span class=nf>switch_cgroup</span><span class=p>(</span><span class=s>&#34;/acct&#34;</span><span class=p>,</span> <span class=n>pid</span><span class=p>))</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;info: switch cgroup succeeded, cgroup in /acct</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>cgroup</span><span class=o>::</span><span class=nf>switch_cgroup</span><span class=p>(</span><span class=s>&#34;/dev/cg2_bpf&#34;</span><span class=p>,</span> <span class=n>pid</span><span class=p>))</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;info: switch cgroup succeeded, cgroup in /dev/cg2_bpf</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>cgroup</span><span class=o>::</span><span class=nf>switch_cgroup</span><span class=p>(</span><span class=s>&#34;/sys/fs/cgroup&#34;</span><span class=p>,</span> <span class=n>pid</span><span class=p>))</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;info: switch cgroup succeeded, cgroup in /sys/fs/cgroup</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=kt>char</span> <span class=n>buf</span><span class=p>[</span><span class=n>PROP_VALUE_MAX</span> <span class=o>+</span> <span class=mi>1</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=nf>__system_property_get</span><span class=p>(</span><span class=s>&#34;ro.config.per_app_memcg&#34;</span><span class=p>,</span> <span class=n>buf</span><span class=p>)</span> <span class=o>&gt;</span> <span class=mi>0</span> <span class=o>&amp;&amp;</span>
+</span></span><span class=line><span class=cl>        <span class=nf>strncmp</span><span class=p>(</span><span class=n>buf</span><span class=p>,</span> <span class=s>&#34;false&#34;</span><span class=p>,</span> <span class=mi>5</span><span class=p>)</span> <span class=o>!=</span> <span class=mi>0</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=p>(</span><span class=n>cgroup</span><span class=o>::</span><span class=nf>switch_cgroup</span><span class=p>(</span><span class=s>&#34;/dev/memcg/apps&#34;</span><span class=p>,</span> <span class=n>pid</span><span class=p>))</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;info: switch cgroup succeeded, cgroup in /dev/memcg/apps</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;warn: can&#39;t switch cgroup</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>fflush</span><span class=p>(</span><span class=n>stdout</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=o>-</span><span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>int</span> <span class=nf>switch_mnt_ns</span><span class=p>(</span><span class=kt>int</span> <span class=n>pid</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kt>char</span> <span class=n>mnt</span><span class=p>[</span><span class=mi>32</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>    <span class=nf>snprintf</span><span class=p>(</span><span class=n>mnt</span><span class=p>,</span> <span class=k>sizeof</span><span class=p>(</span><span class=n>mnt</span><span class=p>),</span> <span class=s>&#34;/proc/%d/ns/mnt&#34;</span><span class=p>,</span> <span class=n>pid</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=nf>access</span><span class=p>(</span><span class=n>mnt</span><span class=p>,</span> <span class=n>R_OK</span><span class=p>)</span> <span class=o>==</span> <span class=o>-</span><span class=mi>1</span><span class=p>)</span> <span class=k>return</span> <span class=o>-</span><span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=n>fd</span> <span class=o>=</span> <span class=nf>open</span><span class=p>(</span><span class=n>mnt</span><span class=p>,</span> <span class=n>O_RDONLY</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>fd</span> <span class=o>&lt;</span> <span class=mi>0</span><span class=p>)</span> <span class=k>return</span> <span class=o>-</span><span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=n>res</span> <span class=o>=</span> <span class=nf>setns</span><span class=p>(</span><span class=n>fd</span><span class=p>,</span> <span class=mi>0</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>close</span><span class=p>(</span><span class=n>fd</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>res</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>之后就检查 se_linux 规则,是否允许不被信任的 app 进行 binder 通信,如果同意则调用 start_server 启动名为 shizuku_server 的服务器</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=k>static</span> <span class=kt>void</span> <span class=nf>start_server</span><span class=p>(</span><span class=k>const</span> <span class=kt>char</span> <span class=o>*</span><span class=n>path</span><span class=p>,</span> <span class=k>const</span> <span class=kt>char</span> <span class=o>*</span><span class=n>main_class</span><span class=p>,</span> <span class=k>const</span> <span class=kt>char</span> <span class=o>*</span><span class=n>process_name</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kt>pid_t</span> <span class=n>pid</span> <span class=o>=</span> <span class=nf>fork</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=k>switch</span> <span class=p>(</span><span class=n>pid</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>case</span> <span class=o>-</span><span class=mi>1</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nf>perrorf</span><span class=p>(</span><span class=s>&#34;fatal: can&#39;t fork</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=nf>exit</span><span class=p>(</span><span class=n>EXIT_FATAL_FORK</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=k>case</span> <span class=mi>0</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nf>LOGD</span><span class=p>(</span><span class=s>&#34;child&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=nf>setsid</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>            <span class=nf>chdir</span><span class=p>(</span><span class=s>&#34;/&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=kt>int</span> <span class=n>fd</span> <span class=o>=</span> <span class=nf>open</span><span class=p>(</span><span class=s>&#34;/dev/null&#34;</span><span class=p>,</span> <span class=n>O_RDWR</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=p>(</span><span class=n>fd</span> <span class=o>!=</span> <span class=o>-</span><span class=mi>1</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=nf>dup2</span><span class=p>(</span><span class=n>fd</span><span class=p>,</span> <span class=n>STDIN_FILENO</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>                <span class=nf>dup2</span><span class=p>(</span><span class=n>fd</span><span class=p>,</span> <span class=n>STDOUT_FILENO</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>                <span class=nf>dup2</span><span class=p>(</span><span class=n>fd</span><span class=p>,</span> <span class=n>STDERR_FILENO</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>                <span class=k>if</span> <span class=p>(</span><span class=n>fd</span> <span class=o>&gt;</span> <span class=mi>2</span><span class=p>)</span> <span class=nf>close</span><span class=p>(</span><span class=n>fd</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=p>}</span>
+</span></span><span class=line><span class=cl>            <span class=nf>run_server</span><span class=p>(</span><span class=n>path</span><span class=p>,</span> <span class=n>main_class</span><span class=p>,</span> <span class=n>process_name</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=k>default</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;info: shizuku_server pid is %d</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>pid</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;info: shizuku_starter exit with 0</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=nf>exit</span><span class=p>(</span><span class=n>EXIT_SUCCESS</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>启动方式也很简单</p><ol><li>fork 创建子进程, 让修改 pid 资源目录 文件描述符等让子进程独立开</li><li>调用 run_server</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=k>static</span> <span class=kt>void</span> <span class=nf>run_server</span><span class=p>(</span><span class=k>const</span> <span class=kt>char</span> <span class=o>*</span><span class=n>dex_path</span><span class=p>,</span> <span class=k>const</span> <span class=kt>char</span> <span class=o>*</span><span class=n>main_class</span><span class=p>,</span> <span class=k>const</span> <span class=kt>char</span> <span class=o>*</span><span class=n>process_name</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=nf>setenv</span><span class=p>(</span><span class=s>&#34;CLASSPATH&#34;</span><span class=p>,</span> <span class=n>dex_path</span><span class=p>,</span> <span class=nb>true</span><span class=p>))</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nf>LOGE</span><span class=p>(</span><span class=s>&#34;can&#39;t set CLASSPATH</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=nf>exit</span><span class=p>(</span><span class=n>EXIT_FATAL_SET_CLASSPATH</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=cp>#define ARG(v) char **v = nullptr; \
+</span></span></span><span class=line><span class=cl><span class=cp>    char buf_##v[PATH_MAX]; \
+</span></span></span><span class=line><span class=cl><span class=cp>    size_t v_size = 0; \
+</span></span></span><span class=line><span class=cl><span class=cp>    uintptr_t v_current = 0;
+</span></span></span><span class=line><span class=cl><span class=cp>#define ARG_PUSH(v, arg) v_size += sizeof(char *); \
+</span></span></span><span class=line><span class=cl><span class=cp>if (v == nullptr) { \
+</span></span></span><span class=line><span class=cl><span class=cp>    v = (char **) malloc(v_size); \
+</span></span></span><span class=line><span class=cl><span class=cp>} else { \
+</span></span></span><span class=line><span class=cl><span class=cp>    v = (char **) realloc(v, v_size);\
+</span></span></span><span class=line><span class=cl><span class=cp>} \
+</span></span></span><span class=line><span class=cl><span class=cp>v_current = (uintptr_t) v + v_size - sizeof(char *); \
+</span></span></span><span class=line><span class=cl><span class=cp>*((char **) v_current) = arg ? strdup(arg) : nullptr;
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=cp>#define ARG_END(v) ARG_PUSH(v, nullptr)
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=cp>#define ARG_PUSH_FMT(v, fmt, ...) snprintf(buf_##v, PATH_MAX, fmt, __VA_ARGS__); \
+</span></span></span><span class=line><span class=cl><span class=cp>    ARG_PUSH(v, buf_##v)
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=cp>#ifdef JAVA_DEBUGGABLE
+</span></span></span><span class=line><span class=cl><span class=cp>#define ARG_PUSH_DEBUG_ONLY(v, arg) ARG_PUSH(v, arg)
+</span></span></span><span class=line><span class=cl><span class=cp>#define ARG_PUSH_DEBUG_VM_PARAMS(v) \
+</span></span></span><span class=line><span class=cl><span class=cp>    if (android_get_device_api_level() &gt;= 30) { \
+</span></span></span><span class=line><span class=cl><span class=cp>        ARG_PUSH(v, &#34;-Xcompiler-option&#34;); \
+</span></span></span><span class=line><span class=cl><span class=cp>        ARG_PUSH(v, &#34;--debuggable&#34;); \
+</span></span></span><span class=line><span class=cl><span class=cp>        ARG_PUSH(v, &#34;-XjdwpProvider:adbconnection&#34;); \
+</span></span></span><span class=line><span class=cl><span class=cp>        ARG_PUSH(v, &#34;-XjdwpOptions:suspend=n,server=y&#34;); \
+</span></span></span><span class=line><span class=cl><span class=cp>    } else if (android_get_device_api_level() &gt;= 28) { \
+</span></span></span><span class=line><span class=cl><span class=cp>        ARG_PUSH(v, &#34;-Xcompiler-option&#34;); \
+</span></span></span><span class=line><span class=cl><span class=cp>        ARG_PUSH(v, &#34;--debuggable&#34;); \
+</span></span></span><span class=line><span class=cl><span class=cp>        ARG_PUSH(v, &#34;-XjdwpProvider:internal&#34;); \
+</span></span></span><span class=line><span class=cl><span class=cp>        ARG_PUSH(v, &#34;-XjdwpOptions:transport=dt_android_adb,suspend=n,server=y&#34;); \
+</span></span></span><span class=line><span class=cl><span class=cp>    } else { \
+</span></span></span><span class=line><span class=cl><span class=cp>        ARG_PUSH(v, &#34;-Xcompiler-option&#34;); \
+</span></span></span><span class=line><span class=cl><span class=cp>        ARG_PUSH(v, &#34;--debuggable&#34;); \
+</span></span></span><span class=line><span class=cl><span class=cp>        ARG_PUSH(v, &#34;-agentlib:jdwp=transport=dt_android_adb,suspend=n,server=y&#34;); \
+</span></span></span><span class=line><span class=cl><span class=cp>    }
+</span></span></span><span class=line><span class=cl><span class=cp>#else
+</span></span></span><span class=line><span class=cl><span class=cp>#define ARG_PUSH_DEBUG_VM_PARAMS(v)
+</span></span></span><span class=line><span class=cl><span class=cp>#define ARG_PUSH_DEBUG_ONLY(v, arg)
+</span></span></span><span class=line><span class=cl><span class=cp>#endif
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl>    <span class=kt>char</span> <span class=n>lib_path</span><span class=p>[</span><span class=n>PATH_MAX</span><span class=p>]{</span><span class=mi>0</span><span class=p>};</span>
+</span></span><span class=line><span class=cl>    <span class=nf>snprintf</span><span class=p>(</span><span class=n>lib_path</span><span class=p>,</span> <span class=n>PATH_MAX</span><span class=p>,</span> <span class=s>&#34;%s/lib/%s&#34;</span><span class=p>,</span> <span class=nf>dirname</span><span class=p>(</span><span class=n>dex_path</span><span class=p>),</span> <span class=n>ABI</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nf>ARG</span><span class=p>(</span><span class=n>argv</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nf>ARG_PUSH</span><span class=p>(</span><span class=n>argv</span><span class=p>,</span> <span class=s>&#34;/system/bin/app_process&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nf>ARG_PUSH_FMT</span><span class=p>(</span><span class=n>argv</span><span class=p>,</span> <span class=s>&#34;-Djava.class.path=%s&#34;</span><span class=p>,</span> <span class=n>dex_path</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nf>ARG_PUSH_FMT</span><span class=p>(</span><span class=n>argv</span><span class=p>,</span> <span class=s>&#34;-Dshizuku.library.path=%s&#34;</span><span class=p>,</span> <span class=n>lib_path</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nf>ARG_PUSH_DEBUG_VM_PARAMS</span><span class=p>(</span><span class=n>argv</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nf>ARG_PUSH</span><span class=p>(</span><span class=n>argv</span><span class=p>,</span> <span class=s>&#34;/system/bin&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nf>ARG_PUSH_FMT</span><span class=p>(</span><span class=n>argv</span><span class=p>,</span> <span class=s>&#34;--nice-name=%s&#34;</span><span class=p>,</span> <span class=n>process_name</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nf>ARG_PUSH</span><span class=p>(</span><span class=n>argv</span><span class=p>,</span> <span class=n>main_class</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nf>ARG_PUSH_DEBUG_ONLY</span><span class=p>(</span><span class=n>argv</span><span class=p>,</span> <span class=s>&#34;--debug&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nf>ARG_END</span><span class=p>(</span><span class=n>argv</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nf>LOGD</span><span class=p>(</span><span class=s>&#34;exec app_process&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=nf>execvp</span><span class=p>((</span><span class=k>const</span> <span class=kt>char</span> <span class=o>*</span><span class=p>)</span> <span class=n>argv</span><span class=p>[</span><span class=mi>0</span><span class=p>],</span> <span class=n>argv</span><span class=p>))</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nf>exit</span><span class=p>(</span><span class=n>EXIT_FATAL_APP_PROCESS</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>这里就是通过 execvp 去执行 app_process 启动 com.safe.discipline.server.ResidentServer JAVA进程. 并且这个 JAVA 拥有shell (pid = 200)进程权限. 最终其实就是在 adb shell 中执行如下指令</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=n>app_process</span> <span class=p>[</span><span class=n>java</span><span class=o>-</span><span class=n>options</span><span class=p>]</span> <span class=n>cmd</span><span class=o>-</span><span class=n>dir</span> <span class=n>start</span><span class=o>-</span><span class=n>class</span><span class=o>-</span><span class=n>name</span> <span class=p>[</span><span class=n>options</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>/</span><span class=n>system</span><span class=o>/</span><span class=n>bin</span><span class=o>/</span><span class=n>app_process</span> \
+</span></span><span class=line><span class=cl>  <span class=o>-</span><span class=n>Djava</span><span class=p>.</span><span class=n>class</span><span class=p>.</span><span class=n>path</span><span class=o>=/</span><span class=n>data</span><span class=o>/</span><span class=n>app</span><span class=o>/~~</span><span class=p>...</span><span class=o>/</span><span class=n>moe</span><span class=p>.</span><span class=n>shizuku</span><span class=p>.</span><span class=n>manager</span><span class=p>...</span><span class=o>/</span><span class=n>base</span><span class=p>.</span><span class=n>apk</span> \
+</span></span><span class=line><span class=cl>  <span class=o>-</span><span class=n>Dshizuku</span><span class=p>.</span><span class=n>library</span><span class=p>.</span><span class=n>path</span><span class=o>=/</span><span class=n>data</span><span class=o>/</span><span class=n>app</span><span class=o>/~~</span><span class=p>...</span><span class=o>/</span><span class=n>moe</span><span class=p>.</span><span class=n>shizuku</span><span class=p>.</span><span class=n>manager</span><span class=p>...</span><span class=o>/</span><span class=n>lib</span><span class=o>/</span><span class=n>arm64</span> \
+</span></span><span class=line><span class=cl>  <span class=o>/</span><span class=n>system</span><span class=o>/</span><span class=n>bin</span> \
+</span></span><span class=line><span class=cl>  <span class=o>--</span><span class=n>nice</span><span class=o>-</span><span class=n>name</span><span class=o>=</span><span class=n>shizuku_server</span> \
+</span></span><span class=line><span class=cl>  <span class=n>moe</span><span class=p>.</span><span class=n>shizuku</span><span class=p>.</span><span class=n>starter</span><span class=p>.</span><span class=n>ServiceStarter</span> \
+</span></span><span class=line><span class=cl>  <span class=o>--</span><span class=n>debug</span>  <span class=err>#</span> <span class=p>(</span><span class=err>如果开启了</span><span class=n>DEBUG</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>而 ResidentServer 这里其实就是建立 binder 进行通信(具体内容有空再去分析一下)</p><p>自此 shizuku 就已经成功启动带有adb shell 权限的 Java server , 后续其他 app 需要 adb 操作权限只需要通过 binder 和这个 server 进行通信即可.</p><h1 id=xphone-功能>Xphone 功能</h1><hr><p>而我自己开发的这个 app 就是基于 shizuku 实现的 自定义 APP 隐藏目前存在如下功能</p><ol><li>快速选择 APP 进行隐藏</li><li>对 APP 进行分类</li><li>指定时间和星期自动隐藏/显示APP</li><li>存在强制模式 在强制模式中显示 app 消耗自定义次数, 并且关闭强制模式时可以开启时延,避免冲动娱乐</li></ol><hr><p>下面是带开发的 app 功能, 等什么时候有空的时候再做一下吧</p><ol><li>选中 app 指定时间才显示出来,其余时间一直隐藏</li></ol></section><footer class=article-footer><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section></footer><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css integrity=sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js integrity=sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8 crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js integrity=sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05 crossorigin=anonymous defer></script><script>window.addEventListener("DOMContentLoaded",()=>{const e=document.querySelector(".main-article");renderMathInElement(e,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}],ignoredClasses:["gist"]})})</script></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/p/android-jni%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80/><div class=article-details><h2 class=article-title>android JNI开发基础</h2></div></a></article></div></div></aside><div class=disqus-container><div id=disqus_thread></div><script>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//hugo-theme-stack.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{typeof DISQUS=="object"&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+2020 -
+2026 wake0p</section><section class=powerby>使用 <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> 构建<br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.30.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>
