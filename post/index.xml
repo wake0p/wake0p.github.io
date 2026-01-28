@@ -18,8 +18,8 @@
 &lt;/div>&lt;p>而这个adb_shell 权限是能够操控其他app的, 因此如果我们能够维持一个 adb_shell 这样的高权限,就能过实现当前 OutPhone 的核心功能 任意隐藏/显示 app.&lt;/p>
 &lt;p>那么我们该如何维持高权限呢? 这里就不得不参考一下 shizuku 的代码实现了,下面是 shizuku 代码实现分析.&lt;/p>
 &lt;p>在 shizuku 中需要用户认证 adb 调试, 通过无线/有限/root的方式实现权限认证, 这里以无线认证的方式进行一步一步分析源码&lt;/p>
-&lt;h2 id="寻找-adb-端口">寻找 adb 端口
-&lt;/h2>&lt;p>&lt;strong>AdbMdns.kt&lt;/strong> 用于在当前的局域网中寻找服务和对应的 IP port 寻找过程如下&lt;/p>
+&lt;h3 id="寻找-adb-端口">寻找 adb 端口
+&lt;/h3>&lt;p>&lt;strong>AdbMdns.kt&lt;/strong> 用于在当前的局域网中寻找服务和对应的 IP port 寻找过程如下&lt;/p>
 &lt;ol>
 &lt;li>通过 discoverServices 函数匹配服务名称 &amp;ldquo;_adb-tls-pairing._tcp&amp;rdquo;&lt;/li>
 &lt;/ol>
@@ -316,8 +316,8 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;h2 id="和-adb-服务器进行认证">和 adb 服务器进行认证
-&lt;/h2>&lt;p>onInput 调用 AdbKey , 他和 adb 建立连接 并且生成rsa密钥,并且保存到本地的adb 服务上&lt;/p>
+&lt;/div>&lt;h3 id="和-adb-服务器进行认证">和 adb 服务器进行认证
+&lt;/h3>&lt;p>onInput 调用 AdbKey , 他和 adb 建立连接 并且生成rsa密钥,并且保存到本地的adb 服务上&lt;/p>
 &lt;p>在 AdbKey 的 初始化函数中&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
@@ -554,8 +554,8 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>在 &lt;code>AdbPairingClient&lt;/code> 的 start 函数中就完成了和 adb 服务器的信息认证,之后通过 AdbClient 与服务器建立连接之后, 通知栏显示配对完成&lt;/p>
-&lt;h2 id="启动后台服务">启动后台服务
-&lt;/h2>&lt;p>后续启动 shizuku 后 进入主界面点击无线模式的启动之后,会调用 onCreate ,该函数会 初始化 viewModel&lt;/p>
+&lt;h3 id="启动后台服务">启动后台服务
+&lt;/h3>&lt;p>后续启动 shizuku 后 进入主界面点击无线模式的启动之后,会调用 onCreate ,该函数会 初始化 viewModel&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -1611,8 +1611,8 @@
 &lt;/div>
 &lt;/div>&lt;p>而 ResidentServer 这里其实就是建立 binder 进行通信(具体内容有空再去分析一下)&lt;/p>
 &lt;p>自此 shizuku 就已经成功启动带有adb shell 权限的 Java server , 后续其他 app 需要 adb 操作权限只需要通过 binder 和这个 server 进行通信即可.&lt;/p>
-&lt;h1 id="xphone-功能">Xphone 功能
-&lt;/h1>&lt;hr>
+&lt;h2 id="xphone-功能">Xphone 功能
+&lt;/h2>&lt;hr>
 &lt;p>而我自己开发的这个 app 就是基于 shizuku 实现的 自定义 APP 隐藏目前存在如下功能&lt;/p>
 &lt;ol>
 &lt;li>快速选择 APP 进行隐藏&lt;/li>
